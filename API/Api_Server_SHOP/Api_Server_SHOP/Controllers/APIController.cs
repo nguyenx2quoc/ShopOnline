@@ -40,7 +40,28 @@ namespace Api_Server_SHOP.Controllers
         }
         #endregion
 
-      
+        #region +Lấy về danh sách mẫu theo giới tính
+        [Route("mathanggt")]
+        [HttpGet]
+        public List<MH_GioiTinh> get_MH_Theo_GT(string GT)
+        {
+
+            var item = (from u in db.CHITIETMATHANGs
+                        join i in db.MATHANGs on u.IDMatHang equals i.ID
+                        join m in db.LOAIHANGs on i.IDLoaiHang equals m.ID
+                        where u.Loai == GT
+                        select new MH_GioiTinh
+                        {
+                            ID = i.ID,
+                            TenMH = i.TenMH,
+                            Mau1 = u.MauSac,
+                            URLHinhAnh1 = i.URLHinhAnh1,
+                            Gia1 = u.Gia.ToString(),
+
+                        }).ToList();
+            return item;
+        }
+        #endregion
 
     }
 }
