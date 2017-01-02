@@ -10,7 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <title>Gretong a Ecommerce Category Flat Bootstarp Responsive Website Template | Home :: w3layouts</title>
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary JavaScript plugins) -->
-<script type='text/javascript' src="js/jquery-1.11.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- Custom Theme files -->
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
@@ -24,14 +24,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
 	<!-- start menu -->
 	<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-
+	<link rel="stylesheet" href="css/etalage.css">
+	<link rel="stylesheet" href="css/flexslider.css">
 	<script type="text/javascript" src="js/megamenu.js"></script>
 	<script src="http://code.angularjs.org/1.2.13/angular.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
 	<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 	<script src="js/menu_jquery.js"></script>
 	<script src="js/simpleCart.min.js"> </script>
+	<script src="js/jquery.etalage.min.js"></script>
 	<script src="app.js"></script>
+
 
 </head>
 <body>
@@ -509,8 +512,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 </div>
 </div>
-<div ui-view class="arriv">
-	<div class="container">
+<div class="arriv">
+	<div ui-view class="container">
 		<div class="arriv-top">
 			<div class="col-md-6 arriv-left">
 				<img src="images/1.jpg" class="img-responsive" alt="">
@@ -518,7 +521,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<h3>NEW ARRIVALS</h3>
 					<p>REVIVE YOUR WARDROBE WITH CHIC KNITS</p>
 					<div class="crt-btn">
-						<a href="details.html">TAKE A LOOK</a>
+						<a ui-sref="details">TAKE A LOOK</a>
 					</div>
 				</div>
 			</div>
