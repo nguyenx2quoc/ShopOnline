@@ -6,14 +6,18 @@ var routerApp = angular.module('routerApp', ['ui.router']);
 
 routerApp.config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/home');
-
-    $stateProvider
-        .state('women', {
+   $urlRouterProvider.otherwise('/home');
+   $stateProvider   .state('home', {
+            url: '/home',
+            templateUrl: 'home.html',
+            
+        });
+     $stateProvider   .state('women', {
             url: '/women',
             templateUrl: 'women.html',
             controller: 'WomenController'
         });
+
     $stateProvider   .state('register', {
             url: '/register',
             templateUrl: 'register.html'
