@@ -44,8 +44,17 @@
 
 		<script src="https://code.angularjs.org/1.2.13/angular.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/ng-file-upload-shim.js"></script>
+		<script src="js/ng-file-upload.js"></script>
+		<script src="js/upload.js"></script>
 
-		<script src="app.js"></script>
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/htmlmixed/htmlmixed.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/htmlembedded/htmlembedded.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/xml/xml.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/javascript/javascript.min.js"></script>
 
 
 	</head>
@@ -157,6 +166,7 @@
 				</div>
 			</div>
 
+
 			<div class="main-content">
 				<div class="main-content-inner">
 					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -262,6 +272,24 @@
 				</div>
 			</div><!-- /.main-content -->
 
+			<form name="myForm">
+				<fieldset>
+					<legend>Upload on form submit</legend>
+						Username: <input type="text" name="userName" ng-model="username" size="39" required>
+						<i ng-show="myForm.userName.$error.required">*required</i><br>
+						Profile Picture: <input type="file" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" required>
+						<i ng-show="myForm.file.$error.required">*required</i>
+						<br/>
+
+						<button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
+						<img style="height: 15px;width: 15px" ngf-src="picFile" class="thumb">
+						<span class="progress" ng-show="picFile.progress >= 0">
+					  <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
+				  </span>
+					<span ng-show="picFile.result">Upload Successful</span>
+				</fieldset>
+				<br/>
+			</form>
 			<div class="footer">
 				<div class="footer-inner">
 					<div class="footer-content">
