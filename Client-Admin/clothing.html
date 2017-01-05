@@ -1,0 +1,546 @@
+
+<div ui-view class="page-header">
+	<h1>
+		Danh sách chi tiết mặt hàng
+	</h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+	<button class="btn btn-primary" data-toggle="modal" data-target="#popupadd">Thêm mới</button>
+</div>
+<br>
+<div class="row" ng-controller="MyController">
+	<div class="col-xs-12">
+		<!-- PAGE CONTENT BEGINS -->
+		<div class="row">
+			<div class="col-xs-12">
+				<table id="simple-table" class="table  table-bordered table-hover">
+					<thead>
+					<tr>
+						<th class="detail-col">
+							ID
+						</th>
+						<th class="hidden-480">Tên mặt hàng</th>
+						<th>........</th>
+						<th>Giá</th>
+						<th class="hidden-480">Số lượng</th>
+						<th>
+							Màu
+						</th>
+						<th class="hidden-480">Size</th>
+
+						<th></th>
+					</tr>
+					</thead>
+
+					<tbody ng-repeat="x in myWelcome">
+					<tr >
+						<td class="center">
+							{{x.ID}}
+						</td>
+
+						<td class="center">
+							{{x.Ten}}
+						</td>
+
+						<td>
+							AAAAAAAA
+						</td>
+						<td>{{x.Gia}}</td>
+						<td class="hidden-480">3</td>
+						<td>{{x.Mau}}</td>
+
+						<td class="hidden-480">
+							Xanh và Đỏ
+						</td>
+
+						<td>
+							<div class="hidden-sm hidden-xs btn-group">
+								<a class="btn btn-xs btn-info" data-toggle="modal" data-target="#popupedit">
+									<i class="ace-icon fa fa-pencil bigger-120">
+									</i>
+								</a>
+								<script>
+                                    $(document).ready(function () {
+                                        $('.btn-info').click(function () {
+                                            var t = $(this).parents('tr').find('td:eq(0)').html();
+
+                                            console.log(t);
+
+                                            document.getElementById('IDe').value = t;
+                                        });
+                                    });
+								</script>
+								<button class="btn btn-xs btn-danger">
+									<i class="ace-icon fa fa-trash-o bigger-120"></i>
+								</button>
+
+								<button class="btn btn-xs btn-warning">
+									<i class="ace-icon fa fa-flag bigger-120"></i>
+								</button>
+							</div>
+
+							<div class="hidden-md hidden-lg">
+								<div class="inline pos-rel">
+									<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+										<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+									</button>
+
+									<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+										<li>
+											<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+																			<span class="blue">
+																				<i class="ace-icon fa fa-search-plus bigger-120"></i>
+																			</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+																			<span class="green">
+																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+																			</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+																			<span class="red">
+																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																			</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+				</table>
+			</div><!-- /.span -->
+		</div><!-- /.row -->
+	</div>
+</div>
+
+<!---Thêm mới--->
+<div class="modal fade" id="popupadd" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-body">
+			<div class="modal-body">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="modal-title formPanel"><strong>Thêm</strong></h3>
+					</div>
+					<fieldset style="margin-top: 10px">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										ID:
+									</p>
+								</div>
+
+								<div class="col-lg-8">
+									<input id= "ID" class="form-control">
+								</div>
+							</div>
+
+
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p for="inputID" class="labelForm">
+											ID mặt hàng:
+										</p>
+									</div>
+
+									<div class="col-lg-8 " >
+										<input class="form-control" id="IDMH">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Tên mặt hàng:
+									</p>
+								</div>
+
+								<div class="col-lg-8">
+									<input class="form-control" id="TenMH">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p for="inputID" class="labelForm">
+											Màu sắc
+										</p>
+									</div>
+
+									<div class="col-lg-8 " >
+										<input class="form-control" id="mausac">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Size:
+									</p>
+								</div>
+								<div class="col-lg-8">
+									<input class="form-control" id="size">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p  for="inputID" class="labelForm">
+											Số lượng:
+										</p>
+									</div>
+									<div class="col-lg-8 " >
+										<input type="number" class="form-control" id="soluong">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Mô tả:
+									</p>
+								</div>
+								<div class="col-lg-8">
+									<input class="form-control" id="mota">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Giá:
+									</p>
+								</div>
+								<div class="col-lg-8">
+									<input type="number" class="form-control" id="gia">
+								</div>
+							</div>
+						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p for="inputID" class="labelForm">
+											Url Hình ảnh:
+										</p>
+									</div>
+
+									<div class="col-lg-8 " >
+										<div class="widget-main">
+											<div class="form-group">
+												<div class="col-xs-12">
+													<input type="file" id="id-input-file-2" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p for="inputID" class="labelForm">
+											Url Hình ảnh:
+										</p>
+									</div>
+
+									<div class="col-lg-8 " >
+										<input class="form-control" id="url2">
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Url Hình ảnh:
+									</p>
+								</div>
+
+								<div class="col-lg-8">
+									<input class="form-control" id="url3">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p for="inputID" class="labelForm" >
+											Url Hình ảnh:
+										</p>
+									</div>
+
+									<div class="col-lg-8 " >
+										<input class="form-control" id="url4">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<div class="modal-footer" style="margin-top: 20px">
+						<div class="submitButton">
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								Cancel</button>
+							<button  id="OK" class="btn btn-primary" >OK
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<script>
+	$('#OK').click(function () {
+		alert("Ajax post!");
+		var ID = $('#ID').val();
+		$.ajax({
+		    type : 'POST',
+			url : '',
+			datatype: 'JSON',
+			data: {
+				ID: ID,
+			},
+			success: function (data) {
+				if (data == true){
+				    alert("Lưu thành công!");
+				}
+				else {
+                    alert("Lưu thất bại!");
+				}
+            }
+		});
+    });
+	function Add() {
+		var x = $('#ID').val() + $('#IDMH').val() + $('#TenMH').val() + $('#soluong').val() + $('#mausac').val() +
+            $('#size').val() + $('#gia').val() + $('#ID').val() ;
+		alert(x);
+    }
+</script>
+
+
+<!--POPUP--->
+<div class="modal fade" id="popupedit" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-body">
+			<div class="modal-body">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="modal-title formPanel"><strong>Chỉnh sửa mặt hàng</strong></h3>
+					</div>
+					<fieldset style="margin-top: 10px">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm" >
+										ID:
+									</p>
+								</div>
+								<div class="col-lg-8">
+									<input id= "IDe" class="form-control" readonly="true">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p for="inputID" class="labelForm">
+											ID mặt hàng:
+										</p>
+									</div>
+
+									<div class="col-lg-8 " >
+										<input class="form-control" id="IDMHe">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Tên mặt hàng:
+									</p>
+								</div>
+
+								<div class="col-lg-8">
+									<input class="form-control" id="TenMHe">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p for="inputID" class="labelForm">
+											Màu sắc
+										</p>
+									</div>
+
+									<div class="col-lg-8 " >
+										<input class="form-control" id="mausace">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Size:
+									</p>
+								</div>
+								<div class="col-lg-8">
+									<input class="form-control" id="sizee">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p  for="inputID" class="labelForm">
+											Số lượng:
+										</p>
+									</div>
+									<div class="col-lg-8 " >
+										<input type="number" class="form-control" id="soluonge">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Mô tả:
+									</p>
+								</div>
+								<div class="col-lg-8">
+									<input class="form-control" id="motae">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Giá:
+									</p>
+								</div>
+								<div class="col-lg-8">
+									<input type="number" class="form-control" id="giae">
+								</div>
+							</div>
+						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Url Hình ảnh:
+									</p>
+								</div>
+
+								<div class="col-lg-8">
+									<form name="myForm">
+										<fieldset>
+											<i ng-show="myForm.userName.$error.required"></i><br>
+											<input type="file" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" required>
+											<i ng-show="myForm.file.$error.required"></i>
+											<br/>
+											<button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
+											<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
+											<span class="progress" ng-show="picFile.progress >= 0">
+												  <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
+											</span>
+										</fieldset>
+									</form>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p for="inputID" class="labelForm">
+											Url Hình ảnh:
+										</p>
+									</div>
+
+									<div class="col-lg-8 " >
+										<input class="form-control" id="url2e">
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Url Hình ảnh:
+									</p>
+								</div>
+
+								<div class="col-lg-8">
+									<input class="form-control" id="url3e">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p for="inputID" class="labelForm" >
+											Url Hình ảnh:
+										</p>
+									</div>
+
+									<div class="col-lg-8 " >
+										<input class="form-control" id="url4e">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<div class="modal-footer" style="margin-top: 20px">
+						<div class="submitButton">
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								Cancel</button>
+							<button  id="OKEdit" class="btn btn-primary" >OK
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
