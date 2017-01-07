@@ -9,14 +9,18 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
-        .state('women', {
-            url: '/women',
-            templateUrl: 'women.html',
-            controller: 'WomenController'
+        .state('filter', {
+            url: '/filter',
+            templateUrl: 'filter.html',
+            controller: 'FilterController'
         });
     $stateProvider   .state('register', {
             url: '/register',
             templateUrl: 'register.html'
+        });
+      $stateProvider   .state('home', {
+            url: '/home',
+            templateUrl: 'home.html'
         });
     $stateProvider   .state('checkout', {
             url: '/checkout',

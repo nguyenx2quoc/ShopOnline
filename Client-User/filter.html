@@ -1,0 +1,129 @@
+
+
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<script type="text/javascript" src="js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<script src="js/menu_jquery.js"></script>
+<script src="js/simpleCart.min.js"> </script>
+
+
+
+<!-- content -->
+<div ui-view class="container">
+	<div class="women_main">
+	<!-- start sidebar -->
+	<div class="col-md-3 s-d">
+	  <div class="w_sidebar">
+		<div class="w_nav1">
+			<h4><a href="#">TẤT CẢ</a></h4>
+			<ul>
+				<li><a href="women.html">NAM</a></li>
+				<li><a href="#">NỮ</a></li>
+			</ul>	
+		</div>
+		<section  class="sky-form">
+					<h4>Loại Hàng</h4>
+						<div class="row1 scroll-pane">
+							<div class="col col-4">
+								<label class="radio"><input type="radio" name="radio"><i></i>Quần</label>
+								<label class="radio"><input type="radio" name="radio"><i></i>Áo</label>
+								<label class="radio"><input type="radio" name="radio"><i></i>Đầm</label>
+							</div>
+							
+						</div>
+		</section>
+		
+	</div>
+   </div>
+	<!-- start content -->
+	<div class="col-md-9 w_content">
+		<div class="women">
+			<a href="#"><h4>Loại lọc - <span>4449 sản phẩm</span> </h4></a>
+		     <div class="clearfix"></div>	
+		</div>
+		<!-- grids_of_4 -->
+		<script>
+			$(document).ready(function () {
+				$.ajax({
+                    type: 'GET',
+                    url: 'https://private-167575-test10548.apiary-mock.com/mathang',
+                    data: '',
+                    dataType: 'json',
+                    success: function (data) {
+                        var gia = 'ONLY  $' +data.Gia;
+                        var Ten = data.Ten + '  (' + data.Mau + ')';
+
+                        $('#Gia').html(gia);
+                        $('#Ten').html(Ten);
+					}
+				})
+            })
+		</script>
+
+
+		<div class="grids_of_4" id="sp">
+		  	<div class="grid1_of_4">
+				<div class="content_box">
+					<a ui-seft="details">
+			   	   	 <img src="images/w1.jpg" class="img-responsive" alt=""/>
+				   	  </a>
+				    <h4><a ui-seft="details" id="Ten1"> Duis autem</a></h4>
+				     <p>It is a long established fact that</p>
+					 <div class="grid_1 simpleCart_shelfItem">
+				    
+					 <div class="item_add"><span class="item_price"><h6 id="Gia1">ONLY $99.00</h6></span></div>
+					
+					 </div>
+			   	</div>
+			</div>
+			<div class="grid1_of_4">
+				<div class="content_box"><a href="details.html">
+			   	   	 <img src="images/w2.jpg" class="img-responsive" alt=""/>
+				   	  </a>
+				    <h4><a href="details.html"> Duis autem</a></h4>
+				     <p>It is a long established fact that</p>
+					 <div class="grid_1 simpleCart_shelfItem">
+				    
+					 <div class="item_add"><span class="item_price"><h6>ONLY $76.00</h6></span></div>
+					
+					 </div>
+			   	</div>
+			</div>
+			<div class="grid1_of_4">
+				<div class="content_box"><a href="details.html">
+			   	   	 <img src="images/w3.jpg" class="img-responsive" alt=""/>
+				   	  </a>
+				    <h4><a href="details.html"> Duis autem</a></h4>
+				     <p>It is a long established fact that</p>
+					 <div class="grid_1 simpleCart_shelfItem">
+				    
+					 <div class="item_add"><span class="item_price"><h6>ONLY $58.00</h6></span></div>
+					
+					 </div>
+			   	</div>
+			</div>
+			<div class="grid1_of_4">
+				<div class="content_box"><a href="details.html">
+			   	   	 <img src="images/w4.jpg" class="img-responsive" alt=""/>
+				   	  </a>
+				    <h4><a href="details.html"> Duis autem</a></h4>
+				     <p>It is a long established fact that</p>
+					 <div class="grid_1 simpleCart_shelfItem">
+				    
+					 <div class="item_add"><span class="item_price"><h6>ONLY $112.00</h6></span></div>
+					
+					 </div>
+			   	</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		
+		
+		
+		<!-- end grids_of_4 -->
+	</div>
+	<div class="clearfix"></div>
+	
+	<!-- end content -->
+
