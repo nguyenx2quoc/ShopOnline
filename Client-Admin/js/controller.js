@@ -1,9 +1,10 @@
-/**
- * Created by asus on 1/3/2017.
- */
-var photoAlbumControllers = angular.module('photoAlbumControllers', ['ngFileUpload']);
+'use strict';
 
-photoAlbumControllers.controller('photoUploadCtrl', ['$scope', '$rootScope', '$routeParams', '$location', 'Upload', 'cloudinary',
+/* Controllers */
+
+
+
+routerApp.controller('photoUploadCtrl', ['$scope', '$rootScope', '$routeParams', '$location', 'Upload', 'cloudinary',
     /* Uploading with Angular File Upload */
     function($scope, $rootScope, $routeParams, $location, $upload, cloudinary) {
         var d = new Date();
@@ -18,7 +19,7 @@ photoAlbumControllers.controller('photoUploadCtrl', ['$scope', '$rootScope', '$r
                         url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
                         data: {
                             upload_preset: cloudinary.config().upload_preset,
-                            tags: 'myphotoalbum',
+                            tags: 'bfa8vkr6',
                             context: 'photo=' + $scope.title,
                             file: file
                         }

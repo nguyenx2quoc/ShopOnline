@@ -9,7 +9,7 @@
 	<button class="btn btn-primary" data-toggle="modal" data-target="#popupadd">Thêm mới</button>
 </div>
 <br>
-<div class="row" ng-controller="MyController">
+<div class="row" ng-controller="MyCtrl">
 	<div class="col-xs-12">
 		<!-- PAGE CONTENT BEGINS -->
 		<div class="row">
@@ -17,10 +17,10 @@
 				<table id="simple-table" class="table  table-bordered table-hover">
 					<thead>
 					<tr>
-						<th class="detail-col">
+						<th>
 							ID
 						</th>
-						<th class="hidden-480">Tên mặt hàng</th>
+						<th class="hidden-480" ng-click="orderByMe('Ten')">Tên mặt hàng</th>
 						<th>........</th>
 						<th>Giá</th>
 						<th class="hidden-480">Số lượng</th>
@@ -35,11 +35,11 @@
 
 					<tbody ng-repeat="x in myWelcome">
 					<tr >
-						<td class="center">
+						<td>
 							{{x.ID}}
 						</td>
 
-						<td class="center">
+						<td >
 							{{x.Ten}}
 						</td>
 
@@ -64,7 +64,7 @@
                                     $(document).ready(function () {
                                         $('.btn-info').click(function () {
                                             var t = $(this).parents('tr').find('td:eq(0)').html();
-
+                                            t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");
                                             console.log(t);
 
                                             document.getElementById('IDe').value = t;
@@ -241,40 +241,31 @@
 						</br>
 						<div class="row">
 							<div class="col-lg-6">
-								<div>
-									<div class="col-lg-4">
-										<p for="inputID" class="labelForm">
-											Url Hình ảnh:
-										</p>
-									</div>
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Loại SP:
+									</p>
+								</div>
+								<div class="col-lg-8 " >
+									<select id="loaisp">
 
-									<div class="col-lg-8 " >
-										<div class="widget-main">
-											<div class="form-group">
-												<div class="col-xs-12">
-													<input type="file" id="id-input-file-2" />
-												</div>
-											</div>
-										</div>
-									</div>
+									</select>
 								</div>
 							</div>
 							<div class="col-lg-6">
-								<div>
-									<div class="col-lg-4">
-										<p for="inputID" class="labelForm">
-											Url Hình ảnh:
-										</p>
-									</div>
-
-									<div class="col-lg-8 " >
-										<input class="form-control" id="url2">
-
-									</div>
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Url Hình ảnh:
+									</p>
 								</div>
-							</div>
+								<div class="col-lg-8 " >
+									<input class="form-control" id="url2">
 
+								</div>
+
+							</div>
 						</div>
+
 						</br>
 						<div class="row">
 							<div class="col-lg-6">
@@ -287,9 +278,10 @@
 								<div class="col-lg-8">
 									<input class="form-control" id="url3">
 								</div>
+
 							</div>
 							<div class="col-lg-6">
-								<div>
+
 									<div class="col-lg-4">
 										<p for="inputID" class="labelForm" >
 											Url Hình ảnh:
@@ -300,7 +292,6 @@
 										<input class="form-control" id="url4">
 
 									</div>
-								</div>
 							</div>
 						</div>
 					</fieldset>
@@ -320,6 +311,24 @@
 </div>
 
 <script>
+
+	$.ajax({
+		type: 'GET',
+		url:'https://private-167575-test10548.apiary-mock.com/abcd',
+		datatype: 'JSON',
+		success: function (success) {
+			var LoaiSP = '<select id="loaisp">';
+			for (var i = 0; i < success.length; i++)
+			{
+				LoaiSP = LoaiSP + '<option value="'+ success[i].ID + '">' + success[i].Ten + '</option>';
+			}
+			LoaiSP = LoaiSP + '</select>';
+
+			$('#loaisp').html(LoaiSP);
+            $('#loaispe').html(LoaiSP);
+		}
+	})
+
 	$('#OK').click(function () {
 		alert("Ajax post!");
 		var ID = $('#ID').val();
@@ -466,41 +475,27 @@
 							<div class="col-lg-6">
 								<div class="col-lg-4">
 									<p for="inputID" class="labelForm">
-										Url Hình ảnh:
+										Loại SP:
 									</p>
 								</div>
+								<div class="col-lg-8 " >
+									<select id="loaispe">
 
-								<div class="col-lg-8">
-									<form name="myForm">
-										<fieldset>
-											<i ng-show="myForm.userName.$error.required"></i><br>
-											<input type="file" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" required>
-											<i ng-show="myForm.file.$error.required"></i>
-											<br/>
-											<button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
-											<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
-											<span class="progress" ng-show="picFile.progress >= 0">
-												  <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
-											</span>
-										</fieldset>
-									</form>
+									</select>
 								</div>
 							</div>
 							<div class="col-lg-6">
-								<div>
-									<div class="col-lg-4">
-										<p for="inputID" class="labelForm">
-											Url Hình ảnh:
-										</p>
-									</div>
-
-									<div class="col-lg-8 " >
-										<input class="form-control" id="url2e">
-
-									</div>
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm">
+										Url Hình ảnh:
+									</p>
 								</div>
-							</div>
+								<div class="col-lg-8 " >
+									<input class="form-control" id="url2e">
 
+								</div>
+
+							</div>
 						</div>
 						</br>
 						<div class="row">
