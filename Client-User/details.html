@@ -16,7 +16,7 @@
 
 
 <!-- content -->
-<div ui-view class="container">
+<div ui-view class="container" ng-controller = "homeCtrl">
 
 	<!-- start content -->
 			<div class="row single">
@@ -26,42 +26,31 @@
 						<ul id="etalage">
 							<li>
 								<a href="optionallink.html">
-									<img class="etalage_thumb_image" src="images/d1.jpg" class="img-responsive" />
-									<img class="etalage_source_image" src="images/d1.jpg" class="img-responsive" title="" />
+									<img class="etalage_thumb_image" ng-src={{listitems[0].MH_URLHinhAnh1}} class="img-responsive" />
+									<img class="etalage_source_image" ng-src={{listitems[0].MH_URLHinhAnh1}} class="img-responsive" title="" />
 								</a>
 							</li>
-							<li>
-								<img class="etalage_thumb_image" src="images/d2.jpg" class="img-responsive" />
-								<img class="etalage_source_image" src="images/d2.jpg" class="img-responsive" title="" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="images/d3.jpg" class="img-responsive"  />
-								<img class="etalage_source_image" src="images/d3.jpg"class="img-responsive"  />
-							</li>
-						    <li>
-								<img class="etalage_thumb_image" src="images/d4.jpg" class="img-responsive"  />
-								<img class="etalage_source_image" src="images/d4.jpg"class="img-responsive"  />
-							</li>
+							
 						</ul>
 						 <div class="clearfix"></div>		
 				  </div>
 				  <div class="desc1 span_3_of_2">
-					<h3>Tên Sản Phẩm</h3>
+					<h3>{{id}}</h3>
 					<br>
-					<span class="code">Mã Sản Phẩm: Product 11</span>
-									<p>Mô tả ngắn</p>
+					<span class="code">Mã Sản Phẩm: {{listitems[0].MH_TenMH}}-{{listitems[0].CT_ID}} </span>
+									<p>{{listitems[0].CT_MoTa}}</p>
 						<div class="price">
-							<span class="text">Giá:</span>
+							<span class="text">Giá : {{listitems[0].CT_Gia}}</span>
 							
 						</div>
 					<div class="det_nav1">
-						<h4>Kích cỡ:</h4>
+						<h4>Kích cỡ: {{listitems[0].CT_Size}}</h4>
 							
-						<h4>Màu sắc:</h4>
+						<h4>Màu sắc:{{listitems[0].CT_MauSac}}</h4>
 							
 					</div>
 					<div class="btn_form">
-						<a href="checkout.html">buy</a>
+						<a ui-sref="checkout">Đặt hàng</a>
 					</div>
 										
 			   	 </div>

@@ -5,7 +5,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE HTML>
-<html ng-app="routerApp">
+<html ng-app="myApp">
 <head>
 <title>ONLINE SHOP</title>
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
@@ -35,7 +35,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="js/jquery.etalage.min.js"></script>
 	<script src="app.js"></script>
 
-
+<script src="homeController.js"></script>
 </head>
 <body>
 <!-- header_top -->
@@ -61,7 +61,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="header">
 	<div class="head-t">
 		<div class="logo">
-			<a href="index.html"><img src="images/logo.png" class="img-responsive" alt=""/> </a>
+			<a ui-sref="home"><img src="images/logo.jpg" class="img-responsive" alt=""/> </a>
 		</div>
 		<!-- start header_right -->
 		<div class="header_right">
@@ -94,7 +94,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 				</li>
 
-				<li><a class="color6" href="#">Quần</a>
+				<li><a class="color6" ui-sref="filter">Quần</a>
 				<div class="megapanel">
 					<div class="row">
 						<div class="col1">
@@ -108,7 +108,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     				</div>
 				</li>				
 			
-				<li><a class="color6" href="#">ÁO</a>
+				<li><a class="color6" ui-sref="filter">ÁO</a>
 				<div class="megapanel">
 					<div class="row">
 						<div class="col1">
@@ -122,18 +122,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     				</div>
 				</li>				
 			
-				<li><a class="color6" href="#">ĐẦM</a>
-				<div class="megapanel">
-					<div class="row">
-						<div class="col1">
-							<div class="h_nav">
-								<ul>
-									<li><a ui-sref="filter">NAM</a></li>
-									<li><a ui-sref="filter">NỮ</a></li>
-								</ul>	
-							</div>							
-						</div>
-    				</div>
+				<li><a class="color6" ui-sref="filter">ĐẦM</a>
 				</li>	
 						 </ul> 
 	</div>
@@ -220,7 +209,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<div class="col-md-4 abt">
 			<h4>THÔNG TIN</h4>
-				<li><a href="contact.html">Liên hệ</a></li>
+				<li><a ui-sref="contact">Liên hệ</a></li>
 		</div>
 		 
 		<div class="col-md-4 our-st">
