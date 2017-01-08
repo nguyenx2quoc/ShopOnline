@@ -3,20 +3,20 @@
 <div ui-view class="container">
 		<div class="arriv-top" ng-controller="homeCtrl">
 			<div class="col-md-6 arriv-left">
-				<img ng-src = {{listitems[0].MH_URLHinhAnh1}} class="img-responsive" alt="">
+				<img ng-src = {{listitems[0][0].MH_URLHinhAnh1}} class="img-responsive" alt="">
 				<div class="arriv-info">
-					<h3>{{listitems[0].MH_TenMH}}</h3>
+					<h3>{{listitems[0][0].MH_TenMH}}</h3>
 										<div class="crt-btn">
-						<a ui-sref="filter">TAKE A LOOK</a>
+						<a ui-sref="filterid({id: listitems[0][0].MH_ID })">TAKE A LOOK</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 arriv-right">
-				<img ng-src={{listitems[3].MH_URLHinhAnh1}} class="img-responsive" alt="">
+				<img ng-src={{listitems[0][3].MH_URLHinhAnh1}} class="img-responsive" alt="">
 				<div class="arriv-info">
-					<h3>{{listitems[3].MH_TenMH}}</h3>
+					<h3>{{listitems[0][3].MH_TenMH}}</h3>
 					<div class="crt-btn">
-						<a ui-sref="filter">SHOP NOW</a>
+						<a ui-sref="filterid({id: listitems[0][3].MH_ID })">SHOP NOW</a>
 					</div>
 			</div>				</div>
 
@@ -24,20 +24,20 @@
 		</div>
 		<div class="arriv-top" ng-controller="homeCtrl">
 			<div class="col-md-6 arriv-left">
-				<img ng-src = {{listitems[12].MH_URLHinhAnh1}} class="img-responsive" alt="">
+				<img ng-src = {{listitems[0][12].MH_URLHinhAnh1}} class="img-responsive" alt="">
 				<div class="arriv-info">
-					<h3>{{listitems[12].MH_TenMH}}</h3>
+					<h3>{{listitems[0][12].MH_TenMH}}</h3>
 					<div class="crt-btn">
-						<a ui-sref="filter">TAKE A LOOK</a>
+						<a ui-sref="filterid({id: listitems[0][12].MH_ID })">TAKE A LOOK</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 arriv-right">
-				<img ng-src={{listitems[15].MH_URLHinhAnh1}} class="img-responsive" alt="">
+				<img ng-src={{listitems[0][15].MH_URLHinhAnh1}} class="img-responsive" alt="">
 				<div class="arriv-info">
-					<h3>{{listitems[15].MH_TenMH}}</h3>
+					<h3>{{listitems[0][15].MH_TenMH}}</h3>
 					<div class="crt-btn">
-						<a ui-sref="filter">SHOP NOW</a>
+						<a ui-sref="filterid({id: listitems[0][15].MH_ID })">SHOP NOW</a>
 					</div>
 			</div>				</div>
 
@@ -45,20 +45,20 @@
 		</div>
 		<div class="arriv-top" ng-controller="homeCtrl">
 			<div class="col-md-6 arriv-left">
-				<img ng-src = {{listitems[6].MH_URLHinhAnh1}} class="img-responsive" alt="">
+				<img ng-src = {{listitems[0][6].MH_URLHinhAnh1}} class="img-responsive" alt="">
 				<div class="arriv-info">
-					<h3>{{listitems[6].MH_TenMH}}</h3>
+					<h3>{{listitems[0][6].MH_TenMH}}</h3>
 					<div class="crt-btn">
-						<a ui-sref="filter">TAKE A LOOK</a>
+						<a ui-sref="filterid({id: listitems[0][6].MH_ID })">TAKE A LOOK</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6 arriv-right">
-				<img ng-src={{listitems[9].MH_URLHinhAnh1}} class="img-responsive" alt="">
+				<img ng-src={{listitems[0][9].MH_URLHinhAnh1}} class="img-responsive" alt="">
 				<div class="arriv-info">
-					<h3>{{listitems[9].MH_TenMH}}</h3>
+					<h3>{{listitems[0][9].MH_TenMH}}</h3>
 					<div class="crt-btn">
-						<a ui-sref="filter">SHOP NOW</a>
+						<a ui-sref="filterid({id: listitems[0][9].MH_ID })">SHOP NOW</a>
 					</div>
 			</div>				</div>
 

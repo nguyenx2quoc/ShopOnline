@@ -2,7 +2,7 @@
  * Created by asus on 12/20/2016.
  */
 
- angular.module('myApp', ['ui.router','homeCtrl']);
+ angular.module('myApp', ['ui.router','homeCtrl','filCtrl','indexCtrl']);
 
 //var routerApp = angular.module('routerApp', ['ui.router']);
 
@@ -10,11 +10,13 @@ angular.module('myApp').config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
 
-    $stateProvider
-        .state('filter', {
-            url: '/filter',
+   
+     $stateProvider
+        .state('filtertype', {
+            url: '/filtertype/:type',
             templateUrl: 'filter.html',
         });
+       
     $stateProvider   .state('register', {
             url: '/register',
             templateUrl: 'register.html'
