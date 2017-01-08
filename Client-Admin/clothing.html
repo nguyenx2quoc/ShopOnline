@@ -65,8 +65,6 @@
                                         $('.btn-info').click(function () {
                                             var t = $(this).parents('tr').find('td:eq(0)').html();
                                             t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");
-                                            console.log(t);
-
                                             document.getElementById('IDe').value = t;
                                         });
                                     });
@@ -220,11 +218,11 @@
 							<div class="col-lg-6">
 								<div class="col-lg-4">
 									<p for="inputID" class="labelForm">
-										Mô tả:
+										Giới Tính:
 									</p>
 								</div>
 								<div class="col-lg-8">
-									<input class="form-control" id="mota">
+									<input class="form-control" id="gioitinh">
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -238,6 +236,8 @@
 								</div>
 							</div>
 						</div>
+						</br>
+
 						</br>
 						<div class="row">
 							<div class="col-lg-6">
@@ -294,6 +294,20 @@
 									</div>
 							</div>
 						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="col-lg-2">
+									<p for="inputID" class="labelForm">
+										Mô Tả:
+									</p>
+								</div>
+								<div class="col-lg-9">
+									<textarea class="form-control" id="mota" rows="2"></textarea>
+								</div>
+							</div>
+						</div>
+
 					</fieldset>
 					<div class="modal-footer" style="margin-top: 20px">
 						<div class="submitButton">
@@ -452,11 +466,11 @@
 							<div class="col-lg-6">
 								<div class="col-lg-4">
 									<p for="inputID" class="labelForm">
-										Mô tả:
+										Giới Tính:
 									</p>
 								</div>
 								<div class="col-lg-8">
-									<input class="form-control" id="motae">
+									<input class="form-control" id="gioitinhe">
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -471,6 +485,7 @@
 							</div>
 						</div>
 						</br>
+
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="col-lg-4">
@@ -525,6 +540,20 @@
 								</div>
 							</div>
 						</div>
+						</br>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="col-lg-2">
+									<p for="inputID" class="labelForm">
+										Mô Tả:
+									</p>
+								</div>
+								<div class="col-lg-9">
+									<textarea class="form-control" id="motae" rows="2"></textarea>
+								</div>
+							</div>
+						</div>
+
 					</fieldset>
 					<div class="modal-footer" style="margin-top: 20px">
 						<div class="submitButton">
