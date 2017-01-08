@@ -16,10 +16,10 @@
 	<div class="col-md-3 s-d">
 	  <div class="w_sidebar">
 		<div class="w_nav1">
-			<h4><a href="#">TẤT CẢ</a></h4>
+			<h4><a ui-sref = "filter">TẤT CẢ</a></h4>
 			<ul>
-				<li><a href="women.html">NAM</a></li>
-				<li><a href="#">NỮ</a></li>
+				<li><a ui-sref = "filter">NAM</a></li>
+				<li><a ui-sref = "filter">NỮ</a></li>
 			</ul>	
 		</div>
 		<section  class="sky-form">
@@ -37,82 +37,60 @@
 	</div>
    </div>
 	<!-- start content -->
-	<div class="col-md-9 w_content">
+	<div class="col-md-9 w_content" ng-controller = "filCtrltype">
 		<div class="women">
-			<a href="#"><h4>Loại lọc - <span>4449 sản phẩm</span> </h4></a>
+			<a href="#"><h4>Loại lọc - <span>{{listitems[0].length}} mặt hàng</span> </h4></a>
 		     <div class="clearfix"></div>	
 		</div>
 		<!-- grids_of_4 -->
-		<script>
-			$(document).ready(function () {
-				$.ajax({
-                    type: 'GET',
-                    url: 'https://private-167575-test10548.apiary-mock.com/mathang',
-                    data: '',
-                    dataType: 'json',
-                    success: function (data) {
-                        var gia = 'ONLY  $' +data.Gia;
-                        var Ten = data.Ten + '  (' + data.Mau + ')';
+		
 
-                        $('#Gia').html(gia);
-                        $('#Ten').html(Ten);
-					}
-				})
-            })
-		</script>
-
-
-		<div class="grids_of_4" id="sp">
+		<div class="grids_of_4"  ng-repeat = "item in listitems[0]" ng-if="$index % 4 == 0">
 		  	<div class="grid1_of_4">
 				<div class="content_box">
-					<a ui-seft="details">
-			   	   	 <img src="images/w1.jpg" class="img-responsive" alt=""/>
+					<a ui-sref="details">
+			   	   	 <img ng-src= {{listitems[0][$index].HinhAnh}} class="img-responsive" alt=""/>
 				   	  </a>
-				    <h4><a ui-seft="details" id="Ten1"> Duis autem</a></h4>
-				     <p>It is a long established fact that</p>
+				    <h4><a ui-sref="details({id: 1})" id="Ten1">{{listitems[0][$index].TenMH}}</a></h4>
+				     <p>{{listitems[0][$index].Mota}}</p>
 					 <div class="grid_1 simpleCart_shelfItem">
-				    
-					 <div class="item_add"><span class="item_price"><h6 id="Gia1">ONLY $99.00</h6></span></div>
-					
+				   		<div class="item_add"><span class="item_price"><h6 id="Gia1">ONLY {{listitems[0][$index].Gia}}</h6></span></div>
 					 </div>
 			   	</div>
 			</div>
-			<div class="grid1_of_4">
-				<div class="content_box"><a href="details.html">
-			   	   	 <img src="images/w2.jpg" class="img-responsive" alt=""/>
+			<div class="grid1_of_4" ng-if="listitems[0].length > ($index + 1)">
+				<div class="content_box">
+					<a ui-sref="details">
+			   	   	 <img ng-src= {{listitems[0][$index+1].HinhAnh}} class="img-responsive" alt=""/>
 				   	  </a>
-				    <h4><a href="details.html"> Duis autem</a></h4>
-				     <p>It is a long established fact that</p>
+				    <h4><a ui-sref="details" id="Ten1">{{listitems[0][$index+1].TenMH}}</a></h4>
+				     <p>{{listitems[0][$index+1].Mota}}</p>
 					 <div class="grid_1 simpleCart_shelfItem">
-				    
-					 <div class="item_add"><span class="item_price"><h6>ONLY $76.00</h6></span></div>
-					
+				   		<div class="item_add"><span class="item_price"><h6 id="Gia1">ONLY {{listitems[0][$index+1].Gia}}</h6></span></div>
 					 </div>
 			   	</div>
 			</div>
-			<div class="grid1_of_4">
-				<div class="content_box"><a href="details.html">
-			   	   	 <img src="images/w3.jpg" class="img-responsive" alt=""/>
+			<div class="grid1_of_4" ng-if="listitems[0].length > ($index + 2)">
+				<div class="content_box">
+					<a ui-sref="details">
+			   	   	 <img ng-src= {{listitems[0][$index+2].HinhAnh}} class="img-responsive" alt=""/>
 				   	  </a>
-				    <h4><a href="details.html"> Duis autem</a></h4>
-				     <p>It is a long established fact that</p>
+				    <h4><a ui-sref="details" id="Ten1">{{listitems[0][$index+2].TenMH}}</a></h4>
+				     <p>{{listitems[0][$index +2 ].Mota}}</p>
 					 <div class="grid_1 simpleCart_shelfItem">
-				    
-					 <div class="item_add"><span class="item_price"><h6>ONLY $58.00</h6></span></div>
-					
+				   		<div class="item_add"><span class="item_price"><h6 id="Gia1">ONLY {{listitems[0][$index+2].Gia}}</h6></span></div>
 					 </div>
 			   	</div>
 			</div>
-			<div class="grid1_of_4">
-				<div class="content_box"><a href="details.html">
-			   	   	 <img src="images/w4.jpg" class="img-responsive" alt=""/>
+			<div class="grid1_of_4" ng-if="listitems[0].length > ($index + 3)">
+				<div class="content_box">
+					<a ui-sref="details">
+			   	   	 <img ng-src= {{listitems[0][$index+3].HinhAnh}} class="img-responsive" alt=""/>
 				   	  </a>
-				    <h4><a href="details.html"> Duis autem</a></h4>
-				     <p>It is a long established fact that</p>
+				    <h4><a ui-sref="details" id="Ten1">{{listitems[0][$index+3].TenMH}}</a></h4>
+				     <p>{{listitems[0][$index+3].Mota}}</p>
 					 <div class="grid_1 simpleCart_shelfItem">
-				    
-					 <div class="item_add"><span class="item_price"><h6>ONLY $112.00</h6></span></div>
-					
+				   		<div class="item_add"><span class="item_price"><h6 id="Gia1">ONLY {{listitems[0][$index+3].Gia}}</h6></span></div>
 					 </div>
 			   	</div>
 			</div>

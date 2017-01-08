@@ -2,22 +2,26 @@
  * Created by asus on 12/20/2016.
  */
 
-var routerApp = angular.module('routerApp', ['ui.router']);
+ angular.module('myApp', ['ui.router','homeCtrl','filCtrl','indexCtrl']);
 
-routerApp.config(function($stateProvider, $urlRouterProvider) {
+//var routerApp = angular.module('routerApp', ['ui.router']);
+
+angular.module('myApp').config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/home');
 
-    $stateProvider
-        .state('filter', {
-            url: '/filter',
+   
+     $stateProvider
+        .state('filtertype', {
+            url: '/filtertype/:type',
             templateUrl: 'filter.html',
-            controller: 'FilterController'
         });
+       
     $stateProvider   .state('register', {
             url: '/register',
             templateUrl: 'register.html'
         });
+
       $stateProvider   .state('home', {
             url: '/home',
             templateUrl: 'home.html'
@@ -27,7 +31,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'checkout.html'
         })
     $stateProvider.state('details', {
-            url: '/details',
+            url: '/details/:id',
             templateUrl: 'details.html',
 
         });
@@ -36,11 +40,3 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'contact.html'
         })
 });
-
-routerApp.controller('WomenController',['$scope', '$http', function ($scope, $http) {
-
-}]);
-
-routerApp.controller('DetailController',['$scope', '$http', function ($scope, $http) {
-
-}]);
