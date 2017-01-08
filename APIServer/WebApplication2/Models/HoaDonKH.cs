@@ -7,11 +7,11 @@ namespace WebApplication2.Models
 {
     public class HoaDonKH
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string SDT { get; set; }
         public string Email { get; set; }
         public string Status { get; set; }
-        public System.DateTime Ngay { get; set; }
+        public string Ngay { get; set; }
         public int TongTien { get; set; }
         public string TinhTrang { get; set; }
     }

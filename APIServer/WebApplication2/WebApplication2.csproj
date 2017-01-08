@@ -312,10 +312,10 @@
     </Compile>
     <Compile Include="Models\P_SanPham.cs" />
     <Compile Include="Models\SanPham.cs" />
-    <Compile Include="Models\_SubLH.cs" />
     <Compile Include="Models\SUBLOAIHANG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\_SubLH.cs" />
     <Compile Include="Models\_ChiTietMH.cs" />
     <Compile Include="Models\_MatHang.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

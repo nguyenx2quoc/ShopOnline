@@ -15,7 +15,7 @@ namespace WebApplication2.ServiceDB
 {
     public class Service
     {
-        SHOPEntities1 db = new SHOPEntities1();
+        ShopEntities1 db = new ShopEntities1();
 
 
 

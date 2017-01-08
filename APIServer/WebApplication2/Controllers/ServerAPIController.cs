@@ -19,16 +19,10 @@ namespace WebApplication2.Controllers
 
     public class ServerAPIController : ApiController
     {
-        private SHOPEntities1 db = new SHOPEntities1();
+        private ShopEntities1 db = new ShopEntities1();
         private ServiceDB.Service Service = new ServiceDB.Service();
 
-        /// <summary>
-        /// Lay chi tiet 1 account cu the
-        /// </summary>
-        /// <param name="UseName"></param>
-        /// <param name="PassWord"></param>
-        /// <returns></returns>
-        /// 
+       
         #region --Đăng nhập--
         [Authorize]
         [HttpGet]
@@ -115,6 +109,84 @@ namespace WebApplication2.Controllers
             return item;
         }
 
+        //3. Lấy tất cả hóa đơn
+        [HttpGet]
+        [Route("hoadon")]
+        public List<HoaDonKH> GetHoaDon()
+        {
+            try
+            {
+                var f = (from u in db.HOADONs
+                         where u.STATUS == true
+                         select new HoaDonKH
+                         {
+                             ID = u.ID,
+                             SDT = u.SDT,
+                             Email = u.EMAIL,
+                             Ngay = u.Ngay.ToString(),
+                             TinhTrang = u.TinhTrang,
+                             TongTien = u.TongTien
+                         }).ToList();
+                return f;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+
+        }
+
+
+        //4. Lấy hóa đơn theo ID
+        [HttpGet]
+        [Route("hoadon")]
+        public List<HoaDonKH> GetHoaDon(int ID)
+        {
+            try
+            {
+                var f = (from u in db.HOADONs
+                         where u.STATUS == true && u.ID == ID
+                         select new HoaDonKH
+                         {
+                             ID = u.ID,
+                             SDT = u.SDT,
+                             Email = u.EMAIL,
+                             Ngay = u.Ngay.ToString(),
+                             TinhTrang = u.TinhTrang,
+                             TongTien = u.TongTien
+                         }).ToList();
+                return f;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+
+        }
+
+        //3. Lấy tất cả hóa đơn
+        [HttpGet]
+        [Route("getsub")]
+        public List<_SubLH> GetSub()
+        {
+            try
+            {
+                var f = (from u in db.SUBLOAIHANGs
+                         select new _SubLH
+                         {
+                             ID = u.ID.ToString(),
+                             IDLH = u.IDLoaiHang.ToString(),
+                             TenLoai = u.TenLoai,
+                             Mota = u.MoTa,
+                         }).ToList();
+                return f;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+
+        }
         #endregion
 
         #region --POST--
@@ -205,6 +277,29 @@ namespace WebApplication2.Controllers
             }
         }
 
+        //3. Chỉnh sửa hóa đơn
+        [HttpPut]
+        [Route("hoadon")]
+        public bool PutHoaDon(int ID, string TrangThai)
+        {
+            try
+            {
+                var staff = db.HOADONs.Where(s => s.ID.Equals(ID)).FirstOrDefault();
+                if (staff != null)
+                {
+                    staff.TinhTrang = TrangThai;
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+
+        }
         #endregion
 
         #region --DELETE--
@@ -227,15 +322,85 @@ namespace WebApplication2.Controllers
             }
         }
 
+        //2. Xóa hóa đơn khỏi csdl
+        [HttpDelete]
+        [Route("xoahoadon")]
+        public bool DeleteHoaDon(int ID)
+        {
+            try
+            {
+                var staff = db.HOADONs.Where(s => s.ID.Equals(ID)).FirstOrDefault();
+                if (staff != null)
+                {
+                    staff.STATUS = false;
+                    //Tìm trong bảng chi tiết hóa đơn và xóa nó đi(set thuộc tính ẩn cho trường dữ liệu)
+                    var staff1 = db.CHITIETHOADONs.Where(s => s.ID.Equals(ID)).ToList();
+                    foreach (var item in staff1)
+                    {
+                        item.STATUS = false;
+                    }
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                    return false;
+
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+
+        }
+
         #endregion
 
         #endregion
 
         #region --Phước--
         //1. Tất cả sản phẩm: dung api ở trên
+        [Route("getmathang")]
+        [HttpGet]
+        public List<_MatHang> get_Mat_Hang()
+        {
+
+            var item = (from u in db.MATHANGs
+                        where (u.STATUS != false)
+                        select new _MatHang
+                        {
+                            MH_ID = u.ID.ToString(),
+                            MH_TenMH = u.TenMH,
+                            MH_IDSubLoaiHang = u.ID.ToString(),
+                            MH_Status = u.STATUS.ToString(),
+                            MH_URLHinhAnh1 = u.URLHinhAnh1,
+                            MH_URLHinhAnh2 = u.URLHinhAnh2,
+                            MH_URLHinhAnh3 = u.URLHinhAnh3,
+
+                        }).ToList();
+            return item;
+        }
 
         //2. Lọc sản phẩm theo id: dùng api ở trên
+        [Route("getmathangtheoid")]
+        [HttpGet]
+        public List<_MatHang> get_Mat_Hang_ID(string IDMH)
+        {
 
+            var item = (from u in db.MATHANGs
+                        where (u.STATUS != false && u.ID.ToString() == IDMH)
+                        select new _MatHang
+                        {
+                            MH_ID = u.ID.ToString(),
+                            MH_TenMH = u.TenMH,
+                            MH_IDSubLoaiHang = u.ID.ToString(),
+                            MH_Status = u.STATUS.ToString(),
+                            MH_URLHinhAnh1 = u.URLHinhAnh1,
+                            MH_URLHinhAnh2 = u.URLHinhAnh2,
+                            MH_URLHinhAnh3 = u.URLHinhAnh3,
+
+                        }).ToList();
+            return item;
+        }
         //3. Lọc theo quần/áo/đầm
         [Route("getsptheoloai")]
         [HttpGet]

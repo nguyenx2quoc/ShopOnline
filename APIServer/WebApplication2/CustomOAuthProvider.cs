@@ -13,7 +13,7 @@ namespace WebApplication2
 {
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {
-        private SHOPEntities1 db = new SHOPEntities1();
+        private ShopEntities1 db = new ShopEntities1();
         private Service service = new Service();
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {

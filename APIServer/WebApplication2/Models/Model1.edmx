@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SHOPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ACCOUNT">
           <Key>
             <PropertyRef Name="Username" />
@@ -116,7 +116,7 @@
           <Property Name="TenLoai" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="MoTa" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__ACCOUNT__IDType__1ED998B2">
+        <Association Name="FK__ACCOUNT__IDType__1B0907CE">
           <End Role="ACCOUNTTYPE" Type="Self.ACCOUNTTYPE" Multiplicity="1" />
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -128,7 +128,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ACCOUNTAD__Accou__21B6055D">
+        <Association Name="FK__ACCOUNTAD__Accou__1FCDBCEB">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
           <End Role="ACCOUNTADMIN" Type="Self.ACCOUNTADMIN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -140,7 +140,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CHITIETHO__IDChi__29572725">
+        <Association Name="FK__CHITIETHO__IDChi__2D27B809">
           <End Role="CHITIETMATHANG" Type="Self.CHITIETMATHANG" Multiplicity="1" />
           <End Role="CHITIETHOADON" Type="Self.CHITIETHOADON" Multiplicity="*" />
           <ReferentialConstraint>
@@ -152,7 +152,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CHITIETHO__IDHoa__2A4B4B5E">
+        <Association Name="FK__CHITIETHO__IDHoa__2E1BDC42">
           <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
           <End Role="CHITIETHOADON" Type="Self.CHITIETHOADON" Multiplicity="*" />
           <ReferentialConstraint>
@@ -164,7 +164,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CHITIETMA__IDMat__1A14E395">
+        <Association Name="FK__CHITIETMA__IDMat__1273C1CD">
           <End Role="MATHANG" Type="Self.MATHANG" Multiplicity="1" />
           <End Role="CHITIETMATHANG" Type="Self.CHITIETMATHANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -188,7 +188,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MATHANG__IDSubLo__173876EA">
+        <Association Name="FK__MATHANG__IDSubLo__0DAF0CB0">
           <End Role="SUBLOAIHANG" Type="Self.SUBLOAIHANG" Multiplicity="1" />
           <End Role="MATHANG" Type="Self.MATHANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -200,7 +200,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SUBLOAIHA__IDLoa__145C0A3F">
+        <Association Name="FK__SUBLOAIHA__IDLoa__08EA5793">
           <End Role="LOAIHANG" Type="Self.LOAIHANG" Multiplicity="0..1" />
           <End Role="SUBLOAIHANG" Type="Self.SUBLOAIHANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -212,7 +212,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SHOPModelStoreContainer">
+        <EntityContainer Name="ShopModelStoreContainer">
           <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACCOUNTADMIN" EntityType="Self.ACCOUNTADMIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACCOUNTTYPE" EntityType="Self.ACCOUNTTYPE" Schema="dbo" store:Type="Tables" />
@@ -224,23 +224,23 @@
           <EntitySet Name="LOAIHANG" EntityType="Self.LOAIHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MATHANG" EntityType="Self.MATHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SUBLOAIHANG" EntityType="Self.SUBLOAIHANG" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__ACCOUNT__IDType__1ED998B2" Association="Self.FK__ACCOUNT__IDType__1ED998B2">
+          <AssociationSet Name="FK__ACCOUNT__IDType__1B0907CE" Association="Self.FK__ACCOUNT__IDType__1B0907CE">
             <End Role="ACCOUNTTYPE" EntitySet="ACCOUNTTYPE" />
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
           </AssociationSet>
-          <AssociationSet Name="FK__ACCOUNTAD__Accou__21B6055D" Association="Self.FK__ACCOUNTAD__Accou__21B6055D">
+          <AssociationSet Name="FK__ACCOUNTAD__Accou__1FCDBCEB" Association="Self.FK__ACCOUNTAD__Accou__1FCDBCEB">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="ACCOUNTADMIN" EntitySet="ACCOUNTADMIN" />
           </AssociationSet>
-          <AssociationSet Name="FK__CHITIETHO__IDChi__29572725" Association="Self.FK__CHITIETHO__IDChi__29572725">
+          <AssociationSet Name="FK__CHITIETHO__IDChi__2D27B809" Association="Self.FK__CHITIETHO__IDChi__2D27B809">
             <End Role="CHITIETMATHANG" EntitySet="CHITIETMATHANG" />
             <End Role="CHITIETHOADON" EntitySet="CHITIETHOADON" />
           </AssociationSet>
-          <AssociationSet Name="FK__CHITIETHO__IDHoa__2A4B4B5E" Association="Self.FK__CHITIETHO__IDHoa__2A4B4B5E">
+          <AssociationSet Name="FK__CHITIETHO__IDHoa__2E1BDC42" Association="Self.FK__CHITIETHO__IDHoa__2E1BDC42">
             <End Role="HOADON" EntitySet="HOADON" />
             <End Role="CHITIETHOADON" EntitySet="CHITIETHOADON" />
           </AssociationSet>
-          <AssociationSet Name="FK__CHITIETMA__IDMat__1A14E395" Association="Self.FK__CHITIETMA__IDMat__1A14E395">
+          <AssociationSet Name="FK__CHITIETMA__IDMat__1273C1CD" Association="Self.FK__CHITIETMA__IDMat__1273C1CD">
             <End Role="MATHANG" EntitySet="MATHANG" />
             <End Role="CHITIETMATHANG" EntitySet="CHITIETMATHANG" />
           </AssociationSet>
@@ -248,11 +248,11 @@
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="KHACHHANG" EntitySet="KHACHHANG" />
           </AssociationSet>
-          <AssociationSet Name="FK__MATHANG__IDSubLo__173876EA" Association="Self.FK__MATHANG__IDSubLo__173876EA">
+          <AssociationSet Name="FK__MATHANG__IDSubLo__0DAF0CB0" Association="Self.FK__MATHANG__IDSubLo__0DAF0CB0">
             <End Role="SUBLOAIHANG" EntitySet="SUBLOAIHANG" />
             <End Role="MATHANG" EntitySet="MATHANG" />
           </AssociationSet>
-          <AssociationSet Name="FK__SUBLOAIHA__IDLoa__145C0A3F" Association="Self.FK__SUBLOAIHA__IDLoa__145C0A3F">
+          <AssociationSet Name="FK__SUBLOAIHA__IDLoa__08EA5793" Association="Self.FK__SUBLOAIHA__IDLoa__08EA5793">
             <End Role="LOAIHANG" EntitySet="LOAIHANG" />
             <End Role="SUBLOAIHANG" EntitySet="SUBLOAIHANG" />
           </AssociationSet>
@@ -261,7 +261,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SHOPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ACCOUNT">
           <Key>
             <PropertyRef Name="Username" />
@@ -269,8 +269,8 @@
           <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IDType" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ACCOUNTTYPE" Relationship="Self.FK__ACCOUNT__IDType__1ED998B2" FromRole="ACCOUNT" ToRole="ACCOUNTTYPE" />
-          <NavigationProperty Name="ACCOUNTADMINs" Relationship="Self.FK__ACCOUNTAD__Accou__21B6055D" FromRole="ACCOUNT" ToRole="ACCOUNTADMIN" />
+          <NavigationProperty Name="ACCOUNTTYPE" Relationship="Self.FK__ACCOUNT__IDType__1B0907CE" FromRole="ACCOUNT" ToRole="ACCOUNTTYPE" />
+          <NavigationProperty Name="ACCOUNTADMINs" Relationship="Self.FK__ACCOUNTAD__Accou__1FCDBCEB" FromRole="ACCOUNT" ToRole="ACCOUNTADMIN" />
           <NavigationProperty Name="KHACHHANGs" Relationship="Self.FK__KHACHHANG__IDAcc__24927208" FromRole="ACCOUNT" ToRole="KHACHHANG" />
         </EntityType>
         <EntityType Name="ACCOUNTADMIN">
@@ -282,7 +282,7 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SDT" Type="Int32" Nullable="false" />
           <Property Name="Account" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ACCOUNT1" Relationship="Self.FK__ACCOUNTAD__Accou__21B6055D" FromRole="ACCOUNTADMIN" ToRole="ACCOUNT" />
+          <NavigationProperty Name="ACCOUNT1" Relationship="Self.FK__ACCOUNTAD__Accou__1FCDBCEB" FromRole="ACCOUNTADMIN" ToRole="ACCOUNT" />
         </EntityType>
         <EntityType Name="ACCOUNTTYPE">
           <Key>
@@ -290,7 +290,7 @@
           </Key>
           <Property Name="ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TenLoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ACCOUNTs" Relationship="Self.FK__ACCOUNT__IDType__1ED998B2" FromRole="ACCOUNTTYPE" ToRole="ACCOUNT" />
+          <NavigationProperty Name="ACCOUNTs" Relationship="Self.FK__ACCOUNT__IDType__1B0907CE" FromRole="ACCOUNTTYPE" ToRole="ACCOUNT" />
         </EntityType>
         <EntityType Name="CHITIETHOADON">
           <Key>
@@ -301,8 +301,8 @@
           <Property Name="IDHoaDon" Type="Int32" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="STATUS" Type="Boolean" />
-          <NavigationProperty Name="CHITIETMATHANG" Relationship="Self.FK__CHITIETHO__IDChi__29572725" FromRole="CHITIETHOADON" ToRole="CHITIETMATHANG" />
-          <NavigationProperty Name="HOADON" Relationship="Self.FK__CHITIETHO__IDHoa__2A4B4B5E" FromRole="CHITIETHOADON" ToRole="HOADON" />
+          <NavigationProperty Name="CHITIETMATHANG" Relationship="Self.FK__CHITIETHO__IDChi__2D27B809" FromRole="CHITIETHOADON" ToRole="CHITIETMATHANG" />
+          <NavigationProperty Name="HOADON" Relationship="Self.FK__CHITIETHO__IDHoa__2E1BDC42" FromRole="CHITIETHOADON" ToRole="HOADON" />
         </EntityType>
         <EntityType Name="CHITIETMATHANG">
           <Key>
@@ -317,8 +317,8 @@
           <Property Name="Loai" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="STATUS" Type="Boolean" />
-          <NavigationProperty Name="CHITIETHOADONs" Relationship="Self.FK__CHITIETHO__IDChi__29572725" FromRole="CHITIETMATHANG" ToRole="CHITIETHOADON" />
-          <NavigationProperty Name="MATHANG" Relationship="Self.FK__CHITIETMA__IDMat__1A14E395" FromRole="CHITIETMATHANG" ToRole="MATHANG" />
+          <NavigationProperty Name="CHITIETHOADONs" Relationship="Self.FK__CHITIETHO__IDChi__2D27B809" FromRole="CHITIETMATHANG" ToRole="CHITIETHOADON" />
+          <NavigationProperty Name="MATHANG" Relationship="Self.FK__CHITIETMA__IDMat__1273C1CD" FromRole="CHITIETMATHANG" ToRole="MATHANG" />
         </EntityType>
         <EntityType Name="CUAHANG">
           <Key>
@@ -341,7 +341,7 @@
           <Property Name="TongTien" Type="Int32" Nullable="false" />
           <Property Name="TinhTrang" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="STATUS" Type="Boolean" />
-          <NavigationProperty Name="CHITIETHOADONs" Relationship="Self.FK__CHITIETHO__IDHoa__2A4B4B5E" FromRole="HOADON" ToRole="CHITIETHOADON" />
+          <NavigationProperty Name="CHITIETHOADONs" Relationship="Self.FK__CHITIETHO__IDHoa__2E1BDC42" FromRole="HOADON" ToRole="CHITIETHOADON" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -362,7 +362,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenLoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MoTa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SUBLOAIHANGs" Relationship="Self.FK__SUBLOAIHA__IDLoa__145C0A3F" FromRole="LOAIHANG" ToRole="SUBLOAIHANG" />
+          <NavigationProperty Name="SUBLOAIHANGs" Relationship="Self.FK__SUBLOAIHA__IDLoa__08EA5793" FromRole="LOAIHANG" ToRole="SUBLOAIHANG" />
         </EntityType>
         <EntityType Name="MATHANG">
           <Key>
@@ -375,8 +375,8 @@
           <Property Name="URLHinhAnh2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="URLHinhAnh3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="STATUS" Type="Boolean" />
-          <NavigationProperty Name="CHITIETMATHANGs" Relationship="Self.FK__CHITIETMA__IDMat__1A14E395" FromRole="MATHANG" ToRole="CHITIETMATHANG" />
-          <NavigationProperty Name="SUBLOAIHANG" Relationship="Self.FK__MATHANG__IDSubLo__173876EA" FromRole="MATHANG" ToRole="SUBLOAIHANG" />
+          <NavigationProperty Name="CHITIETMATHANGs" Relationship="Self.FK__CHITIETMA__IDMat__1273C1CD" FromRole="MATHANG" ToRole="CHITIETMATHANG" />
+          <NavigationProperty Name="SUBLOAIHANG" Relationship="Self.FK__MATHANG__IDSubLo__0DAF0CB0" FromRole="MATHANG" ToRole="SUBLOAIHANG" />
         </EntityType>
         <EntityType Name="SUBLOAIHANG">
           <Key>
@@ -386,10 +386,10 @@
           <Property Name="IDLoaiHang" Type="Int32" />
           <Property Name="TenLoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MoTa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LOAIHANG" Relationship="Self.FK__SUBLOAIHA__IDLoa__145C0A3F" FromRole="SUBLOAIHANG" ToRole="LOAIHANG" />
-          <NavigationProperty Name="MATHANGs" Relationship="Self.FK__MATHANG__IDSubLo__173876EA" FromRole="SUBLOAIHANG" ToRole="MATHANG" />
+          <NavigationProperty Name="LOAIHANG" Relationship="Self.FK__SUBLOAIHA__IDLoa__08EA5793" FromRole="SUBLOAIHANG" ToRole="LOAIHANG" />
+          <NavigationProperty Name="MATHANGs" Relationship="Self.FK__MATHANG__IDSubLo__0DAF0CB0" FromRole="SUBLOAIHANG" ToRole="MATHANG" />
         </EntityType>
-        <Association Name="FK__ACCOUNT__IDType__1ED998B2">
+        <Association Name="FK__ACCOUNT__IDType__1B0907CE">
           <End Role="ACCOUNTTYPE" Type="Self.ACCOUNTTYPE" Multiplicity="1" />
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -401,7 +401,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ACCOUNTAD__Accou__21B6055D">
+        <Association Name="FK__ACCOUNTAD__Accou__1FCDBCEB">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
           <End Role="ACCOUNTADMIN" Type="Self.ACCOUNTADMIN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -425,7 +425,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CHITIETHO__IDChi__29572725">
+        <Association Name="FK__CHITIETHO__IDChi__2D27B809">
           <End Role="CHITIETMATHANG" Type="Self.CHITIETMATHANG" Multiplicity="1" />
           <End Role="CHITIETHOADON" Type="Self.CHITIETHOADON" Multiplicity="*" />
           <ReferentialConstraint>
@@ -437,7 +437,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CHITIETHO__IDHoa__2A4B4B5E">
+        <Association Name="FK__CHITIETHO__IDHoa__2E1BDC42">
           <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
           <End Role="CHITIETHOADON" Type="Self.CHITIETHOADON" Multiplicity="*" />
           <ReferentialConstraint>
@@ -449,7 +449,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CHITIETMA__IDMat__1A14E395">
+        <Association Name="FK__CHITIETMA__IDMat__1273C1CD">
           <End Role="MATHANG" Type="Self.MATHANG" Multiplicity="1" />
           <End Role="CHITIETMATHANG" Type="Self.CHITIETMATHANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -461,7 +461,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SUBLOAIHA__IDLoa__145C0A3F">
+        <Association Name="FK__SUBLOAIHA__IDLoa__08EA5793">
           <End Role="LOAIHANG" Type="Self.LOAIHANG" Multiplicity="0..1" />
           <End Role="SUBLOAIHANG" Type="Self.SUBLOAIHANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -473,7 +473,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MATHANG__IDSubLo__173876EA">
+        <Association Name="FK__MATHANG__IDSubLo__0DAF0CB0">
           <End Role="SUBLOAIHANG" Type="Self.SUBLOAIHANG" Multiplicity="1" />
           <End Role="MATHANG" Type="Self.MATHANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -485,7 +485,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SHOPEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ShopEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
           <EntitySet Name="ACCOUNTADMINs" EntityType="Self.ACCOUNTADMIN" />
           <EntitySet Name="ACCOUNTTYPEs" EntityType="Self.ACCOUNTTYPE" />
@@ -497,11 +497,11 @@
           <EntitySet Name="LOAIHANGs" EntityType="Self.LOAIHANG" />
           <EntitySet Name="MATHANGs" EntityType="Self.MATHANG" />
           <EntitySet Name="SUBLOAIHANGs" EntityType="Self.SUBLOAIHANG" />
-          <AssociationSet Name="FK__ACCOUNT__IDType__1ED998B2" Association="Self.FK__ACCOUNT__IDType__1ED998B2">
+          <AssociationSet Name="FK__ACCOUNT__IDType__1B0907CE" Association="Self.FK__ACCOUNT__IDType__1B0907CE">
             <End Role="ACCOUNTTYPE" EntitySet="ACCOUNTTYPEs" />
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
           </AssociationSet>
-          <AssociationSet Name="FK__ACCOUNTAD__Accou__21B6055D" Association="Self.FK__ACCOUNTAD__Accou__21B6055D">
+          <AssociationSet Name="FK__ACCOUNTAD__Accou__1FCDBCEB" Association="Self.FK__ACCOUNTAD__Accou__1FCDBCEB">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="ACCOUNTADMIN" EntitySet="ACCOUNTADMINs" />
           </AssociationSet>
@@ -509,23 +509,23 @@
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
           </AssociationSet>
-          <AssociationSet Name="FK__CHITIETHO__IDChi__29572725" Association="Self.FK__CHITIETHO__IDChi__29572725">
+          <AssociationSet Name="FK__CHITIETHO__IDChi__2D27B809" Association="Self.FK__CHITIETHO__IDChi__2D27B809">
             <End Role="CHITIETMATHANG" EntitySet="CHITIETMATHANGs" />
             <End Role="CHITIETHOADON" EntitySet="CHITIETHOADONs" />
           </AssociationSet>
-          <AssociationSet Name="FK__CHITIETHO__IDHoa__2A4B4B5E" Association="Self.FK__CHITIETHO__IDHoa__2A4B4B5E">
+          <AssociationSet Name="FK__CHITIETHO__IDHoa__2E1BDC42" Association="Self.FK__CHITIETHO__IDHoa__2E1BDC42">
             <End Role="HOADON" EntitySet="HOADONs" />
             <End Role="CHITIETHOADON" EntitySet="CHITIETHOADONs" />
           </AssociationSet>
-          <AssociationSet Name="FK__CHITIETMA__IDMat__1A14E395" Association="Self.FK__CHITIETMA__IDMat__1A14E395">
+          <AssociationSet Name="FK__CHITIETMA__IDMat__1273C1CD" Association="Self.FK__CHITIETMA__IDMat__1273C1CD">
             <End Role="MATHANG" EntitySet="MATHANGs" />
             <End Role="CHITIETMATHANG" EntitySet="CHITIETMATHANGs" />
           </AssociationSet>
-          <AssociationSet Name="FK__SUBLOAIHA__IDLoa__145C0A3F" Association="Self.FK__SUBLOAIHA__IDLoa__145C0A3F">
+          <AssociationSet Name="FK__SUBLOAIHA__IDLoa__08EA5793" Association="Self.FK__SUBLOAIHA__IDLoa__08EA5793">
             <End Role="LOAIHANG" EntitySet="LOAIHANGs" />
             <End Role="SUBLOAIHANG" EntitySet="SUBLOAIHANGs" />
           </AssociationSet>
-          <AssociationSet Name="FK__MATHANG__IDSubLo__173876EA" Association="Self.FK__MATHANG__IDSubLo__173876EA">
+          <AssociationSet Name="FK__MATHANG__IDSubLo__0DAF0CB0" Association="Self.FK__MATHANG__IDSubLo__0DAF0CB0">
             <End Role="SUBLOAIHANG" EntitySet="SUBLOAIHANGs" />
             <End Role="MATHANG" EntitySet="MATHANGs" />
           </AssociationSet>
@@ -535,9 +535,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SHOPModelStoreContainer" CdmEntityContainer="SHOPEntities1">
+        <EntityContainerMapping StorageEntityContainer="ShopModelStoreContainer" CdmEntityContainer="ShopEntities1">
           <EntitySetMapping Name="ACCOUNTs">
-            <EntityTypeMapping TypeName="SHOPModel.ACCOUNT">
+            <EntityTypeMapping TypeName="ShopModel.ACCOUNT">
               <MappingFragment StoreEntitySet="ACCOUNT">
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -546,7 +546,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ACCOUNTADMINs">
-            <EntityTypeMapping TypeName="SHOPModel.ACCOUNTADMIN">
+            <EntityTypeMapping TypeName="ShopModel.ACCOUNTADMIN">
               <MappingFragment StoreEntitySet="ACCOUNTADMIN">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
@@ -557,7 +557,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ACCOUNTTYPEs">
-            <EntityTypeMapping TypeName="SHOPModel.ACCOUNTTYPE">
+            <EntityTypeMapping TypeName="ShopModel.ACCOUNTTYPE">
               <MappingFragment StoreEntitySet="ACCOUNTTYPE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
@@ -565,7 +565,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CHITIETHOADONs">
-            <EntityTypeMapping TypeName="SHOPModel.CHITIETHOADON">
+            <EntityTypeMapping TypeName="ShopModel.CHITIETHOADON">
               <MappingFragment StoreEntitySet="CHITIETHOADON">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IDChiTietMatHang" ColumnName="IDChiTietMatHang" />
@@ -576,7 +576,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CHITIETMATHANGs">
-            <EntityTypeMapping TypeName="SHOPModel.CHITIETMATHANG">
+            <EntityTypeMapping TypeName="ShopModel.CHITIETMATHANG">
               <MappingFragment StoreEntitySet="CHITIETMATHANG">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IDMatHang" ColumnName="IDMatHang" />
@@ -591,7 +591,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CUAHANGs">
-            <EntityTypeMapping TypeName="SHOPModel.CUAHANG">
+            <EntityTypeMapping TypeName="ShopModel.CUAHANG">
               <MappingFragment StoreEntitySet="CUAHANG">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TenCH" ColumnName="TenCH" />
@@ -602,7 +602,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HOADONs">
-            <EntityTypeMapping TypeName="SHOPModel.HOADON">
+            <EntityTypeMapping TypeName="ShopModel.HOADON">
               <MappingFragment StoreEntitySet="HOADON">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SDT" ColumnName="SDT" />
@@ -615,7 +615,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="KHACHHANGs">
-            <EntityTypeMapping TypeName="SHOPModel.KHACHHANG">
+            <EntityTypeMapping TypeName="ShopModel.KHACHHANG">
               <MappingFragment StoreEntitySet="KHACHHANG">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
@@ -627,7 +627,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LOAIHANGs">
-            <EntityTypeMapping TypeName="SHOPModel.LOAIHANG">
+            <EntityTypeMapping TypeName="ShopModel.LOAIHANG">
               <MappingFragment StoreEntitySet="LOAIHANG">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
@@ -636,7 +636,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MATHANGs">
-            <EntityTypeMapping TypeName="SHOPModel.MATHANG">
+            <EntityTypeMapping TypeName="ShopModel.MATHANG">
               <MappingFragment StoreEntitySet="MATHANG">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TenMH" ColumnName="TenMH" />
@@ -649,7 +649,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SUBLOAIHANGs">
-            <EntityTypeMapping TypeName="SHOPModel.SUBLOAIHANG">
+            <EntityTypeMapping TypeName="ShopModel.SUBLOAIHANG">
               <MappingFragment StoreEntitySet="SUBLOAIHANG">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IDLoaiHang" ColumnName="IDLoaiHang" />
