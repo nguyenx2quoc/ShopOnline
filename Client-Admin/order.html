@@ -5,7 +5,7 @@
 	</h1>
 </div><!-- /.page-header -->
 <br>
-<div class="row" ng-controller="MyController">
+<div class="row" ng-controller="HoaDonCtrl">
 	<div class="col-xs-12">
 		<!-- PAGE CONTENT BEGINS -->
 		<div class="row">
@@ -16,39 +16,35 @@
 						<th class="detail-col">
 							ID
 						</th>
-						<th class="hidden-480">Tên mặt hàng</th>
+						<th class="hidden-480">Địa chỉ</th>
 						<th>Số điện thoại</th>
 						<th>Giá</th>
-						<th class="hidden-480">Số lượng</th>
+						<th class="hidden-480">Ngày</th>
 						<th>
-							Màu
+							Tình Trạng
 						</th>
-						<th class="hidden-480">Size</th>
 
 						<th></th>
 					</tr>
 					</thead>
 
-					<tbody ng-repeat="x in myWelcome">
+					<tbody ng-repeat="x in hoadon">
 					<tr >
 						<td class="center">
 							{{x.ID}}
 						</td>
 
 						<td class="center">
-							{{x.Ten}}
+							{{x.Email}}
 						</td>
 
 						<td>
-							AAAAAAAA
+							{{x.SDT}}
 						</td>
-						<td>{{x.Gia}}</td>
-						<td class="hidden-480">3</td>
-						<td>{{x.Mau}}</td>
+						<td>{{x.TongTien}}</td>
+						<td class="hidden-480">{{x.Ngay}}</td>
+						<td>{{x.TinhTrang}}</td>
 
-						<td class="hidden-480">
-							Xanh và Đỏ
-						</td>
 
 						<td>
 							<div class="hidden-sm hidden-xs btn-group">
@@ -56,19 +52,69 @@
 									<i class="ace-icon fa fa-pencil bigger-120">
 									</i>
 								</a>
+
 								<script>
-                                    $(document).ready(function () {
-                                        $('.btn-info').click(function () {
-                                            var t = $(this).parents('tr').find('td:eq(0)').html();
-                                            t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");
-                                            document.getElementById('IDe').value = t;
+                                    var t = '';
+                                    $('.btn-info').click(function () {
+                                        t = $(this).parents('tr').find('td:eq(0)').html();
+                                        t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");
+                                        $.ajax({
+                                            type: 'GET',
+                                            url : 'http://apishoponline.apphb.com/api/Server/hoadon?ID=' + t,
+                                            success: function (data) {
+
+                                                var CT_ID = data[0].ID;
+                                                $('#ID').val(CT_ID);
+                                                $('#sdt').val(data[0].SDT);
+                                                $('#diachi').val(data[0].Email);
+                                                $('#gia').val(data[0].TongTien);
+                                                $('#ngay').val(data[0].Ngay);
+                                                $('#tinhtrang').val(data[0].TinhTrang);
+                                            }
                                         });
                                     });
+
+                                    $('#OK').click(function () {
+										$.ajax({
+										   type : 'PUT',
+											url: 'http://apishoponline.apphb.com/api/Server/hoadon?ID=' + t + '&TrangThai=' +$('#tinhtrang'),
+											dataType: 'JSON',
+											success: function (data) {
+												if (data = true){
+												}
+												else {
+                                                    alert("Lưu không thành công!");
+												}
+                                            }
+										});
+                                    });
 								</script>
-								<button class="btn btn-xs btn-danger">
+								<button class="btn btn-xs btn-danger" data-target="#popupdelete">
 									<i class="ace-icon fa fa-trash-o bigger-120"></i>
 								</button>
+								<script>
+                                    var t = '';
+                                    $('.btn-danger').click(function () {
+                                        t = $(this).parents('tr').find('td:eq(0)').html();
+                                        t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");
+                                    });
+                                    $('#Delete').click(function () {
+                                        $.ajax({
+                                            type: 'DELETE',
+                                            url : 'http://apishoponline.apphb.com/api/Server/xoaHD?ID=' + t,
+                                            dataType: 'JSON',
+                                            success: function (data) {
+                                                if(data == true){
+                                                    alert("Xóa thành công !");
+                                                }
+                                                else {
+                                                }
 
+                                            }
+                                        });
+                                    });
+
+								</script>
 								<button class="btn btn-xs btn-warning">
 									<i class="ace-icon fa fa-flag bigger-120"></i>
 								</button>
@@ -116,6 +162,29 @@
 	</div>
 </div>
 
+<!----POPUP xóa hóa đơn-->
+<div class="modal fade" id="popupdelete" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-body">
+			<div class="modal-body">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="modal-title formPanel"><strong>Bạn có thực sự muốn xóa hóa đơn này không?</strong></h3>
+					</div>
+					<div class="modal-footer">
+						<div class="submitButton" style="margin: auto">
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								Cancel</button>
+							<button id="Delete" class="btn btn-primary" >OK
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!---Thêm mới--->
 <div class="modal fade" id="popupedit" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -135,7 +204,7 @@
 								</div>
 
 								<div class="col-lg-8">
-									<input disabled="true" id= "ID" class="form-control">
+									<input readonly id= "ID" class="form-control">
 								</div>
 							</div>
 
@@ -149,7 +218,7 @@
 									</div>
 
 									<div class="col-lg-8 " >
-										<input class="form-control" id="sdt">
+										<input readonly class="form-control" id="sdt">
 									</div>
 								</div>
 							</div>
@@ -159,23 +228,23 @@
 							<div class="col-lg-6">
 								<div class="col-lg-4">
 									<p for="inputID" class="labelForm">
-										IDCTMH:
+										Địa chỉ:
 									</p>
 								</div>
 								<div class="col-lg-8">
-									<input class="form-control" id="IDCTMH">
+									<input readonly class="form-control" id="diachi">
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div>
 									<div class="col-lg-4">
 										<p for="inputID" class="labelForm">
-											Màu sắc:
+											Ngày:
 										</p>
 									</div>
 
 									<div class="col-lg-8 " >
-										<input class="form-control" id="mausac">
+										<input readonly class="form-control" id="ngay">
 
 									</div>
 								</div>
@@ -183,42 +252,6 @@
 						</div>
 						</br>
 						<div class="row">
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Size:
-									</p>
-								</div>
-								<div class="col-lg-8">
-									<input class="form-control" id="size">
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div>
-									<div class="col-lg-4">
-										<p for="inputID" class="labelForm">
-											Số lượng:
-										</p>
-									</div>
-									<div class="col-lg-8 " >
-										<input  disabled="true" type="number" class="form-control" id="soluong">
-
-									</div>
-								</div>
-							</div>
-						</div>
-						</br>
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Trạng Thái:
-									</p>
-								</div>
-								<div class="col-lg-8">
-									<input class="form-control" id="mota">
-								</div>
-							</div>
 							<div class="col-lg-6">
 								<div class="col-lg-4">
 									<p for="inputID" class="labelForm">
@@ -226,19 +259,30 @@
 									</p>
 								</div>
 								<div class="col-lg-8">
-									<input disabled="true" type="number" class="form-control" id="gia">
+									<input class="form-control" id="gia" readonly>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div>
+									<div class="col-lg-4">
+										<p for="inputID" class="labelForm">
+											Tình Trạng:
+										</p>
+									</div>
+									<div class="col-lg-8 " >
+										<input type="text" class="form-control" id="tinhtrang">
+
+									</div>
 								</div>
 							</div>
 						</div>
 						</br>
-
-
 					</fieldset>
 					<div class="modal-footer" style="margin-top: 20px">
 						<div class="submitButton">
 							<button type="button" class="btn btn-default" data-dismiss="modal">
 								Cancel</button>
-							<button  id="OK" class="btn btn-primary" >OK
+							<button type="submit"  id="OK" class="btn btn-primary" >OK
 							</button>
 						</div>
 					</div>
@@ -246,34 +290,4 @@
 			</div>
 		</div>
 	</div>
-
 </div>
-
-<script>
-	$('#OK').click(function () {
-		alert("Ajax post!");
-		var ID = $('#ID').val();
-		$.ajax({
-		    type : 'POST',
-			url : '',
-			datatype: 'JSON',
-			data: {
-				ID: ID,
-			},
-			success: function (data) {
-				if (data == true){
-				    alert("Lưu thành công!");
-				}
-				else {
-                    alert("Lưu thất bại!");
-				}
-            }
-		});
-    });
-	function Add() {
-		var x = $('#ID').val() + $('#IDMH').val() + $('#TenMH').val() + $('#soluong').val() + $('#mausac').val() +
-            $('#size').val() + $('#gia').val() + $('#ID').val() ;
-		alert(x);
-    }
-</script>
-

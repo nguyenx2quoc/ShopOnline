@@ -21,9 +21,9 @@
 							ID
 						</th>
 						<th class="hidden-480" ng-click="orderByMe('Ten')">Tên mặt hàng</th>
-						<th>........</th>
+						<th>Số lượng</th>
 						<th>Giá</th>
-						<th class="hidden-480">Số lượng</th>
+						<th class="hidden-480">Giới tính</th>
 						<th>
 							Màu
 						</th>
@@ -36,22 +36,22 @@
 					<tbody ng-repeat="x in myWelcome">
 					<tr >
 						<td>
-							{{x.ID}}
+							{{x.CT_ID}}
 						</td>
 
 						<td >
-							{{x.Ten}}
+							{{x.MH_TenMH}}
 						</td>
 
 						<td>
-							AAAAAAAA
+							{{x.CT_SoLuong}}
 						</td>
-						<td>{{x.Gia}}</td>
-						<td class="hidden-480">3</td>
-						<td>{{x.Mau}}</td>
+						<td>{{x.CT_Gia}}</td>
+						<td class="hidden-480">{{x.CT_Loai}}</td>
+						<td>{{x.CT_MauSac}}</td>
 
 						<td class="hidden-480">
-							Xanh và Đỏ
+							{{x.CT_Size}}
 						</td>
 
 						<td>
@@ -61,17 +61,92 @@
 									</i>
 								</a>
 								<script>
-                                    $(document).ready(function () {
+									$(document).ready(function () {
+                                        var t = '';
                                         $('.btn-info').click(function () {
-                                            var t = $(this).parents('tr').find('td:eq(0)').html();
+                                            t = $(this).parents('tr').find('td:eq(0)').html();
                                             t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");
-                                            document.getElementById('IDe').value = t;
+                                            $.ajax({
+                                                type: 'GET',
+                                                url : 'http://apishoponline.apphb.com/api/Server//getsptheoid?IDCTMH=' + t,
+                                                success: function (data) {
+                                                    var CT_ID = data[0].CT_ID;
+                                                    $('#IDe').val(CT_ID);
+                                                    $('#IDMHe').val(data[0].MH_ID);
+                                                    $('#TenMHe').val(data[0].MH_TenMH);
+													$('#gioitinhe').val(data[0].CT_Loai);
+                                                    $('#sizee').val(data[0].CT_Size);
+                                                    $('#loaispe').val(data[0].MH_IDSubLoaiHang);
+                                                    $('#giae').val(data[0].CT_Gia);
+                                                    $('#soluonge').val(data[0].CT_SoLuong);
+                                                    $('#mausace').val(data[0].CT_MauSac);
+                                                    $('#urlhae').val(data[0].MH_URLHinhAnh1);
+                                                    $('#urlha1e').val(data[0].MH_URLHinhAnh2);
+                                                    $('#urlha2e').val(data[0].MH_URLHinhAnh3);
+                                                    $('#motae').val(data[0].MH_MoTa);
+                                                }
+                                            });
+                                    	});
+                                        $('#OKEdit').click(function () {
+                                            $.ajax({
+                                                type : 'PUT',
+                                                url : 'http://apishoponline.apphb.com/api/Server/capnhatMH',
+                                                datatype: 'JSON',
+                                                data: {
+                                                    ID : t,
+													STATUS : true,
+                                                    TenMH: $('#TenMHe').val(),
+                                                    IDSubLoaiHang : $('#loaispe').val(),
+                                                    URLHinhAnh1: $('#urlhae').val(),
+                                                    URLHianhAnh2: $('#urlha1e').val(),
+                                                    URLHinhAnh3: $('#urlha2e').val(),
+//                                                    MoTa : $('#motae').val(),
+//                                                    MauSac: $('#mausace').val(),
+//                                                    Size: $('#sizee').val(),
+//                                                    Loai : t,
+//                                                    SoLuong : $('#soluonge').val(),
+                                                },
+                                                success: function (data) {
+                                                    if (data == true){
+                                                    }
+                                                    else {
+                                                        alert("Lưu thất bại!");
+                                                    }
+                                                }
+                                            });
+
                                         });
                                     });
 								</script>
-								<button class="btn btn-xs btn-danger">
+
+								<button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#popupdelete">
 									<i class="ace-icon fa fa-trash-o bigger-120"></i>
 								</button>
+
+								<!----Script xóa sản phẩm---->
+								<script>
+									var t = '';
+									$('.btn-danger').click(function () {
+										t = $(this).parents('tr').find('td:eq(0)').html();
+										t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");
+									});
+									$('#Delete').click(function () {
+										$.ajax({
+											type: 'DELETE',
+											url : 'http://apishoponline.apphb.com/api/Server/xoaCTMH?IDCTMH=' + t,
+											dataType: 'JSON',
+											success: function (data) {
+												if(data == true){
+												}
+												else {
+													alert("Xóa không thành công!");
+												}
+
+											}
+										});
+									});
+
+								</script>
 
 								<button class="btn btn-xs btn-warning">
 									<i class="ace-icon fa fa-flag bigger-120"></i>
@@ -120,6 +195,31 @@
 	</div>
 </div>
 
+
+<!----Pop up xóa--->
+
+<div class="modal fade" id="popupdelete" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-body">
+			<div class="modal-body">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="modal-title formPanel"><strong>Bạn có thực sự muốn xóa sản phẩm này không?</strong></h3>
+					</div>
+					<div class="modal-footer">
+						<div class="submitButton" style="margin: auto">
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								Cancel</button>
+							<button id="Delete" class="btn btn-primary" >OK
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!---Thêm mới--->
 <div class="modal fade" id="popupadd" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -127,39 +227,9 @@
 			<div class="modal-body">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="modal-title formPanel"><strong>Thêm</strong></h3>
+						<h3 class="modal-title formPanel"><i class="fa fa-fw fa-plus"></i><strong>Thêm</strong></h3>
 					</div>
 					<fieldset style="margin-top: 10px">
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										ID:
-									</p>
-								</div>
-
-								<div class="col-lg-8">
-									<input id= "ID" class="form-control">
-								</div>
-							</div>
-
-
-							<div class="col-lg-6">
-								<div>
-									<div class="col-lg-4">
-										<p for="inputID" class="labelForm">
-											ID mặt hàng:
-										</p>
-									</div>
-
-									<div class="col-lg-8 " >
-										<input class="form-control" id="IDMH">
-
-									</div>
-								</div>
-							</div>
-						</div>
-						</br>
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="col-lg-4">
@@ -222,7 +292,10 @@
 									</p>
 								</div>
 								<div class="col-lg-8">
-									<input class="form-control" id="gioitinh">
+									<select id="gioitinh">
+										<option value="1">Nam</option>
+										<option value="2">Nữ</option>
+									</select>
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -236,8 +309,6 @@
 								</div>
 							</div>
 						</div>
-						</br>
-
 						</br>
 						<div class="row">
 							<div class="col-lg-6">
@@ -259,13 +330,20 @@
 									</p>
 								</div>
 								<div class="col-lg-8 " >
-									<input class="form-control" id="url2">
-
+									<form name="myForm" ng-controller="MyCtrl">
+										<input type="button" id="browse-image0" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
+										<button ng-click="uploadFiles(picFile)">Submit</button>
+										<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
+										<input id="urlha" class="form-control" ng-model="url1" placeholder="Đây là url hình ảnh" disabled="true">
+										<span class="progress" ng-show="picFile.progress >= 0">
+											<div style="width:5%;color: #0000cc" ng-bind="picFile.progress + '%'"></div>
+										</span>
+										<br/>
+									</form>
 								</div>
 
 							</div>
 						</div>
-
 						</br>
 						<div class="row">
 							<div class="col-lg-6">
@@ -276,7 +354,16 @@
 								</div>
 
 								<div class="col-lg-8">
-									<input class="form-control" id="url3">
+									<form name="myForm" ng-controller="MyCtrl">
+										<input type="button" id="browse-image" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
+										<button ng-click="uploadFiles(picFile)">Submit</button>
+										<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
+										<input class="form-control" ng-model="url1" placeholder="Đây là url hình ảnh" disabled="true" id="urlha1">
+										<span class="progress" ng-show="picFile.progress >= 0">
+												  <div style="width:5%; color: #0000cc" ng-bind="picFile.progress + '%'"></div>
+										</span>
+										<br/>
+									</form>
 								</div>
 
 							</div>
@@ -289,8 +376,16 @@
 									</div>
 
 									<div class="col-lg-8 " >
-										<input class="form-control" id="url4">
-
+										<form name="myForm" ng-controller="MyCtrl">
+											<input type="button" id="browse-image2" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
+											<button ng-click="uploadFiles(picFile)">Submit</button>
+											<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
+											<input class="form-control" ng-model="url1" placeholder="Đây là url hình ảnh" id="urlha2" disabled="true">
+											<span class="progress" ng-show="picFile.progress >= 0">
+												  <div style="width:5%;color: #0000cc" ng-bind="picFile.progress + '%'"></div>
+										</span>
+											<br/>
+										</form>
 									</div>
 							</div>
 						</div>
@@ -324,17 +419,17 @@
 
 </div>
 
+<!---Script thêm sản phầm--->
 <script>
-
 	$.ajax({
 		type: 'GET',
-		url:'https://private-167575-test10548.apiary-mock.com/abcd',
+		url:'http://apishoponline.apphb.com/api/Server/getsub',
 		datatype: 'JSON',
 		success: function (success) {
 			var LoaiSP = '<select id="loaisp">';
 			for (var i = 0; i < success.length; i++)
 			{
-				LoaiSP = LoaiSP + '<option value="'+ success[i].ID + '">' + success[i].Ten + '</option>';
+				LoaiSP = LoaiSP + '<option value="'+ success[i].ID + '">' + success[i].TenLoai + '</option>';
 			}
 			LoaiSP = LoaiSP + '</select>';
 
@@ -344,18 +439,31 @@
 	})
 
 	$('#OK').click(function () {
-		alert("Ajax post!");
-		var ID = $('#ID').val();
+		var t = $('#gioitinh').val();
+		if(t == 'Nam')
+		{
+		    t = 'Nam';
+		}else {
+		    t = 'Nữ';
+		}
 		$.ajax({
 		    type : 'POST',
-			url : '',
+			url : 'http://apishoponline.apphb.com/api/Server/themMH',
 			datatype: 'JSON',
 			data: {
-				ID: ID,
+				TenMH: $('#TenMH').val(),
+				IDSubLoaiHang : $('#loaisp').val(),
+				URLHinhAnh1: $('#urlha').val(),
+				URLHianhAnh2: $('#urlha1').val(),
+                URLHinhAnh3: $('#urlha2').val(),
+//                MoTa : $('#mota').val(),
+//                MauSac: $('#mausac').val(),
+//                Size: $('#size').val(),
+//                Loai : t,
+//                SoLuong : $('#soluong').val(),
 			},
 			success: function (data) {
 				if (data == true){
-				    alert("Lưu thành công!");
 				}
 				else {
                     alert("Lưu thất bại!");
@@ -363,15 +471,10 @@
             }
 		});
     });
-	function Add() {
-		var x = $('#ID').val() + $('#IDMH').val() + $('#TenMH').val() + $('#soluong').val() + $('#mausac').val() +
-            $('#size').val() + $('#gia').val() + $('#ID').val() ;
-		alert(x);
-    }
 </script>
 
 
-<!--POPUP--->
+<!--POPUP chỉnh sửa sản phầm--->
 <div class="modal fade" id="popupedit" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-body">
@@ -401,7 +504,7 @@
 									</div>
 
 									<div class="col-lg-8 " >
-										<input class="form-control" id="IDMHe">
+										<input class="form-control" id="IDMHe" readonly="true">
 
 									</div>
 								</div>
@@ -485,7 +588,6 @@
 							</div>
 						</div>
 						</br>
-
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="col-lg-4">
@@ -506,8 +608,16 @@
 									</p>
 								</div>
 								<div class="col-lg-8 " >
-									<input class="form-control" id="url2e">
-
+									<form name="myForm" ng-controller="MyCtrl">
+										<input type="button" id="browse-image0e" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
+										<button ng-click="uploadFiles(picFile)">Submit</button>
+										<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
+										<input class="form-control" ng-model="url1" id="urlhae" placeholder="Đây là url hình ảnh" disabled="true">
+										<span class="progress" ng-show="picFile.progress >= 0">
+											<div style="width:5%;color: #0000cc" ng-bind="picFile.progress + '%'"></div>
+										</span>
+										<br/>
+									</form>
 								</div>
 
 							</div>
@@ -522,21 +632,38 @@
 								</div>
 
 								<div class="col-lg-8">
-									<input class="form-control" id="url3e">
+									<form name="myForm" ng-controller="MyCtrl">
+										<input type="button" id="browse-imagee" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
+										<button ng-click="uploadFiles(picFile)">Submit</button>
+										<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
+										<input class="form-control" ng-model="url1" id="urlha1e" placeholder="Đây là url hình ảnh" disabled="true">
+										<span class="progress" ng-show="picFile.progress >= 0">
+												  <div style="width:5%; color: #0000cc" ng-bind="picFile.progress + '%'"></div>
+										</span>
+										<br/>
+									</form>
 								</div>
+
 							</div>
 							<div class="col-lg-6">
-								<div>
-									<div class="col-lg-4">
-										<p for="inputID" class="labelForm" >
-											Url Hình ảnh:
-										</p>
-									</div>
 
-									<div class="col-lg-8 " >
-										<input class="form-control" id="url4e">
+								<div class="col-lg-4">
+									<p for="inputID" class="labelForm" >
+										Url Hình ảnh:
+									</p>
+								</div>
 
-									</div>
+								<div class="col-lg-8 " >
+									<form name="myForm" ng-controller="MyCtrl">
+										<input type="button" id="browse-image1" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
+										<button ng-click="uploadFiles(picFile)">Submit</button>
+										<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
+										<input class="form-control" ng-model="url1"id="urlha2e" placeholder="Đây là url hình ảnh" disabled="true">
+										<span class="progress" ng-show="picFile.progress >= 0">
+												  <div style="width:5%;color: #0000cc" ng-bind="picFile.progress + '%'"></div>
+										</span>
+										<br/>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -553,13 +680,12 @@
 								</div>
 							</div>
 						</div>
-
 					</fieldset>
 					<div class="modal-footer" style="margin-top: 20px">
 						<div class="submitButton">
 							<button type="button" class="btn btn-default" data-dismiss="modal">
 								Cancel</button>
-							<button  id="OKEdit" class="btn btn-primary" >OK
+							<button id="OKEdit" class="btn btn-primary" ui-sref="clothing">OK
 							</button>
 						</div>
 					</div>

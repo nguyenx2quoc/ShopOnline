@@ -44,8 +44,8 @@
 		<script src="assets/js/angular.js"></script>
 
 		<script src="assets/js/angular-ui-router.min.js"></script>
+		<script src="assets/js/angular-cloudinary.js"></script>
 
-		<script src="js/cloudinary-angular.js"></script>
 		<script src="js/ng-file-upload-shim.js"></script>
 		<script src="js/ng-file-upload.js"></script>
 
@@ -257,8 +257,6 @@
 								<div  class="page-content">
 
 								</div>
-
-
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->
@@ -266,21 +264,6 @@
 				</div>
 			</div><!-- /.main-content -->
 
-			<form name="myForm">
-
-				<i ng-show="myForm.userName.$error.required"></i><br>
-				<button class="browse-image" data-target="image_name" ></button>
-				<!--<input type="button" id="browse-image" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" required>-->
-				<input id="image_name" type="hidden">
-				<i ng-show="myForm.file.$error.required"></i>
-				<br/>
-				<!--<button ng-click="uploadFile2(picFile)">Submit</button>-->
-				<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
-				<span class="progress" ng-show="picFile.progress >= 0">
-												  <div style="width:5%" ng-bind="picFile.progress + '%'"></div>
-				</span>
-				<br/>
-			</form>
 			<div class="footer">
 				<div class="footer-inner">
 					<div class="footer-content">
