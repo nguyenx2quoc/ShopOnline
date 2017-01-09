@@ -36,6 +36,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="app.js"></script>
 
 <script src="homeController.js"></script>
+<script src="filterController.js"></script>
+<script src="indexController.js"></script>
 </head>
 <body>
 <!-- header_top -->
@@ -78,15 +80,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="clearfix"> </div>
 	</div>
 		<!-- start header menu -->
-		<ul class="megamenu skyblue">
+		<ul class="megamenu skyblue" ng-controller="indexCtrl">
 			<li class="active grid"><a class="color1" ui-sref="home">Trang Chủ</a></li>
 				<li class="grid"><a class="color2" href="#">Giới tính</a>
 					<div class="megapanel">
 						<div class="row">
 							<div class="h_nav" style="align-content: center">
 								<ul>
-									<li><a ui-sref="filter">NAM</a></li>
-									<li><a ui-sref="filter">NỮ</a></li>
+									<li><a ui-sref="filtertype({type: nam })">NAM</a></li>
+									<li><a ui-sref="filtertype({type: nu })">NỮ</a></li>
 								</ul>
 							</div>
 						</div>
@@ -100,8 +102,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="col1">
 							<div class="h_nav">
 								<ul>
-									<li><a ui-sref="filter">NAM</a></li>
-									<li><a ui-sref="filter">NỮ</a></li>
+									<li><a ui-sref="filtertype({type: namquan })">NAM</a></li>
+									<li><a ui-sref="filtertype({type: nuquan })">NỮ</a></li>
 								</ul>	
 							</div>							
 						</div>
@@ -114,15 +116,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="col1">
 							<div class="h_nav">
 								<ul>
-									<li><a ui-sref="filter">NAM</a></li>
-									<li><a ui-sref="filter">NỮ</a></li>
+									<li><a ui-sref="filtertype({type: namao })">NAM</a></li>
+									<li><a ui-sref="filtertype({type: nuao })">NỮ</a></li>
 								</ul>	
 							</div>							
 						</div>
     				</div>
 				</li>				
 			
-				<li><a class="color6" ui-sref="filter">ĐẦM</a>
+				<li><a class="color6" ui-sref="filtertype({type: dam })">ĐẦM</a>
 				</li>	
 						 </ul> 
 	</div>
@@ -130,72 +132,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 <div class="arriv">
 	<div ui-view class="container">
-		<div class="arriv-top">
-			<div class="col-md-6 arriv-left">
-				<img src="images/1.jpg" class="img-responsive" alt="">
-				<div class="arriv-info">
-					<h3>NEW ARRIVALS</h3>
-					<p>REVIVE YOUR WARDROBE WITH CHIC KNITS</p>
-					<div class="crt-btn">
-						<a ui-sref="details">TAKE A LOOK</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 arriv-right">
-				<img src="images/2.jpg" class="img-responsive" alt="">
-				<div class="arriv-info">
-					<h3>TUXEDO</h3>
-					<p>REVIVE YOUR WARDROBE WITH CHIC KNITS</p>
-					<div class="crt-btn">
-						<a href="details.html">SHOP NOW</a>
-					</div>
-				</div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-		<div class="arriv-bottm">
-			<div class="col-md-8 arriv-left1">
-				<img src="images/3.jpg" class="img-responsive" alt="">
-				<div class="arriv-info1">
-					<h3>SWEATER</h3>
-					<p>REVIVE YOUR WARDROBE WITH CHIC KNITS</p>
-					<div class="crt-btn">
-						<a href="details.html">SHOP NOW</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 arriv-right1">
-				<img src="images/4.jpg" class="img-responsive" alt="">
-				<div class="arriv-info2">
-					<a href="details.html"><h3>Trekking Shoes<i class="ars"></i></h3></a>
-				</div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-		<div class="arriv-las">
-			<div class="col-md-4 arriv-left2">
-				<img src="images/5.jpg" class="img-responsive" alt="">
-				<div class="arriv-info2">
-					<a href="details.html"><h3>Casual Glasses<i class="ars"></i></h3></a>
-				</div>
-			</div>
-			<div class="col-md-4 arriv-middle">
-				<img src="images/6.jpg" class="img-responsive" alt="">
-				<div class="arriv-info3">
-					<h3>FRESH LOOK T-SHIRT</h3>
-					<div class="crt-btn">
-						<a href="details.html">SHOP NOW</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 arriv-right2">
-				<img src="images/7.jpg" class="img-responsive" alt="">
-				<div class="arriv-info2">
-					<a href="details.html"><h3>Elegant Watches<i class="ars"></i></h3></a>
-				</div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
+		
+		
+			
 	</div>
 </div>
 
@@ -226,6 +165,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="clearfix"> </div>
 			
 	</div>
+</div>
 </div>
 </body>
 </html>
