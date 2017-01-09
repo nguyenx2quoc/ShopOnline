@@ -51,6 +51,7 @@ $('#Delete').click(function () {
         }
     });
 });
+
 $('#OK').click(function () {
     $.ajax({
         type : 'PUT',

@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Dashboard - Ace Admin</title>
+		<title>ADMIN</title>
 
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -26,15 +26,92 @@
 		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
 
+
+
 		<!--[if lte IE 9]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
 
-
-
 	</head>
 
 	<body class="no-skin">
+	<script>
+	function statusChangeCallback(response) {
+	console.log('statusChangeCallback');
+	console.log(response);
+	// The response object is returned with a status field that lets the
+	// app know the current login status of the person.
+	// Full docs on the response object can be found in the documentation
+	// for FB.getLoginStatus().
+	if (response.status === 'connected') {
+	// Logged into your app and Facebook.
+	testAPI();
+	} else if (response.status === 'not_authorized') {
+	// The person is logged into Facebook, but not your app.
+	document.getElementById('status').innerHTML = 'Please log ' +
+	'into this app.';
+	} else {
+	// The person is not logged into Facebook, so we're not sure if
+	// they are logged into this app or not.
+	document.getElementById('status').innerHTML = 'Please log ' +
+	'into Facebook.';
+	}
+	}
+
+	// This function is called when someone finishes with the Login
+	// Button.  See the onlogin handler attached to it in the sample
+	// code below.
+	function checkLoginState() {
+	FB.getLoginStatus(function(response) {
+	statusChangeCallback(response);
+	});
+	}
+
+	window.fbAsyncInit = function() {
+	FB.init({
+	appId      : '1841021052823012',
+	cookie     : true,  // enable cookies to allow the server to access
+	// the session
+	xfbml      : true,  // parse social plugins on this page
+	version    : 'v2.8' // use graph api version 2.8
+	});
+
+	// Now that we've initialized the JavaScript SDK, we call
+	// FB.getLoginStatus().  This function gets the state of the
+	// person visiting this page and can return one of three states to
+	// the callback you provide.  They can be:
+	//
+	// 1. Logged into your app ('connected')
+	// 2. Logged into Facebook, but not your app ('not_authorized')
+	// 3. Not logged into Facebook and can't tell if they are logged into
+	//    your app or not.
+	//
+	// These three cases are handled in the callback function.
+
+	FB.getLoginStatus(function(response) {
+	statusChangeCallback(response);
+	});
+
+	};
+
+	// Load the SDK asynchronously
+	(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js";
+	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+
+
+	function testAPI() {
+	console.log('Welcome!  Fetching your information.... ');
+	FB.api('/me', function(response) {
+	console.log('Successful login for: ' + response.name);
+	document.getElementById('status').innerHTML =
+	'Thanks for logging in, ' + response.name + '!';
+	});
+	}</script>
 		<div id="navbar" class="navbar navbar-default          ace-save-state">
 			<div class="navbar-container ace-save-state" id="navbar-container">
 				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -56,44 +133,8 @@
 					</a>
 				</div>
 
-				<div class="navbar-buttons navbar-header pull-right" role="navigation">
-					<ul class="nav ace-nav">
-						<li class="light-blue dropdown-modal">
-							<a data-toggle="dropdown"  class="dropdown-toggle"><!---href="#"--->
-								<img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
-								<span class="user-info">
-
-								</span>
-
-								<i class="ace-icon fa fa-caret-down"></i>
-							</a>
-
-							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
-									<a ><!---href="#"--->
-										<i class="ace-icon fa fa-cog"></i>
-										Settings
-									</a>
-								</li>
-
-								<li>
-									<a href="profile.html">
-										<i class="ace-icon fa fa-user"></i>
-										Profile
-									</a>
-								</li>
-
-								<li class="divider"></li>
-
-								<li>
-									<a href="#">
-										<i class="ace-icon fa fa-power-off"></i>
-										Logout
-									</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
+				<div class="navbar-header pull-right" >
+					<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="true" data-auto-logout-link="true"></div>
 				</div>
 			</div><!-- /.navbar-container -->
 		</div>
@@ -104,13 +145,11 @@
 			</script>
 
 			<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
-				<script type="text/javascript">
-					try{ace.settings.loadState('sidebar')}catch(e){}
-				</script>
+
 				<ul class="nav nav-list">
 					<li class="active">
 						<a ui-sref="home">
-							<i class="menu-icon fa fa-tachometer"></i>
+							<i class="menu-icon fa fa-home"></i>
 							<span class="menu-text"> Dashboard </span>
 						</a>
 
@@ -119,7 +158,7 @@
 
 					<li class="" >
 						<a ui-sref="sanpham" >
-							<i class="menu-icon fa fa-desktop"></i>
+							<i class="menu-icon fa fa-product-hunt"></i>
 							<span class="menu-text">
 								Sản phẩm
 							</span>
@@ -127,7 +166,7 @@
 					</li>
 					<li class="" >
 						<a ui-sref="chitietsp" >
-							<i class="menu-icon fa fa-desktop"></i>
+							<i class="menu-icon fa fa-th"></i>
 							<span class="menu-text">
 								Chi tiết sản phẩm
 							</span>
@@ -149,7 +188,7 @@
 			</div>
 
 
-			<div class="main-content">
+			<div  ui-view  class="main-content">
 				<div class="main-content-inner">
 					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 						<ul class="breadcrumb">
@@ -161,74 +200,8 @@
 					</div>
 
 					<div class="page-content">
-						<div class="ace-settings-container" id="ace-settings-container">
-							<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-								<i class="ace-icon fa fa-cog bigger-130"></i>
-							</div>
 
-							<div class="ace-settings-box clearfix" id="ace-settings-box">
-								<div class="pull-left width-50">
-									<div class="ace-settings-item">
-										<div class="pull-left">
-											<select id="skin-colorpicker" class="hide">
-												<option data-skin="no-skin" value="#438EB9">#438EB9</option>
-												<option data-skin="skin-1" value="#222A2D">#222A2D</option>
-												<option data-skin="skin-2" value="#C6487E">#C6487E</option>
-												<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-											</select>
-										</div>
-										<span>&nbsp; Choose Skin</span>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
-										<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
-										<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
-										<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
-										<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
-										<label class="lbl" for="ace-settings-add-container">
-											Inside
-											<b>.container</b>
-										</label>
-									</div>
-								</div><!-- /.pull-left -->
-
-								<div class="pull-left width-50">
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
-										<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
-										<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
-										<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
-									</div>
-								</div><!-- /.pull-left -->
-							</div><!-- /.ace-settings-box -->
-						</div><!-- /.ace-settings-container -->
-
-						<div ui-view class="page-header">
+						<div class="page-header">
 							<h1>
 								ADMIN
 							</h1>
@@ -281,7 +254,11 @@
 		<script src="assets/js/angular-cloudinary.js"></script>
 		<script src="js/ng-file-upload-shim.js"></script>
 		<script src="js/ng-file-upload.js"></script>
+		<script src="assets/js/angular-local-storage.js"></script>
+
 		<script src="js/app.js"></script>
+
+		<script src="js/services.js"></script>
 	</body>
 
 

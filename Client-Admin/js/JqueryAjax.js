@@ -11,9 +11,7 @@ $.ajax({
         subLH = subLH + '</select>'
         $('#loaispe').html(subLH);
     }
-})
-//2 '</td> + <td>'+ success[i].CT_ID +
-//4,5  success[i].CT_SoLuong + '</td> + <td>' +success[i].CT_Gia + '</td> <td>' + success[i].CT_Size+ '</td> <td>' +
+});
 
 $.ajax({
     type: 'GET',
@@ -40,118 +38,71 @@ $.ajax({
             '$(".btn-info").click(function(){vr = $(this).parents("tr").find("td:eq(0)").html();' +
             'console.log(vr);' +
             '$.ajax({' +
-            'url : "http://apishoponline.apphb.com/api/Server/getsptheoid?IDCTMH=" + vr,' +
+            'url : "http://apishoponline.apphb.com/api/Server/getmathangtheoid?IDMH=" + vr,' +
             'type: "GET",' +
             'success: function(response) { console.log(response);' +
-            '$("#IDe").val(response[0].CT_ID);' +
-            '$("#IDMHe").val(response[0].MH_ID);' +
-            '$("#TenMHe").val(response[0].MH_TenMH);' +
-            '$("#mausace").val(response[0].CT_MauSac);' +
-            '$("#sizee").val(response[0].CT_Size);' +
-            '$("#soluonge").val(response[0].CT_SoLuong);' +
-            '$("#gioitinhe").val(response[0].CT_Loai);' +
-            '$("#giae").val(response[0].CT_Gia);' +
+            '$("#idmhe").val(response[0].MH_ID);' +
+            '$("#tenmhe").val(response[0].MH_TenMH);' +
             '$("#loaispe").val(response[0].MH_IDSubLoaiHang);' +
             '$("#urlhae").val(response[0].MH_URLHinhAnh1);' +
             '$("#urlha1e").val(response[0].MH_URLHinhAnh2);' +
             '$("#urlha2e").val(response[0].MH_URLHinhAnh3);' +
-            '$("#motae").val(response[0].CT_MoTa);' +
             ' }' +
             '});});' +
             '$(".btn-success").click(function(){vr = $(this).parents("tr").find("td:eq(0)").html();' +
             'console.log(vr); $("#IDMH").val($(this).parents("tr").find("td:eq(0)").html());' +
            '});' +
             '$("#Delete").click(function () {  $.ajax({  type: "DELETE",  url : ' +
-            '"http://apishoponline.apphb.com/api/Server/xoaCTMH?IDCTMH=" + t, dataType: "JSON",' +
+            '"http://apishoponline.apphb.com/api/Server/xoaMH?IDMH=" + t, dataType: "JSON",' +
             ' success: function (data) { if(data == true){   alert("Xóa thành công!");}' +
             ' else {  alert("Xóa không thành công!"); }}});});'+
+
+            '$("#OK").click(function () { '+
+            '$.ajax({' +
+            'type : "POST",' +
+            'url : "http://apishoponline.apphb.com/api/Server/themCTMH",'+
+            'datatype: "JSON",'+
+            'data: {'+
+            'IDMatHang:$("#IDMH").val(),'+
+            'STATUS: true,'+
+            'Size: $("#size").val(),'+
+            'Gia: $("#gia").val(),'+
+            'Loai: $("#gioitinh").val(),'+
+            'SoLuong: $("#soluong").val(),'+
+            'MauSac: $("#mausac").val(),'+
+            'MoTa: $("#mota").val() },'+
+            'success: function (data) {'+
+            'if (data == true){ alert("Lưu thành công!");}'+
+            'else {alert("Lưu thất bại!");}}});});'+
+
+            '$("#OKEditMH").click(function () { '+
+                '$.ajax({' +
+                    'type : "PUT",' +
+                    'url : "http://apishoponline.apphb.com/api/Server/putMH",'+
+                    'datatype: "JSON",'+
+                    'data: {'+
+                       'ID : $("#idmhe").val(),'+
+                        'STATUS : true,'+
+                        'TenMH: $("#tenmhe").val(),'+
+                        'IDSubLoaiHang : $("#loaispe").val(),'+
+                        'URLHinhAnh1: $("#urlhae").val(),'+
+                        'URLHinhAnh2: $("#urlha1e").val(),'+
+                        'URLHinhAnh3: $("#urlha2e").val()},'+
+                    'success: function (data) {'+
+                        'if (data == true){ alert("Lưu thành công!");}'+
+                        'else {alert("Lưu thất bại!");}}});});'+
+
             '</script>';
         $('#tableds').html(vt);
     }
 });
 
 
-//
-// $('#Delete').click(function () {
-//     $.ajax({
-//         type: 'DELETE',
-//         url : 'http://apishoponline.apphb.com/api/Server/xoaCTMH?IDCTMH=' + t,
-//         dataType: 'JSON',
-//         success: function (data) {
-//             if(data == true){
-//                 alert("Xóa thành công!");
-//             }
-//             else {
-//                 alert("Xóa không thành công!");
-//             }
-//         }
-//     });
-// });
-
-
-
-$('#OKEdit').click(function () {
-    $.ajax({
-        type : 'PUT',
-        url : 'http://apishoponline.apphb.com/api/Server/capnhatMH',
-        datatype: 'JSON',
-        data: {
-            MH_ID : $('#IDMHe').val(),
-            MH_STATUS : true,
-            MH_TenMH: $('#TenMHe').val(),
-            MH_IDSubLoaiHang : $('#loaispe').val(),
-            MH_URLHinhAnh1: $('#urlhae').val(),
-            MH_URLHianhAnh2: $('#urlha1e').val(),
-            MH_URLHinhAnh3: $('#urlha2e').val(),
-            CT_ID : $('#ID').val(),
-            CT_MoTa : $('#motae').val(),
-               CT_MauSac: $('#mausace').val(),
-               CT_Size: $('#sizee').val(),
-               CT_Loai : $('#loaispe').val(),
-            CT_STATUS : true,
-               CT_SoLuong : $('#soluonge').val(),
-            },
-        success: function (data) {
-            if (data == true){
-                alert("Lưu thành công!");
-            }
-            else {
-                alert("Lưu thất bại!");
-            }
-        }
-    });
-
-});
 
 
 
 
 
 
-$('#OK').click(function () {
-    $.ajax({
-        type : 'POST',
-        url : 'http://apishoponline.apphb.com/api/Server/themMH',
-        datatype: 'JSON',
-        data: {
-            TenMH: $('#TenMH').val(),
-            IDSubLoaiHang : $('#loaisp').val(),
-            URLHinhAnh1: $('#urlha').val(),
-            URLHianhAnh2: $('#urlha1').val(),
-            URLHinhAnh3: $('#urlha2').val(),
-//                MoTa : $('#mota').val(),
-//                MauSac: $('#mausac').val(),
-//                Size: $('#size').val(),
-//                Loai : t,
-//                SoLuong : $('#soluong').val(),
-        },
-        success: function (data) {
-            if (data == true){
-            }
-            else {
-                alert("Lưu thất bại!");
-            }
-        }
-    });
-});
+
 

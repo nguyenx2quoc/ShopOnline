@@ -1,6 +1,5 @@
-angular.module('admin')
-
-    .service('AuthService', function($q, $http, API_ENDPOINT, jwtHelper) {
+angular.module('routerApp')
+    .service('AuthService', function($q, $http, API_ENDPOINT) {
         var LOCAL_CLIENTID = 'yourid';
         var LOCAL_TOKEN_KEY = 'yourTokenKey';
         var isAuthenticated = false;
@@ -41,11 +40,7 @@ angular.module('admin')
             if (token == 'undefined'){
                 return false;
             }
-            var tokenPayload = jwtHelper.decodeToken(token);
-            if (tokenPayload.role == "Manager"){
-                return true;
-            }
-            return false;
+            return true;
         }
 
         function destroyUserCredentials() {
@@ -69,10 +64,9 @@ angular.module('admin')
 
         var login = function(user) {
             return $q(function(resolve, reject) {
-
                 $http({
                     method: 'POST',
-                    url: 'http://localhost:57919/api/audience/getAudience',
+                    url: 'http://apishoponline.apphb.com/api/audience/getAudience',
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                     transformRequest: function(obj) {
                         var str = [];
@@ -85,10 +79,9 @@ angular.module('admin')
                     console.log(data);
                     storeClientID(data.ClientId);
                     user.client_id = data.ClientId;
-
                     $http({
                         method: 'POST',
-                        url: 'http://localhost:57919/oauth2/token',
+                        url: 'http://apishoponline.apphb.com/oauth2/token',
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         transformRequest: function(obj) {
                             var str = [];
