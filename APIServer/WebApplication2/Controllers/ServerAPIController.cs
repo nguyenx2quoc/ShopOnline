@@ -297,71 +297,24 @@ namespace WebApplication2.Controllers
             }
         }
 
-        //3. Thêm mặt hàng và chi tiết mặt hàng cùng 1 lần
-        [Route("themsanpham")]
-        [HttpPost]
-        public bool postChiTietMatHang(TongSanPham a)
-        {
-            try
-            {
-                MATHANG u = new MATHANG();
-                CHITIETMATHANG b = new CHITIETMATHANG();
-                u.TenMH = a.MH_TenMH;
-             // u.ID = a.MH_ID;
-                u.IDSubLoaiHang = a.MH_IDSubLoaiHang;
-                u.STATUS = a.MH_Status;
-                u.URLHinhAnh1 = a.MH_URLHinhAnh1;
-                u.URLHinhAnh2 = a.MH_URLHinhAnh2;
-                u.URLHinhAnh3 = a.MH_URLHinhAnh3;
-                db.MATHANGs.Add(u);
-                
-                // b.IDMatHang = a.MH_ID;
-                b.Loai = a.CT_Loai;
-                b.MauSac = a.CT_MauSac;
-                b.Gia = a.CT_Gia;
-                b.Size = a.CT_Size;
-                b.SoLuong = a.CT_SoLuong;
-                b.STATUS = a.CT_Status;
-
-                
-                db.CHITIETMATHANGs.Add(b);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
-
+      
         #endregion
 
         #region --PUT--
-        //1. Cap nhat 1 mặt hàng và 1 chi tiêt mat hang
-        [Route("capnhatMH")]
+        //1. Chỉnh sửa 1 mặt hàng
+        [Route("putmh")]
         [HttpPut]
-        public bool putMatHang(SanPham a)
+        public bool putMat_Hang(MATHANG a)
         {
             try
             {
-                var u = db.MATHANGs.Where(c => c.ID.Equals(a.MH_ID)).FirstOrDefault();
-                var b = db.CHITIETMATHANGs.Where(c => c.ID.Equals(a.CT_ID)).FirstOrDefault();
-
-
-                u.TenMH = a.MH_TenMH;
-                u.IDSubLoaiHang = a.MH_IDSubLoaiHang;
-                u.STATUS = a.MH_Status;
-                u.URLHinhAnh1 = a.MH_URLHinhAnh1;
-                u.URLHinhAnh2 = a.MH_URLHinhAnh2;
-                u.URLHinhAnh3 = a.MH_URLHinhAnh3;
-
-                b.IDMatHang = a.MH_ID;
-                b.Loai = a.CT_Loai;
-                b.MauSac = a.CT_MauSac;
-                b.Gia = a.CT_Gia;
-                b.Size = a.CT_Size;
-                b.SoLuong = a.CT_SoLuong;
-                b.STATUS = a.CT_Status;
+                var u = db.MATHANGs.Where(c => c.ID.Equals(a.ID)).FirstOrDefault();
+                u.TenMH = a.TenMH;
+                u.IDSubLoaiHang = a.IDSubLoaiHang;
+                u.STATUS = a.STATUS;
+                u.URLHinhAnh1 = a.URLHinhAnh1;
+                u.URLHinhAnh2 = a.URLHinhAnh2;
+                u.URLHinhAnh3 = a.URLHinhAnh3;
 
                 db.SaveChanges();
                 return true;
@@ -372,7 +325,33 @@ namespace WebApplication2.Controllers
             }
         }
 
-      
+
+        //2. Chỉnh sửa 1 chi tiêt mat hang
+        [Route("putCTMH")]
+        [HttpPut]
+        public bool put_CTMH(CHITIETMATHANG a)
+        {
+            try
+            {
+                var b = db.CHITIETMATHANGs.Where(c => c.ID.Equals(a.ID)).FirstOrDefault();
+                b.IDMatHang = a.IDMatHang;
+                b.Loai = a.Loai;
+                b.MauSac = a.MauSac;
+                b.Gia = a.Gia;
+                b.Size = a.Size;
+                b.SoLuong = a.SoLuong;
+                b.STATUS = a.STATUS;
+
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+        }
+
+
 
         //3. Chỉnh sửa hóa đơn
         [HttpPut]
@@ -400,6 +379,26 @@ namespace WebApplication2.Controllers
         #endregion
 
         #region --DELETE--
+
+        //0. Xóa 1 mặt hàng
+        [Route("xoaMH")]
+        [HttpDelete]
+        public bool deleteMatHang(int IDMH)
+        {
+
+            try
+            {
+                var ct = db.MATHANGs.Where(c => c.ID.Equals(IDMH)).FirstOrDefault();
+                ct.STATUS = false;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+        }
+
         //1. Xóa 1 chi tiết mặt hàng
         [Route("xoaCTMH")]
         [HttpDelete]
