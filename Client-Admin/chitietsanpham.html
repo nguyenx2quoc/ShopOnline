@@ -1,0 +1,296 @@
+
+
+<script src="js/Jquerychitietsp.js"></script>
+
+<div ui-view class="page-header">
+    <h1>
+        Danh sách chi tiết mặt hàng
+    </h1>
+</div><!-- /.page-header -->
+
+<br>
+<div class="row" ng-controller="MyCtrl">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        <div class="row">
+            <div class="col-xs-12">
+                <table id="simple-table" class="table  table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>IDMH</th>
+                        <th>ID chi tiết</th>
+                        <th >Tên mặt hàng</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Loại hàng</th>
+                        <th>Size</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="tableds">
+                    <!--<tr>-->
+                    <!--<td>-->
+                    <!--{{x.MH_ID}}-->
+                    <!--</td>-->
+
+                    <!--<td >-->
+                    <!--{{x.MH_TenMH}}-->
+                    <!--</td>-->
+
+                    <!--<td>-->
+                    <!--{{x.CT_SoLuong}}-->
+                    <!--</td>-->
+                    <!--<td>{{x.CT_Gia}}</td>-->
+                    <!--<td class="hidden-480">{{x.CT_Loai}}</td>-->
+                    <!--<td>{{x.CT_MauSac}}</td>-->
+
+                    <!--<td class="hidden-480">-->
+                    <!--{{x.CT_Size}}-->
+                    <!--</td>-->
+                    <!--<td>-->
+                    <!--<a class="btn btn-primary btn-xs" ng-click="" ui-sref="clothing.chitet">-->
+                    <!--<i class="ace-icon fa fa-pencil bigger-120" aria-hidden="true">-->
+                    <!--</i>-->
+                    <!--</a>-->
+                    <!--<script>-->
+                    <!--t = $(this).parents('tr').find('td:eq(0)').html();-->
+                    <!--t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");-->
+                    <!--</script>-->
+                    <!--<a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#popupdelete">-->
+                    <!--<i class="ace-icon fa fa-trash-o bigger-120" aria-hidden="true"></i>-->
+                    <!--</a>-->
+                    <!--&lt;!&ndash;&#45;&#45;Script xóa sản phẩm&#45;&#45;&ndash;&gt;-->
+
+
+                    <!--<a class="btn btn-xs btn-warning">-->
+                    <!--<i class="ace-icon fa fa-flag bigger-120"></i>-->
+                    <!--</a>-->
+                    <!--</td>-->
+                    <!--</tr>-->
+                    </tbody>
+                </table>
+            </div><!-- /.span -->
+        </div><!-- /.row -->
+    </div>
+</div>
+
+<!----Pop up xóa--->
+
+<div class="modal fade" id="popupdelete" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-body">
+            <div class="modal-body">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="modal-title formPanel"><strong>Bạn có thực sự muốn xóa sản phẩm này không?</strong></h3>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="submitButton" style="margin: auto">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Cancel</button>
+                            <button id="Delete" class="btn btn-primary" >OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--POPUP chỉnh sửa sản phầm--->
+<div class="modal fade" id="popupedit" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-body">
+            <div class="modal-body">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="modal-title formPanel"><strong>Chỉnh sửa chi tiết mặt hàng</strong></h3>
+                    </div>
+                    <fieldset style="margin-top: 10px">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <p for="inputID" class="labelForm" >
+                                        ID chi tiết:
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input id= "IDe" class="form-control" readonly="true">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div>
+                                    <div class="col-lg-4">
+                                        <p for="inputID" class="labelForm">
+                                            ID mặt hàng:
+                                        </p>
+                                    </div>
+
+                                    <div class="col-lg-8 " >
+                                        <input class="form-control" id="IDMHe" readonly="true">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <p for="inputID" class="labelForm">
+                                        Tên mặt hàng:
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-8">
+                                    <input disabled class="form-control" id="TenMHe">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div>
+                                    <div class="col-lg-4">
+                                        <p for="inputID" class="labelForm">
+                                            Màu sắc
+                                        </p>
+                                    </div>
+
+                                    <div class="col-lg-8 " >
+                                        <input class="form-control" id="mausace">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <p for="inputID" class="labelForm">
+                                        Size:
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input class="form-control" id="sizee">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div>
+                                    <div class="col-lg-4">
+                                        <p  for="inputID" class="labelForm">
+                                            Số lượng:
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-8 " >
+                                        <input type="number" class="form-control" id="soluonge">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <p for="inputID" class="labelForm">
+                                        Giới Tính:
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input class="form-control" id="gioitinhe" ng-model="test">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <p for="inputID" class="labelForm">
+                                        Giá:
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input type="number" class="form-control" id="giae">
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <p for="inputID" class="labelForm">
+                                        Loại SP:
+                                    </p>
+                                </div>
+                                <div class="col-lg-8 " >
+                                    <select id="loaispe">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <p for="inputID" class="labelForm">
+                                        Url Hình ảnh:
+                                    </p>
+                                </div>
+                                <div class="col-lg-8 " >
+
+                                        <input class="form-control" id="urlhae" disabled="true">
+
+                                </div>
+
+                            </div>
+                        </div>
+                        </br>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <p for="inputID" class="labelForm">
+                                        Url Hình ảnh:
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-8">
+                                    <input class="form-control" id="urlha1e" placeholder="Đây là url hình ảnh" disabled>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6">
+
+                                <div class="col-lg-4">
+                                    <p for="inputID" class="labelForm" >
+                                        Url Hình ảnh:
+                                    </p>
+                                </div>
+                                <div class="col-lg-8 " >
+                                    <input class="form-control" id="urlha2e" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-2">
+                                    <p for="inputID" class="labelForm">
+                                        Mô Tả:
+                                    </p>
+                                </div>
+                                <div class="col-lg-9">
+                                    <textarea class="form-control" id="motae" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="modal-footer" style="margin-top: 20px">
+                        <div class="submitButton">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Cancel</button>
+                            <button id="OKEdit" class="btn btn-primary" ui-sref="clothing">OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

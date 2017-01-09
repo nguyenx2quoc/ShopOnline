@@ -1,0 +1,228 @@
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+<div ui-view class="page-header">
+    <h1>
+        Thêm sản phẩm
+    </h1>
+</div><!-- /.page-header -->
+<div class="row" ng-controller="UpLoadCtrl">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="col-lg-4">
+                <p for="inputID" class="labelForm">
+                    ID mặt hàng:
+                </p>
+            </div>
+            <div class="col-lg-8">
+                <input disabled class="form-control" id="IDMH">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div>
+                <div class="col-lg-4">
+                    <p for="inputID" class="labelForm">
+                        Tên mặt hàng:
+                    </p>
+                </div>
+                <div class="col-lg-8 " >
+                    <input class="form-control" id="TenMH">
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="col-lg-4">
+                <p for="inputID" class="labelForm">
+                    Loại sản phẩm:
+                </p>
+            </div>
+            <div class="col-lg-8 " >
+                <select id="loaisp">
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="col-lg-4">
+                <p for="inputID" class="labelForm">
+                    Url Hình ảnh:
+                </p>
+            </div>
+            <div class="col-lg-8 " >
+                <img style="height: 50px;width: 50px" ngf-src="picFile11" class="thumb">
+                <form name="myForm">
+                    <input type="button" id="browse-image11" data-target="image_name" ngf-select ng-model="picFile11" name="file" ngf-accept="'image/*'" value="Choose" required>
+                    <button ng-click="uploadFiles(picFile11)">Submit</button>
+
+                    <input id="urlha1" class="form-control" ng-model="url1" placeholder="Đây là url hình ảnh" disabled="true">
+                    <span class="progress" ng-show="picFile.progress >= 0">
+                                                <div style="width:5%;color: #0000cc" ng-bind="picFile.progress + '%'"></div>
+                                            </span>
+                    <br/>
+                </form>
+            </div>
+        </div>
+    </div>
+    </br>
+    <div class="row" >
+        <div class="col-lg-6">
+            <div class="col-lg-4">
+                <p for="inputID" class="labelForm">
+                    Url Hình ảnh:
+                </p>
+            </div>
+
+            <div class="col-lg-8">
+                <img style="height: 50px;width: 50px" ngf-src="picFile12" class="thumb">
+                <form name="myForm">
+                    <input type="button" id="browse-image12" data-target="image_name" ngf-select ng-model="picFile12" name="file" ngf-accept="'image/*'" value="Choose" required>
+                    <button ng-click="uploadFiles(picFile12)">Submit</button>
+
+                    <input class="form-control" ng-model="url1" placeholder="Đây là url hình ảnh" disabled="true" id="urlha12">
+                    <span class="progress" ng-show="picFile.progress >= 0">
+                                                          <div style="width:5%; color: #0000cc" ng-bind="picFile.progress + '%'"></div>
+                                                </span>
+                    <br/>
+                </form>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="col-lg-4">
+                <p for="inputID" class="labelForm" >
+                    Url Hình ảnh:
+                </p>
+            </div>
+            <div class="col-lg-8 " >
+                <img style="height: 50px;width: 50px" ngf-src="picFile13" class="thumb">
+                <form name="myForm">
+                    <input type="button" id="browse-image13" data-target="image_name" ngf-select ng-model="picFile13" name="file" ngf-accept="'image/*'" value="Choose" required>
+                    <button ng-click="uploadFiles(picFile13)">Submit</button>
+
+                    <input class="form-control" ng-model="url1" placeholder="Đây là url hình ảnh" id="urlha13" disabled="true">
+                    <span class="progress" ng-show="picFile.progress >= 0">
+                                                          <div style="width:5%;color: #0000cc" ng-bind="picFile.progress + '%'"></div>
+                                                </span>
+                    <br/>
+                </form>
+            </div>
+        </div>
+    </div>
+    </br>
+    <!--&lt;!&ndash;&#45;&#45;Sản phẩm 1-&ndash;&gt;-->
+    <!--<div class="w3-panel w3-card-2" style="width: 90%; padding-top: 10px; padding-bottom: 20px; margin: auto">-->
+
+        <!--<div class="row">-->
+            <!--<div class="col-lg-6">-->
+
+            <!--</div>-->
+            <!--<div class="col-lg-6">-->
+                <!--<div>-->
+                    <!--<div class="col-lg-4">-->
+                        <!--<p for="inputID" class="labelForm">-->
+                            <!--Size:-->
+                        <!--</p>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-lg-8 " >-->
+                        <!--<input class="form-control" id="size2">-->
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--</br>-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-6">-->
+                <!--<div class="col-lg-4">-->
+                    <!--<p for="inputID" class="labelForm">-->
+                        <!--Giá:-->
+                    <!--</p>-->
+                <!--</div>-->
+                <!--<div class="col-lg-8">-->
+                    <!--<input class="form-control" id="gia">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-lg-6">-->
+                <!--<div class="col-lg-4">-->
+                    <!--<p for="inputID" class="labelForm">-->
+                        <!--Giới tính:-->
+                    <!--</p>-->
+                <!--</div>-->
+                <!--<div class="col-lg-8 " >-->
+                    <!--<select id="gioitinh2">-->
+                        <!--<option value="Nam">Nam</option>-->
+                        <!--<option value="Nữ">Nữ</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--</br>-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-6">-->
+                <!--<div class="col-lg-4">-->
+                    <!--<p for="inputID" class="labelForm">-->
+                        <!--Màu sắc:-->
+                    <!--</p>-->
+                <!--</div>-->
+                <!--<div class="col-lg-8">-->
+                    <!--<input class="form-control" id="mausac">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-lg-6">-->
+                <!--<div>-->
+                    <!--<div class="col-lg-4">-->
+                        <!--<p  for="inputID" class="labelForm">-->
+                            <!--Số lượng:-->
+                        <!--</p>-->
+                    <!--</div>-->
+                    <!--<div class="col-lg-8 " >-->
+                        <!--<input type="number" class="form-control" id="soluong">-->
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--</br>-->
+        <!--<div class="row">-->
+            <!--<div class="col-lg-12">-->
+                <!--<div class="col-lg-2">-->
+                    <!--<p for="inputID" class="labelForm">-->
+                        <!--Mô Tả:-->
+                    <!--</p>-->
+                <!--</div>-->
+                <!--<div class="col-lg-9">-->
+                    <!--<textarea class="form-control" id="mota" rows="3"></textarea>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+    <div class="modal-footer" style="margin-top: 20px">
+        <div class="submitButton">
+            <button type="button" class="btn btn-default">
+                Cancel</button>
+            <button  id="OK" class="btn btn-primary" >OK
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    $.ajax({
+        type: 'GET',
+        url:'http://apishoponline.apphb.com/api/Server/getsub',
+        datatype: 'JSON',
+        success: function (success) {
+            var LoaiSP = '<select id="loaisp">';
+            for (var i = 0; i < success.length; i++)
+            {
+                LoaiSP = LoaiSP + '<option value="'+ success[i].ID + '">' + success[i].TenLoai + '</option>';
+            }
+            LoaiSP = LoaiSP + '</select>';
+
+            $('#loaisp').html(LoaiSP);
+            $('#loaispe').html(LoaiSP);
+        }
+    });
+
+</script>
