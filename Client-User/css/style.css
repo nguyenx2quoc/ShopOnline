@@ -579,7 +579,9 @@ input:focus {
 }
 .head-t {
   padding: 1em 0;
+	background: #A9F5F2;
 }
+
 /*search*/
 .search{
 	position: relative;
@@ -1095,6 +1097,7 @@ i.goog:hover{
 }
 .footer {
   padding: 3em 0;
+	background:#E0E0F8 ;
 }
 i.phone {
   width: 19px;
@@ -2576,7 +2579,7 @@ p.cart a {
 }
 .header_right {
   float: right;
-  width: 48%;
+  width: 40%;
 }
 .grid_text h3, .grid_text-middle h3 {
 	font-size: 15px;
