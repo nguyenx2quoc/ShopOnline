@@ -295,6 +295,7 @@
     <Compile Include="Models\MATHANG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MH_Sub.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -310,11 +311,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\P_HoaDon.cs" />
     <Compile Include="Models\P_SanPham.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Models\SUBLOAIHANG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TongSanPham.cs" />
     <Compile Include="Models\_SubLH.cs" />
     <Compile Include="Models\_ChiTietMH.cs" />
     <Compile Include="Models\_MatHang.cs" />

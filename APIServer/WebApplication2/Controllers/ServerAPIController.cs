@@ -47,32 +47,28 @@ namespace WebApplication2.Controllers
         //0. Lấy thông tin chi tiết mặt hàng theo IDMH
         [Route("getctmh")]
         [HttpGet]
-        public List<_ChiTietMH> get_CT_Theo_ID(int IDMH)
+        public List<P_SanPham> get_CT_Theo_ID(int IDMH)
         {
 
             var item = (from i in db.CHITIETMATHANGs
                         join u in db.MATHANGs on i.IDMatHang equals u.ID
                         join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
-                        where (u.STATUS != false && i.STATUS != false && u.ID== IDMH)
-                        select new _ChiTietMH
+                        join n in db.LOAIHANGs on m.IDLoaiHang equals n.ID
+                        where (u.STATUS != false && i.STATUS != false && i.IDMatHang == IDMH)
+                        select new P_SanPham
                         {
-                           
-                            ID = i.ID,
-                            IDMatHang = u.ID,
+                            IDCT = i.ID.ToString(),
                             TenMH = u.TenMH,
-                            Gia = i.Gia.ToString(),
-                            Loai = i.Loai,
+                            Mota = i.MoTa,
                             MauSac = i.MauSac,
-                            MoTa = i.MoTa,
+                            Gia = i.Gia.ToString(),
                             Size = i.Size,
-                            SoLuong = i.SoLuong.ToString(),
-                            STATUS = i.STATUS.ToString(),
-
+                            HinhAnh = u.URLHinhAnh1,
                         }).ToList();
             return item;
         }
 
-        //1. Lấy thông tin tất cả sản phẩm
+        //1. Lấy thông tin tất cả sản phẩm chi tiết mặt hàng
         [Route("getsp")]
         [HttpGet]
         public List<SanPham> get_San_Pham()
@@ -112,7 +108,7 @@ namespace WebApplication2.Controllers
             }
         }
 
-        //2. Lấy thông tin sản phẩm theo ID
+        //2. Lấy thông tin sản phẩm CTMH theo ID
         [Route("getsptheoid")]
         [HttpGet]
         public List<SanPham> get_San_Pham_ID(string IDCTMH)
@@ -229,6 +225,41 @@ namespace WebApplication2.Controllers
             }
 
         }
+
+        //6. Lấy tất cả Mặt hàng và sub loại hàng
+        [Route("getmhvasub")]
+        [HttpGet]
+        public List<MH_Sub> get_MH_Sub()
+        {
+            try
+            {
+
+                var item = (from u in db.MATHANGs
+                            join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
+                            where (u.STATUS != false)
+                            select new MH_Sub
+                            {
+                                MH_ID = u.ID,
+                                MH_TenMH = u.TenMH,
+                                MH_IDSubLoaiHang = m.ID,
+                                MH_Status = u.STATUS,
+                                MH_URLHinhAnh1 = u.URLHinhAnh1,
+                                MH_URLHinhAnh2 = u.URLHinhAnh2,
+                                MH_URLHinhAnh3 = u.URLHinhAnh3,
+
+                                S_ID = m.ID,
+                                S_IDLoaiHang = m.ID,
+                                S_MoTa = m.MoTa,
+                                S_TenLoai = m.TenLoai,
+
+                            }).ToList();
+                return item;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+        }
         #endregion
 
         #region --POST--
@@ -245,7 +276,7 @@ namespace WebApplication2.Controllers
             }
             catch (Exception e)
             {
-                return false;
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
             }
         }
 
@@ -262,29 +293,29 @@ namespace WebApplication2.Controllers
             }
             catch (Exception e)
             {
-                return false;
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
             }
         }
 
         //3. Thêm mặt hàng và chi tiết mặt hàng cùng 1 lần
         [Route("themsanpham")]
         [HttpPost]
-        public bool postChiTietMatHang(SanPham a)
+        public bool postChiTietMatHang(TongSanPham a)
         {
             try
             {
                 MATHANG u = new MATHANG();
                 CHITIETMATHANG b = new CHITIETMATHANG();
                 u.TenMH = a.MH_TenMH;
-                u.ID = a.MH_ID;
+             // u.ID = a.MH_ID;
                 u.IDSubLoaiHang = a.MH_IDSubLoaiHang;
                 u.STATUS = a.MH_Status;
                 u.URLHinhAnh1 = a.MH_URLHinhAnh1;
                 u.URLHinhAnh2 = a.MH_URLHinhAnh2;
                 u.URLHinhAnh3 = a.MH_URLHinhAnh3;
-
-                b.ID = a.CT_ID;
-                b.IDMatHang = a.MH_ID;
+                db.MATHANGs.Add(u);
+                
+                // b.IDMatHang = a.MH_ID;
                 b.Loai = a.CT_Loai;
                 b.MauSac = a.CT_MauSac;
                 b.Gia = a.CT_Gia;
@@ -292,7 +323,7 @@ namespace WebApplication2.Controllers
                 b.SoLuong = a.CT_SoLuong;
                 b.STATUS = a.CT_Status;
 
-                db.MATHANGs.Add(u);
+                
                 db.CHITIETMATHANGs.Add(b);
                 db.SaveChanges();
                 return true;
@@ -306,55 +337,42 @@ namespace WebApplication2.Controllers
         #endregion
 
         #region --PUT--
-        //1. Cap nhat 1 mặt hàng
+        //1. Cap nhat 1 mặt hàng và 1 chi tiêt mat hang
         [Route("capnhatMH")]
         [HttpPut]
-        public bool putMatHang(MATHANG a)
+        public bool putMatHang(SanPham a)
         {
             try
             {
-                var ct = db.MATHANGs.Where(c => c.ID.Equals(a.ID)).FirstOrDefault();
-                ct.ID = a.ID;
-                ct.TenMH = a.TenMH;
-                ct.IDSubLoaiHang = a.IDSubLoaiHang;
-                ct.STATUS = a.STATUS;
-                ct.URLHinhAnh1 = a.URLHinhAnh1;
-                ct.URLHinhAnh2 = a.URLHinhAnh2;
-                ct.URLHinhAnh3 = a.URLHinhAnh3;
+                var u = db.MATHANGs.Where(c => c.ID.Equals(a.MH_ID)).FirstOrDefault();
+                var b = db.CHITIETMATHANGs.Where(c => c.ID.Equals(a.CT_ID)).FirstOrDefault();
+
+
+                u.TenMH = a.MH_TenMH;
+                u.IDSubLoaiHang = a.MH_IDSubLoaiHang;
+                u.STATUS = a.MH_Status;
+                u.URLHinhAnh1 = a.MH_URLHinhAnh1;
+                u.URLHinhAnh2 = a.MH_URLHinhAnh2;
+                u.URLHinhAnh3 = a.MH_URLHinhAnh3;
+
+                b.IDMatHang = a.MH_ID;
+                b.Loai = a.CT_Loai;
+                b.MauSac = a.CT_MauSac;
+                b.Gia = a.CT_Gia;
+                b.Size = a.CT_Size;
+                b.SoLuong = a.CT_SoLuong;
+                b.STATUS = a.CT_Status;
+
                 db.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
-                return false;
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
             }
         }
 
-        //2. Cap nhat chi tiết mặt hàng
-        [Route("capnhatCTMH")]
-        [HttpPut]
-        public bool putChiTietMatHang(CHITIETMATHANG a)
-        {
-            try
-            {
-                var ct = db.CHITIETMATHANGs.Where(c => c.ID.Equals(a.ID)).FirstOrDefault();
-                ct.ID = a.ID;
-                ct.IDMatHang = a.IDMatHang;
-                ct.MoTa = a.MoTa;
-                ct.MauSac = a.MauSac;
-                ct.Size = a.Size;
-                ct.Gia = a.Gia;
-                ct.Loai = a.Loai;
-                ct.SoLuong = a.SoLuong;
-                ct.STATUS = a.STATUS;
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
+      
 
         //3. Chỉnh sửa hóa đơn
         [HttpPut]
@@ -382,7 +400,7 @@ namespace WebApplication2.Controllers
         #endregion
 
         #region --DELETE--
-        //1. Thêm 1 chi tiết mặt hàng
+        //1. Xóa 1 chi tiết mặt hàng
         [Route("xoaCTMH")]
         [HttpDelete]
         public bool deleteChiTietMatHang(int IDCTMH)
@@ -397,7 +415,7 @@ namespace WebApplication2.Controllers
             }
             catch (Exception e)
             {
-                return false;
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
             }
         }
 
@@ -437,6 +455,56 @@ namespace WebApplication2.Controllers
         #endregion
 
         #region --Phước--
+
+        #region --GET--
+        //001. Lấy chi tiet mat hang theo mau cua phuoc
+        [Route("getallctmh")]
+        [HttpGet]
+        public List<P_SanPham> get_all_CTMH()
+        {
+
+            var item = (from i in db.CHITIETMATHANGs
+                        join u in db.MATHANGs on i.IDMatHang equals u.ID
+                        join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
+                        join n in db.LOAIHANGs on m.IDLoaiHang equals n.ID
+                        where (u.STATUS != false && i.STATUS != false)
+                        select new P_SanPham
+                        {
+                            IDCT = i.ID.ToString(),
+                            TenMH = u.TenMH,
+                            Mota = i.MoTa,
+                            MauSac = i.MauSac,
+                            Gia = i.Gia.ToString(),
+                            Size = i.Size,
+                            HinhAnh = u.URLHinhAnh1,
+                        }).ToList();
+            return item;
+        }
+
+
+        //0. Lấy chi tiet mat hang theo id của nó
+        [Route("getctmhtheoid")]
+        [HttpGet]
+        public List<P_SanPham> get_CTMH(int IDCTMH)
+        {
+
+            var item = (from i in db.CHITIETMATHANGs
+                        join u in db.MATHANGs on i.IDMatHang equals u.ID
+                        join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
+                        join n in db.LOAIHANGs on m.IDLoaiHang equals n.ID
+                        where (u.STATUS != false && i.STATUS != false && i.ID == IDCTMH)
+                        select new P_SanPham
+                        {
+                            IDCT = i.ID.ToString(),
+                            TenMH = u.TenMH,
+                            Mota = i.MoTa,
+                            MauSac = i.MauSac,
+                            Gia = i.Gia.ToString(),
+                            Size = i.Size,
+                            HinhAnh = u.URLHinhAnh1,
+                        }).ToList();
+            return item;
+        }
         //1. Tất cả sản phẩm: dung api ở trên
         [Route("getmathang")]
         [HttpGet]
@@ -615,8 +683,51 @@ namespace WebApplication2.Controllers
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
             }
         }
+        #endregion
+
+        #region --POST--
+        //POST. Thêm hoa don và chi tiết hoa don cùng 1 lần
+        [Route("themhoadon")]
+        [HttpPost]
+        public bool postHoaDon(P_HoaDon a)
+        {
+            try
+            {
+                HOADON h = new HOADON();
+                CHITIETHOADON c = new CHITIETHOADON();
+
+                h.EMAIL = a.H_EMAIL;
+                h.SDT = a.H_SDT;
+                h.TongTien = a.H_TongTien;
+                h.TinhTrang = "Đã đặt hàng";
+                h.STATUS = true;
+                DateTime today = DateTime.Today;
+                h.Ngay = today;
+                db.HOADONs.Add(h);
+                db.SaveChanges();
+
+                int id = h.ID;
+
+                c.IDChiTietMatHang = a.C_IDCTMH;
+                c.IDHoaDon = id;
+                c.SoLuong = 1;
+                c.STATUS = true;
+                db.CHITIETHOADONs.Add(c);
+                db.SaveChanges();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
+        }
+        #endregion
+
 
         #endregion
+
+
 
     }
 }
