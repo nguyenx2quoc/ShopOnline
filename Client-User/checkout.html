@@ -1,48 +1,39 @@
 
-<div ui-view class="container" ng-controller = "homeCtrl">
+<div ui-view class="container" ng-controller = "checkCtrl">
 	<div class="check">	 
 			 <div class="col-md-3 cart-total">
 			 <a class="continue" href="#">Tiếp tục xem mặt hàng </a>
 			 <div class="price-details">
-				 <h3>Giá chi tiết</h3>
+				 <h3 style="color: red">Giá chi tiết</h3>
 				 <span>Giá sản phẩm</span>
-				 <span class="total1">{{listitems[0].CT_Gia}}</span>
+				 <span class="total1">{{listitems[0].Gia}}</span>
 				 <span>Phí giao hàng</span>
-				 <span class="total1">30.000</span>
+				 <span class="total1">30000</span>
 				 <div class="clearfix"></div>				 
 			 </div>	
 			 <ul class="total_price">
 			   <li class="last_price"> <h4>Tổng cộng</h4></li>	
-			   <li class="last_price"><span>500.000</span></li>
+			   <li class="last_price"><span>{{total}}</span></li>
 			   <div class="clearfix"> </div>
 			 </ul>
 			
 			 
-			 <div class="clearfix"></div>
-			 <a class="order" href="#">Mua</a>
+			 
 			
 			</div>
 		 <div class="col-md-9 cart-items">
 			 <h1>Đặt hàng </h1>
-				<script>$(document).ready(function(c) {
-					$('.close1').on('click', function(c){
-						$('.cart-header').fadeOut('slow', function(c){
-							$('.cart-header').remove();
-						});
-						});	  
-					});
-			   </script>
+				
 			 <div class="cart-header">
-				 <div class="close1"> </div>
-				 <div class="cart-sec simpleCart_shelfItem">
+					 <div class="cart-sec simpleCart_shelfItem">
 						<div class="cart-item cyc">
-							 <img ng-src={{listitems[0].MH_URLHinhAnh1}} class="img-responsive" alt=""/>
+							 <img ng-src={{listitems[0].HinhAnh}} class="img-responsive" alt=""/>
 						</div>
 					   <div class="cart-item-info">
-						<h3><a ui-sref = "details">{{listitems[0].MH_TenMH}} - {{listitems[0].CT_ID}}</a></h3>
+						<h3><a ui-sref = "details">{{listitems[0].TenMH}} - {{listitems[0].IDCT}}</a></h3>
 						<ul class="qty">
-							<li><p>Kích cỡ : {{listitems[0].CT_Size}}</p></li>
-							<li><p>Màu : {{listitems[0].CT_MauSac}}</p></li>
+							<li><p>Kích cỡ : {{listitems[0].Size}}</p></li>
+							<li><p>Màu : {{listitems[0].MauSac}}</p></li>
 						</ul>
 						
 							 <div class="delivery">
@@ -58,6 +49,18 @@
 			
 		
 			<div class="clearfix"> </div>
+	 </div>
+	 <form>
+    <div class="form-group">
+      <label for="address">Địa chỉ:</label>
+      <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ" ng-model="user.diachi">
+    </div>
+    <div class="form-group">
+      <label for="phonenum">Số điện thoại:</label>
+      <input type="text" class="form-control" id="phonenum" placeholder="Nhập số điện thoại" ng-model="user.dienthoai">
+    </div>
+	<a class="order" ui-sref="home" ng-click="mua()" style="width: 80px">Mua</a>
+    </form>
 	 </div>
 	 </div>
 

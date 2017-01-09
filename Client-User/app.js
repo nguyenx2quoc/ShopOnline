@@ -2,7 +2,7 @@
  * Created by asus on 12/20/2016.
  */
 
- angular.module('myApp', ['ui.router','homeCtrl','filCtrl','indexCtrl']);
+ angular.module('myApp', ['ui.router','homeCtrl','filCtrl','indexCtrl','detailCtrl','checkCtrl']);
 
 //var routerApp = angular.module('routerApp', ['ui.router']);
 
@@ -16,6 +16,11 @@ angular.module('myApp').config(function($stateProvider, $urlRouterProvider) {
             url: '/filtertype/:type',
             templateUrl: 'filter.html',
         });
+        $stateProvider
+        .state('filterid', {
+            url: '/filterid/:id',
+            templateUrl: 'filterid.html',
+        });
        
     $stateProvider   .state('register', {
             url: '/register',
@@ -27,7 +32,7 @@ angular.module('myApp').config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'home.html'
         });
     $stateProvider   .state('checkout', {
-            url: '/checkout',
+            url: '/checkout/:id',
             templateUrl: 'checkout.html'
         })
     $stateProvider.state('details', {

@@ -23,9 +23,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
 	<!-- start menu -->
+
 	<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 	<link rel="stylesheet" href="css/etalage.css">
 	<link rel="stylesheet" href="css/flexslider.css">
+
 	<script type="text/javascript" src="js/megamenu.js"></script>
 	<script src="http://code.angularjs.org/1.2.13/angular.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
@@ -38,8 +40,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="homeController.js"></script>
 <script src="filterController.js"></script>
 <script src="indexController.js"></script>
+<script src="detailController.js"></script>
+<script src="checkoutController.js"></script>
 </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=1841021052823012";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <!-- header_top -->
 <div class="top_bg">
 	<div class="container">
@@ -51,7 +63,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</ul>
 			</div>
 			<div class="top_left">
-				<img src="images/loginFB.png" height="32" width="32" style="float: left" alt="">
+				<div class="fb-login-button" data-max-rows="2" data-size="medium" data-show-faces="true" data-auto-logout-link="true"></div>
 			</div>
 				<div class="clearfix"> </div>
 		</div>
@@ -166,6 +178,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			
 	</div>
 </div>
-</div>
+<script src="sweetalert-master/dist/sweetalert.min.js"></script> 
+<link rel="stylesheet" type="text/css" href="sweetalert-master/dist/sweetalert.css">
 </body>
+
 </html>

@@ -1,65 +1,37 @@
-<script>
-    jQuery(document).ready(function($){
-        $('#etalage').etalage({
-            thumb_image_width: 300,
-            thumb_image_height: 400,
-            source_image_width: 900,
-            source_image_height: 1200,
-            show_hint: true,
-            click_callback: function(image_anchor, instance_id){
-                alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-            }
-        });
-
-    });
-</script>
 
 
 <!-- content -->
-<div ui-view class="container" ng-controller = "homeCtrl">
+<div ui-view class="container" ng-controller = "detailCtrl">
 
 	<!-- start content -->
 			<div class="row single">
 				<div class="col-md-9 det">
 				  <div class="single_left">
 					<div class="grid images_3_of_2">
-						<ul id="etalage">
-							<li>
-								<a href="optionallink.html">
-									<img class="etalage_thumb_image" ng-src={{listitems[0].MH_URLHinhAnh1}} class="img-responsive" />
-									<img class="etalage_source_image" ng-src={{listitems[0].MH_URLHinhAnh1}} class="img-responsive" title="" />
-								</a>
-							</li>
-							
-						</ul>
-						 <div class="clearfix"></div>		
-				  </div>
+						<img ng-src={{listitems[0][0].HinhAnh}} class="img-responsive" alt=""/>
+					 </div>
 				  <div class="desc1 span_3_of_2">
-					<h3>{{id}}</h3>
+					<h3>{{listitems[0][0].TenMH}}</h3>
 					<br>
-					<span class="code">Mã Sản Phẩm: {{listitems[0].MH_TenMH}}-{{listitems[0].CT_ID}} </span>
-									<p>{{listitems[0].CT_MoTa}}</p>
+					<span class="code">Mã Sản Phẩm: {{listitems[0][0].TenMH}}-{{listitems[0][0].IDCT}} </span>
+									<p>{{listitems[0][0].MoTa}}</p>
 						<div class="price">
-							<span class="text">Giá : {{listitems[0].CT_Gia}}</span>
+							<span class="text">Giá : {{listitems[0][0].Gia}}</span>
 							
 						</div>
 					<div class="det_nav1">
-						<h4>Kích cỡ: {{listitems[0].CT_Size}}</h4>
+						<h4>Kích cỡ: {{listitems[0][0].Size}}</h4>
 							
-						<h4>Màu sắc:{{listitems[0].CT_MauSac}}</h4>
+						<h4>Màu sắc:{{listitems[0][0].MauSac}}</h4>
 							
 					</div>
 					<div class="btn_form">
-						<a ui-sref="checkout">Đặt hàng</a>
+						<a ui-sref="checkout({id:listitems[0][0].IDCT })">Đặt hàng</a>
 					</div>
 										
 			   	 </div>
           	    <div class="clearfix"></div>
           	   </div>
-          	    <div class="single-bottom1">
-					<h6>Mô tả</h6>
-					<p class="prod-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option</p>
-				</div>
 	       </div>	
 	
 	<!-- end content -->

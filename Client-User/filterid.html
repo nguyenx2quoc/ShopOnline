@@ -10,7 +10,7 @@
 
 
 <!-- content -->
-<div ui-view class="container" ng-controller = "filCtrltype">
+<div ui-view class="container" ng-controller = "filCtrlid">
 	<div class="women_main">
 	<!-- start sidebar -->
 	<div class="col-md-3 s-d">
@@ -39,7 +39,7 @@
 	<!-- start content -->
 	<div class="col-md-9 w_content" >
 		<div class="women">
-			<a href="#"><h4>Lọc theo: {{showtype}} - <span>{{listitems[0].length}} mặt hàng</span> </h4></a>
+			<a href="#"><h4>Lọc theo: ID {{id}} - <span>{{listitems[0].length}} mặt hàng</span> </h4></a>
 		     <div class="clearfix"></div>	
 		</div>
 		<!-- grids_of_4 -->
@@ -63,7 +63,7 @@
 					<a ui-sref="details({id: listitems[0][$index+1].IDCT})">
 			   	   	 <img ng-src= {{listitems[0][$index+1].HinhAnh}} class="img-responsive" alt=""/>
 				   	  </a>
-				    <h4><a ui-sref="details({id: listitems[0][$index+1].IDCT})" id="Ten1">{{listitems[0][$index+1].TenMH}}</a></h4>
+				    <h4><a ui-sref="details({id: listitems[0][$index].IDCT})" id="Ten1">{{listitems[0][$index+1].TenMH}}</a></h4>
 				     <p>{{listitems[0][$index+1].Mota}}</p>
 					 <div class="grid_1 simpleCart_shelfItem">
 				   		<div class="item_add"><span class="item_price"><h6 id="Gia1">ONLY {{listitems[0][$index+1].Gia}}</h6></span></div>
