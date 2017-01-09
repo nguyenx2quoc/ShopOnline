@@ -44,37 +44,72 @@ namespace WebApplication2.Controllers
         #region --Quốc--
 
         #region --GET--
-        //1. Lấy thông tin tất cả sản phẩm
-        [Route("getsp")]
+        //0. Lấy thông tin chi tiết mặt hàng theo IDMH
+        [Route("getctmh")]
         [HttpGet]
-        public List<SanPham> get_San_Pham()
+        public List<_ChiTietMH> get_CT_Theo_ID(int IDMH)
         {
 
             var item = (from i in db.CHITIETMATHANGs
                         join u in db.MATHANGs on i.IDMatHang equals u.ID
                         join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
-                        where (u.STATUS != false && i.STATUS != false)
-                        select new SanPham
+                        where (u.STATUS != false && i.STATUS != false && u.ID== IDMH)
+                        select new _ChiTietMH
                         {
-                            MH_ID = u.ID.ToString(),
-                            MH_TenMH = u.TenMH,
-                            MH_IDSubLoaiHang = m.ID.ToString(),
-                            MH_Status = u.STATUS.ToString(),
-                            MH_URLHinhAnh1 = u.URLHinhAnh1,
-                            MH_URLHinhAnh2 = u.URLHinhAnh2,
-                            MH_URLHinhAnh3 = u.URLHinhAnh3,
-
-                            CT_ID = i.ID.ToString(),
-                            CT_Gia = i.Gia.ToString(),
-                            CT_Loai = i.Loai,
-                            CT_MauSac = i.MauSac,
-                            CT_MoTa = i.MoTa,
-                            CT_Size = i.Size,
-                            CT_SoLuong = i.SoLuong.ToString(),
-                            CT_Status = i.STATUS.ToString(),
+                           
+                            ID = i.ID,
+                            IDMatHang = u.ID,
+                            TenMH = u.TenMH,
+                            Gia = i.Gia.ToString(),
+                            Loai = i.Loai,
+                            MauSac = i.MauSac,
+                            MoTa = i.MoTa,
+                            Size = i.Size,
+                            SoLuong = i.SoLuong.ToString(),
+                            STATUS = i.STATUS.ToString(),
 
                         }).ToList();
             return item;
+        }
+
+        //1. Lấy thông tin tất cả sản phẩm
+        [Route("getsp")]
+        [HttpGet]
+        public List<SanPham> get_San_Pham()
+        {
+            try
+            {
+
+                var item = (from i in db.CHITIETMATHANGs
+                            join u in db.MATHANGs on i.IDMatHang equals u.ID
+                            join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
+                            where (u.STATUS != false && i.STATUS != false)
+                            select new SanPham
+                            {
+                                MH_ID = u.ID,
+                                MH_TenMH = u.TenMH,
+                                MH_IDSubLoaiHang = m.ID,
+                                MH_Status = u.STATUS,
+                                MH_URLHinhAnh1 = u.URLHinhAnh1,
+                                MH_URLHinhAnh2 = u.URLHinhAnh2,
+                                MH_URLHinhAnh3 = u.URLHinhAnh3,
+
+                                CT_ID = i.ID,
+                                CT_Gia = i.Gia,
+                                CT_Loai = i.Loai,
+                                CT_MauSac = i.MauSac,
+                                CT_MoTa = i.MoTa,
+                                CT_Size = i.Size,
+                                CT_SoLuong = i.SoLuong,
+                                CT_Status = i.STATUS,
+
+                            }).ToList();
+                return item;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
         }
 
         //2. Lấy thông tin sản phẩm theo ID
@@ -82,31 +117,38 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public List<SanPham> get_San_Pham_ID(string IDCTMH)
         {
+            try
+            {
 
-            var item = (from i in db.CHITIETMATHANGs
-                        join u in db.MATHANGs on i.IDMatHang equals u.ID
-                        where (u.STATUS != false && i.STATUS != false && i.ID.ToString() == IDCTMH)
-                        select new SanPham
-                        {
-                            MH_ID = u.ID.ToString(),
-                            MH_TenMH = u.TenMH,
-                            MH_IDSubLoaiHang = u.IDSubLoaiHang.ToString(),
-                            MH_Status = u.STATUS.ToString(),
-                            MH_URLHinhAnh1 = u.URLHinhAnh1,
-                            MH_URLHinhAnh2 = u.URLHinhAnh2,
-                            MH_URLHinhAnh3 = u.URLHinhAnh3,
+                var item = (from i in db.CHITIETMATHANGs
+                            join u in db.MATHANGs on i.IDMatHang equals u.ID
+                            where (u.STATUS != false && i.STATUS != false && i.ID.ToString() == IDCTMH)
+                            select new SanPham
+                            {
+                                MH_ID = u.ID,
+                                MH_TenMH = u.TenMH,
+                                MH_IDSubLoaiHang = u.IDSubLoaiHang,
+                                MH_Status = u.STATUS,
+                                MH_URLHinhAnh1 = u.URLHinhAnh1,
+                                MH_URLHinhAnh2 = u.URLHinhAnh2,
+                                MH_URLHinhAnh3 = u.URLHinhAnh3,
 
-                            CT_ID = i.ID.ToString(),
-                            CT_Gia = i.Gia.ToString(),
-                            CT_Loai = i.Loai,
-                            CT_MauSac = i.MauSac,
-                            CT_MoTa = i.MoTa,
-                            CT_Size = i.Size,
-                            CT_SoLuong = i.SoLuong.ToString(),
-                            CT_Status = i.STATUS.ToString(),
+                                CT_ID = i.ID,
+                                CT_Gia = i.Gia,
+                                CT_Loai = i.Loai,
+                                CT_MauSac = i.MauSac,
+                                CT_MoTa = i.MoTa,
+                                CT_Size = i.Size,
+                                CT_SoLuong = i.SoLuong,
+                                CT_Status = i.STATUS,
 
-                        }).ToList();
-            return item;
+                            }).ToList();
+                return item;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
         }
 
         //3. Lấy tất cả hóa đơn
@@ -164,7 +206,7 @@ namespace WebApplication2.Controllers
 
         }
 
-        //3. Lấy tất cả hóa đơn
+        //5. Lấy tất cả subloaihang
         [HttpGet]
         [Route("getsub")]
         public List<_SubLH> GetSub()
@@ -215,6 +257,43 @@ namespace WebApplication2.Controllers
             try
             {
                 db.CHITIETMATHANGs.Add(a);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        //3. Thêm mặt hàng và chi tiết mặt hàng cùng 1 lần
+        [Route("themsanpham")]
+        [HttpPost]
+        public bool postChiTietMatHang(SanPham a)
+        {
+            try
+            {
+                MATHANG u = new MATHANG();
+                CHITIETMATHANG b = new CHITIETMATHANG();
+                u.TenMH = a.MH_TenMH;
+                u.ID = a.MH_ID;
+                u.IDSubLoaiHang = a.MH_IDSubLoaiHang;
+                u.STATUS = a.MH_Status;
+                u.URLHinhAnh1 = a.MH_URLHinhAnh1;
+                u.URLHinhAnh2 = a.MH_URLHinhAnh2;
+                u.URLHinhAnh3 = a.MH_URLHinhAnh3;
+
+                b.ID = a.CT_ID;
+                b.IDMatHang = a.MH_ID;
+                b.Loai = a.CT_Loai;
+                b.MauSac = a.CT_MauSac;
+                b.Gia = a.CT_Gia;
+                b.Size = a.CT_Size;
+                b.SoLuong = a.CT_SoLuong;
+                b.STATUS = a.CT_Status;
+
+                db.MATHANGs.Add(u);
+                db.CHITIETMATHANGs.Add(b);
                 db.SaveChanges();
                 return true;
             }
@@ -363,21 +442,30 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public List<_MatHang> get_Mat_Hang()
         {
+            try
+            {
 
-            var item = (from u in db.MATHANGs
-                        where (u.STATUS != false)
-                        select new _MatHang
-                        {
-                            MH_ID = u.ID.ToString(),
-                            MH_TenMH = u.TenMH,
-                            MH_IDSubLoaiHang = u.ID.ToString(),
-                            MH_Status = u.STATUS.ToString(),
-                            MH_URLHinhAnh1 = u.URLHinhAnh1,
-                            MH_URLHinhAnh2 = u.URLHinhAnh2,
-                            MH_URLHinhAnh3 = u.URLHinhAnh3,
 
-                        }).ToList();
-            return item;
+
+                var item = (from u in db.MATHANGs
+                            where (u.STATUS != false)
+                            select new _MatHang
+                            {
+                                MH_ID = u.ID.ToString(),
+                                MH_TenMH = u.TenMH,
+                                MH_IDSubLoaiHang = u.ID.ToString(),
+                                MH_Status = u.STATUS.ToString(),
+                                MH_URLHinhAnh1 = u.URLHinhAnh1,
+                                MH_URLHinhAnh2 = u.URLHinhAnh2,
+                                MH_URLHinhAnh3 = u.URLHinhAnh3,
+
+                            }).ToList();
+                return item;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
         }
 
         //2. Lọc sản phẩm theo id: dùng api ở trên
@@ -385,44 +473,56 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public List<_MatHang> get_Mat_Hang_ID(string IDMH)
         {
+            try
+            {
+                var item = (from u in db.MATHANGs
+                            where (u.STATUS != false && u.ID.ToString() == IDMH)
+                            select new _MatHang
+                            {
+                                MH_ID = u.ID.ToString(),
+                                MH_TenMH = u.TenMH,
+                                MH_IDSubLoaiHang = u.ID.ToString(),
+                                MH_Status = u.STATUS.ToString(),
+                                MH_URLHinhAnh1 = u.URLHinhAnh1,
+                                MH_URLHinhAnh2 = u.URLHinhAnh2,
+                                MH_URLHinhAnh3 = u.URLHinhAnh3,
 
-            var item = (from u in db.MATHANGs
-                        where (u.STATUS != false && u.ID.ToString() == IDMH)
-                        select new _MatHang
-                        {
-                            MH_ID = u.ID.ToString(),
-                            MH_TenMH = u.TenMH,
-                            MH_IDSubLoaiHang = u.ID.ToString(),
-                            MH_Status = u.STATUS.ToString(),
-                            MH_URLHinhAnh1 = u.URLHinhAnh1,
-                            MH_URLHinhAnh2 = u.URLHinhAnh2,
-                            MH_URLHinhAnh3 = u.URLHinhAnh3,
-
-                        }).ToList();
-            return item;
+                            }).ToList();
+                return item;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
         }
         //3. Lọc theo quần/áo/đầm
         [Route("getsptheoloai")]
         [HttpGet]
         public List<P_SanPham> get_San_Pham_Loai(string LH)
         {
-
-            var item = (from i in db.CHITIETMATHANGs
-                        join u in db.MATHANGs on i.IDMatHang equals u.ID
-                        join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
-                        join n in db.LOAIHANGs on m.IDLoaiHang equals n.ID
-                        where (u.STATUS != false && i.STATUS != false && n.TenLoai == LH )
-                        select new P_SanPham
-                        {
-                           IDCT = i.ID.ToString(),
-                           TenMH = u.TenMH,
-                           Mota = i.MoTa,
-                           MauSac = i.MauSac,
-                           Gia = i.Gia.ToString(),
-                           Size = i.Size,
-                           HinhAnh = u.URLHinhAnh1,
-                        }).ToList();
-            return item;
+            try
+            {
+                var item = (from i in db.CHITIETMATHANGs
+                            join u in db.MATHANGs on i.IDMatHang equals u.ID
+                            join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
+                            join n in db.LOAIHANGs on m.IDLoaiHang equals n.ID
+                            where (u.STATUS != false && i.STATUS != false && n.TenLoai == LH)
+                            select new P_SanPham
+                            {
+                                IDCT = i.ID.ToString(),
+                                TenMH = u.TenMH,
+                                Mota = i.MoTa,
+                                MauSac = i.MauSac,
+                                Gia = i.Gia.ToString(),
+                                Size = i.Size,
+                                HinhAnh = u.URLHinhAnh1,
+                            }).ToList();
+                return item;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
         }
 
         //4. Lọc theo nam/nữ
@@ -430,23 +530,29 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public List<P_SanPham> get_San_Pham_GT(string GT)
         {
-
-            var item = (from i in db.CHITIETMATHANGs
-                        join u in db.MATHANGs on i.IDMatHang equals u.ID
-                        join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
-                        join n in db.LOAIHANGs on m.IDLoaiHang equals n.ID
-                        where (u.STATUS != false && i.STATUS != false && i.Loai == GT)
-                        select new P_SanPham
-                        {
-                            IDCT = i.ID.ToString(),
-                            TenMH = u.TenMH,
-                            Mota = i.MoTa,
-                            MauSac = i.MauSac,
-                            Gia = i.Gia.ToString(),
-                            Size = i.Size,
-                            HinhAnh = u.URLHinhAnh1,
-                        }).ToList();
-            return item;
+            try
+            {
+                var item = (from i in db.CHITIETMATHANGs
+                            join u in db.MATHANGs on i.IDMatHang equals u.ID
+                            join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
+                            join n in db.LOAIHANGs on m.IDLoaiHang equals n.ID
+                            where (u.STATUS != false && i.STATUS != false && i.Loai == GT)
+                            select new P_SanPham
+                            {
+                                IDCT = i.ID.ToString(),
+                                TenMH = u.TenMH,
+                                Mota = i.MoTa,
+                                MauSac = i.MauSac,
+                                Gia = i.Gia.ToString(),
+                                Size = i.Size,
+                                HinhAnh = u.URLHinhAnh1,
+                            }).ToList();
+                return item;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
         }
 
 
@@ -455,23 +561,29 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public List<P_SanPham> get_San_Pham_Nam(string LH)
         {
-
-            var item = (from i in db.CHITIETMATHANGs
-                        join u in db.MATHANGs on i.IDMatHang equals u.ID
-                        join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
-                        join n in db.LOAIHANGs on m.IDLoaiHang equals n.ID
-                        where (u.STATUS != false && i.STATUS != false && n.TenLoai== LH && i.Loai =="NAM")
-                        select new P_SanPham
-                        {
-                            IDCT = i.ID.ToString(),
-                            TenMH = u.TenMH,
-                            Mota = i.MoTa,
-                            MauSac = i.MauSac,
-                            Gia = i.Gia.ToString(),
-                            Size = i.Size,
-                            HinhAnh = u.URLHinhAnh1,
-                        }).ToList();
-            return item;
+            try
+            {
+                var item = (from i in db.CHITIETMATHANGs
+                            join u in db.MATHANGs on i.IDMatHang equals u.ID
+                            join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
+                            join n in db.LOAIHANGs on m.IDLoaiHang equals n.ID
+                            where (u.STATUS != false && i.STATUS != false && n.TenLoai == LH && i.Loai == "NAM")
+                            select new P_SanPham
+                            {
+                                IDCT = i.ID.ToString(),
+                                TenMH = u.TenMH,
+                                Mota = i.MoTa,
+                                MauSac = i.MauSac,
+                                Gia = i.Gia.ToString(),
+                                Size = i.Size,
+                                HinhAnh = u.URLHinhAnh1,
+                            }).ToList();
+                return item;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
         }
 
         //6. Lọc theo đồ của nữ
@@ -479,23 +591,29 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public List<P_SanPham> get_San_Pham_Nu(string LH)
         {
-
-            var item = (from i in db.CHITIETMATHANGs
-                        join u in db.MATHANGs on i.IDMatHang equals u.ID
-                        join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
-                        join n in db.LOAIHANGs on m.IDLoaiHang equals n.ID
-                        where (u.STATUS != false && i.STATUS != false && n.TenLoai == LH && i.Loai != "NAM")
-                        select new P_SanPham
-                        {
-                            IDCT = i.ID.ToString(),
-                            TenMH = u.TenMH,
-                            Mota = i.MoTa,
-                            MauSac = i.MauSac,
-                            Gia = i.Gia.ToString(),
-                            Size = i.Size,
-                            HinhAnh = u.URLHinhAnh1,
-                        }).ToList();
-            return item;
+            try
+            {
+                var item = (from i in db.CHITIETMATHANGs
+                            join u in db.MATHANGs on i.IDMatHang equals u.ID
+                            join m in db.SUBLOAIHANGs on u.IDSubLoaiHang equals m.ID
+                            join n in db.LOAIHANGs on m.IDLoaiHang equals n.ID
+                            where (u.STATUS != false && i.STATUS != false && n.TenLoai == LH && i.Loai != "NAM")
+                            select new P_SanPham
+                            {
+                                IDCT = i.ID.ToString(),
+                                TenMH = u.TenMH,
+                                Mota = i.MoTa,
+                                MauSac = i.MauSac,
+                                Gia = i.Gia.ToString(),
+                                Size = i.Size,
+                                HinhAnh = u.URLHinhAnh1,
+                            }).ToList();
+                return item;
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.BadRequest, false));
+            }
         }
 
         #endregion
