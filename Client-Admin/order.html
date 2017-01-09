@@ -1,4 +1,6 @@
 
+<script src="js/JqueryOder.js"></script>
+
 <div ui-view class="page-header">
 	<h1>
 		Danh sách đơn đặt hàng
@@ -28,134 +30,9 @@
 					</tr>
 					</thead>
 
-					<tbody ng-repeat="x in hoadon">
-					<tr >
-						<td class="center">
-							{{x.ID}}
-						</td>
+					<tbody id="tables">
 
-						<td class="center">
-							{{x.Email}}
-						</td>
-
-						<td>
-							{{x.SDT}}
-						</td>
-						<td>{{x.TongTien}}</td>
-						<td class="hidden-480">{{x.Ngay}}</td>
-						<td>{{x.TinhTrang}}</td>
-
-
-						<td>
-							<div class="hidden-sm hidden-xs btn-group">
-								<a class="btn btn-xs btn-info" data-toggle="modal" data-target="#popupedit">
-									<i class="ace-icon fa fa-pencil bigger-120">
-									</i>
-								</a>
-
-								<script>
-                                    var t = '';
-                                    $('.btn-info').click(function () {
-                                        t = $(this).parents('tr').find('td:eq(0)').html();
-                                        t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");
-                                        $.ajax({
-                                            type: 'GET',
-                                            url : 'http://apishoponline.apphb.com/api/Server/hoadon?ID=' + t,
-                                            success: function (data) {
-
-                                                var CT_ID = data[0].ID;
-                                                $('#ID').val(CT_ID);
-                                                $('#sdt').val(data[0].SDT);
-                                                $('#diachi').val(data[0].Email);
-                                                $('#gia').val(data[0].TongTien);
-                                                $('#ngay').val(data[0].Ngay);
-                                                $('#tinhtrang').val(data[0].TinhTrang);
-                                            }
-                                        });
-                                    });
-
-                                    $('#OK').click(function () {
-										$.ajax({
-										   type : 'PUT',
-											url: 'http://apishoponline.apphb.com/api/Server/hoadon?ID=' + t + '&TrangThai=' +$('#tinhtrang'),
-											dataType: 'JSON',
-											success: function (data) {
-												if (data = true){
-												}
-												else {
-                                                    alert("Lưu không thành công!");
-												}
-                                            }
-										});
-                                    });
-								</script>
-								<button class="btn btn-xs btn-danger" data-target="#popupdelete">
-									<i class="ace-icon fa fa-trash-o bigger-120"></i>
-								</button>
-								<script>
-                                    var t = '';
-                                    $('.btn-danger').click(function () {
-                                        t = $(this).parents('tr').find('td:eq(0)').html();
-                                        t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");
-                                    });
-                                    $('#Delete').click(function () {
-                                        $.ajax({
-                                            type: 'DELETE',
-                                            url : 'http://apishoponline.apphb.com/api/Server/xoaHD?ID=' + t,
-                                            dataType: 'JSON',
-                                            success: function (data) {
-                                                if(data == true){
-                                                    alert("Xóa thành công !");
-                                                }
-                                                else {
-                                                }
-
-                                            }
-                                        });
-                                    });
-
-								</script>
-								<button class="btn btn-xs btn-warning">
-									<i class="ace-icon fa fa-flag bigger-120"></i>
-								</button>
-							</div>
-
-							<div class="hidden-md hidden-lg">
-								<div class="inline pos-rel">
-									<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-										<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-									</button>
-
-									<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-										<li>
-											<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-																			<span class="blue">
-																				<i class="ace-icon fa fa-search-plus bigger-120"></i>
-																			</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-																			<span class="green">
-																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																			</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-																			<span class="red">
-																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																			</span>
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</td>
-					</tr>
-				</tbody>
+					</tbody>
 				</table>
 			</div><!-- /.span -->
 		</div><!-- /.row -->

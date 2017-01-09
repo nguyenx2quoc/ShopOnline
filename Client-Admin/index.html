@@ -30,26 +30,6 @@
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
 
-		<!-- inline styles related to this page -->
-
-		<!-- ace settings handler -->
-
-
-		<script src="assets/js/ace-extra.min.js"></script>
-
-		<script src="assets/js/jquery-2.1.4.min.js"></script>
-
-		<script src="assets/js/bootstrap.min.js"></script>
-
-		<script src="assets/js/angular.js"></script>
-
-		<script src="assets/js/angular-ui-router.min.js"></script>
-		<script src="assets/js/angular-cloudinary.js"></script>
-
-		<script src="js/ng-file-upload-shim.js"></script>
-		<script src="js/ng-file-upload.js"></script>
-
-		<script src="js/app.js"></script>
 
 
 	</head>
@@ -82,8 +62,7 @@
 							<a data-toggle="dropdown"  class="dropdown-toggle"><!---href="#"--->
 								<img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
-									<small>Welcome,</small>
-									Jason
+
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
@@ -139,10 +118,18 @@
 					</li>
 
 					<li class="" >
-						<a ui-sref="clothing" >
+						<a ui-sref="sanpham" >
 							<i class="menu-icon fa fa-desktop"></i>
 							<span class="menu-text">
-								Quần áo
+								Sản phẩm
+							</span>
+						</a>
+					</li>
+					<li class="" >
+						<a ui-sref="chitietsp" >
+							<i class="menu-icon fa fa-desktop"></i>
+							<span class="menu-text">
+								Chi tiết sản phẩm
 							</span>
 						</a>
 					</li>
@@ -243,18 +230,14 @@
 
 						<div ui-view class="page-header">
 							<h1>
-								Dashboard
-								<small>
-									<i class="ace-icon fa fa-angle-double-right"></i>
-									overview &amp; stats
-								</small>
+								ADMIN
 							</h1>
 						</div><!-- /.page-header -->
 
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<div  class="page-content">
+								<div class="page-content">
 
 								</div>
 								<!-- PAGE CONTENT ENDS -->
@@ -290,41 +273,17 @@
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
-		<script src="ckfinder/ckfinder.js"></script>
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-            function BrowseServer(name) {
-//            console.log(name);
-                var config = {};
-                config.startupPath = 'Images:/upload/images/';
-                var finder = new CKFinder(config);
-//    finder.basePath = '../';
-                finder.selectActionFunction = SetFileField;
-                finder.selectActionData = name;
-                finder.callback = function (api) {
-                    api.disableFolderContextMenuOption('Batch', true);
-                };
-                finder.popup();
-            }
-            function SetFileField(fileUrl, data) {
-                var file = fileUrl.replace(/\/\//g, '/');
-                $('#image_name').val(file);
-                var name =$('#image_name').val();
-                console.log(name);
-
-                //            console.log(file);
-//     $('#' + data["selectActionData"]).val(file);
-//     $('#' + data["selectActionData"]).parent().find('.preview-file-upload').attr('src', file);
-            }
-            var browseImage = function () {
-                $('.browse-image').click(function () {
-                    var name = $(this).attr('data-target');
-                    //openKCFinder();
-                    BrowseServer(name);
-                });
-            };
-            browseImage();
-
-		</script>
+		<script src="assets/js/ace-extra.min.js"></script>
+		<script src="assets/js/jquery-2.1.4.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/angular.js"></script>
+		<script src="assets/js/angular-ui-router.min.js"></script>
+		<script src="assets/js/angular-cloudinary.js"></script>
+		<script src="js/ng-file-upload-shim.js"></script>
+		<script src="js/ng-file-upload.js"></script>
+		<script src="js/app.js"></script>
 	</body>
+
+
+
 </html>

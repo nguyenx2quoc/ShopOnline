@@ -1,4 +1,7 @@
 
+
+<script src="js/JqueryAjax.js"></script>
+
 <div ui-view class="page-header">
 	<h1>
 		Danh sách chi tiết mặt hàng
@@ -6,7 +9,7 @@
 </div><!-- /.page-header -->
 
 <div class="row">
-	<button class="btn btn-primary" data-toggle="modal" data-target="#popupadd">Thêm mới</button>
+	<button class="btn btn-primary" ui-sref="themmoi">Thêm mới</button>
 </div>
 <br>
 <div class="row" ng-controller="MyCtrl">
@@ -17,184 +20,63 @@
 				<table id="simple-table" class="table  table-bordered table-hover">
 					<thead>
 					<tr>
-						<th>
-							ID
-						</th>
-						<th class="hidden-480" ng-click="orderByMe('Ten')">Tên mặt hàng</th>
-						<th>Số lượng</th>
-						<th>Giá</th>
-						<th class="hidden-480">Giới tính</th>
-						<th>
-							Màu
-						</th>
-						<th class="hidden-480">Size</th>
-
+						<th>IDMH</th>
+						<!--<th>ID chi tiết</th>-->
+						<th >Tên mặt hàng</th>
+						<!--<th>Số lượng</th>-->
+						<!--<th>Giá</th>-->
+						<th>Loại hàng</th>
+						<!--<th>Size</th>-->
 						<th></th>
 					</tr>
 					</thead>
 
-					<tbody ng-repeat="x in myWelcome">
-					<tr >
-						<td>
-							{{x.CT_ID}}
-						</td>
+					<tbody id="tableds">
+						<!--<tr>-->
+							<!--<td>-->
+								<!--{{x.MH_ID}}-->
+							<!--</td>-->
 
-						<td >
-							{{x.MH_TenMH}}
-						</td>
+							<!--<td >-->
+								<!--{{x.MH_TenMH}}-->
+							<!--</td>-->
 
-						<td>
-							{{x.CT_SoLuong}}
-						</td>
-						<td>{{x.CT_Gia}}</td>
-						<td class="hidden-480">{{x.CT_Loai}}</td>
-						<td>{{x.CT_MauSac}}</td>
+							<!--<td>-->
+								<!--{{x.CT_SoLuong}}-->
+							<!--</td>-->
+							<!--<td>{{x.CT_Gia}}</td>-->
+							<!--<td class="hidden-480">{{x.CT_Loai}}</td>-->
+							<!--<td>{{x.CT_MauSac}}</td>-->
 
-						<td class="hidden-480">
-							{{x.CT_Size}}
-						</td>
+							<!--<td class="hidden-480">-->
+								<!--{{x.CT_Size}}-->
+							<!--</td>-->
+							<!--<td>-->
+								<!--<a class="btn btn-primary btn-xs" ng-click="" ui-sref="clothing.chitet">-->
+									<!--<i class="ace-icon fa fa-pencil bigger-120" aria-hidden="true">-->
+									<!--</i>-->
+								<!--</a>-->
+								<!--<script>-->
+                                    <!--t = $(this).parents('tr').find('td:eq(0)').html();-->
+                                    <!--t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");-->
+								<!--</script>-->
+								<!--<a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#popupdelete">-->
+									<!--<i class="ace-icon fa fa-trash-o bigger-120" aria-hidden="true"></i>-->
+								<!--</a>-->
+								<!--&lt;!&ndash;&#45;&#45;Script xóa sản phẩm&#45;&#45;&ndash;&gt;-->
 
-						<td>
-							<div class="hidden-sm hidden-xs btn-group">
-								<a class="btn btn-xs btn-info" data-toggle="modal" data-target="#popupedit">
-									<i class="ace-icon fa fa-pencil bigger-120">
-									</i>
-								</a>
-								<script>
-									$(document).ready(function () {
-                                        var t = '';
-                                        $('.btn-info').click(function () {
-                                            t = $(this).parents('tr').find('td:eq(0)').html();
-                                            t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");
-                                            $.ajax({
-                                                type: 'GET',
-                                                url : 'http://apishoponline.apphb.com/api/Server//getsptheoid?IDCTMH=' + t,
-                                                success: function (data) {
-                                                    var CT_ID = data[0].CT_ID;
-                                                    $('#IDe').val(CT_ID);
-                                                    $('#IDMHe').val(data[0].MH_ID);
-                                                    $('#TenMHe').val(data[0].MH_TenMH);
-													$('#gioitinhe').val(data[0].CT_Loai);
-                                                    $('#sizee').val(data[0].CT_Size);
-                                                    $('#loaispe').val(data[0].MH_IDSubLoaiHang);
-                                                    $('#giae').val(data[0].CT_Gia);
-                                                    $('#soluonge').val(data[0].CT_SoLuong);
-                                                    $('#mausace').val(data[0].CT_MauSac);
-                                                    $('#urlhae').val(data[0].MH_URLHinhAnh1);
-                                                    $('#urlha1e').val(data[0].MH_URLHinhAnh2);
-                                                    $('#urlha2e').val(data[0].MH_URLHinhAnh3);
-                                                    $('#motae').val(data[0].MH_MoTa);
-                                                }
-                                            });
-                                    	});
-                                        $('#OKEdit').click(function () {
-                                            $.ajax({
-                                                type : 'PUT',
-                                                url : 'http://apishoponline.apphb.com/api/Server/capnhatMH',
-                                                datatype: 'JSON',
-                                                data: {
-                                                    ID : t,
-													STATUS : true,
-                                                    TenMH: $('#TenMHe').val(),
-                                                    IDSubLoaiHang : $('#loaispe').val(),
-                                                    URLHinhAnh1: $('#urlhae').val(),
-                                                    URLHianhAnh2: $('#urlha1e').val(),
-                                                    URLHinhAnh3: $('#urlha2e').val(),
-//                                                    MoTa : $('#motae').val(),
-//                                                    MauSac: $('#mausace').val(),
-//                                                    Size: $('#sizee').val(),
-//                                                    Loai : t,
-//                                                    SoLuong : $('#soluonge').val(),
-                                                },
-                                                success: function (data) {
-                                                    if (data == true){
-                                                    }
-                                                    else {
-                                                        alert("Lưu thất bại!");
-                                                    }
-                                                }
-                                            });
 
-                                        });
-                                    });
-								</script>
-
-								<button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#popupdelete">
-									<i class="ace-icon fa fa-trash-o bigger-120"></i>
-								</button>
-
-								<!----Script xóa sản phẩm---->
-								<script>
-									var t = '';
-									$('.btn-danger').click(function () {
-										t = $(this).parents('tr').find('td:eq(0)').html();
-										t = t.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"").replace(/\s+/g," ");
-									});
-									$('#Delete').click(function () {
-										$.ajax({
-											type: 'DELETE',
-											url : 'http://apishoponline.apphb.com/api/Server/xoaCTMH?IDCTMH=' + t,
-											dataType: 'JSON',
-											success: function (data) {
-												if(data == true){
-												}
-												else {
-													alert("Xóa không thành công!");
-												}
-
-											}
-										});
-									});
-
-								</script>
-
-								<button class="btn btn-xs btn-warning">
-									<i class="ace-icon fa fa-flag bigger-120"></i>
-								</button>
-							</div>
-
-							<div class="hidden-md hidden-lg">
-								<div class="inline pos-rel">
-									<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-										<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-									</button>
-
-									<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-										<li>
-											<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-																			<span class="blue">
-																				<i class="ace-icon fa fa-search-plus bigger-120"></i>
-																			</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-																			<span class="green">
-																				<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																			</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-																			<span class="red">
-																				<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																			</span>
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</td>
-					</tr>
-				</tbody>
+								<!--<a class="btn btn-xs btn-warning">-->
+									<!--<i class="ace-icon fa fa-flag bigger-120"></i>-->
+								<!--</a>-->
+							<!--</td>-->
+						<!--</tr>-->
+					</tbody>
 				</table>
 			</div><!-- /.span -->
 		</div><!-- /.row -->
 	</div>
 </div>
-
 
 <!----Pop up xóa--->
 
@@ -230,179 +112,102 @@
 						<h3 class="modal-title formPanel"><i class="fa fa-fw fa-plus"></i><strong>Thêm</strong></h3>
 					</div>
 					<fieldset style="margin-top: 10px">
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Tên mặt hàng:
-									</p>
-								</div>
+						<div class="row" >
+							<div class="w3-panel w3-card-2" style="width: 90%; padding-top: 10px; padding-bottom: 20px; margin: auto">
 
-								<div class="col-lg-8">
-									<input class="form-control" id="TenMH">
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div>
-									<div class="col-lg-4">
-										<p for="inputID" class="labelForm">
-											Màu sắc
-										</p>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="col-lg-4">
+											<p for="inputID" class="labelForm">
+												ID mặt hàng:
+											</p>
+										</div>
+										<div class="col-lg-8 " >
+											<input disabled class="form-control" id="IDMH">
+										</div>
 									</div>
+									<div class="col-lg-6">
+										<div>
+											<div class="col-lg-4">
+												<p for="inputID" class="labelForm">
+													Size:
+												</p>
+											</div>
 
-									<div class="col-lg-8 " >
-										<input class="form-control" id="mausac">
+											<div class="col-lg-8 " >
+												<input class="form-control" id="size2">
 
+											</div>
+										</div>
+									</div>
+								</div>
+								</br>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="col-lg-4">
+											<p for="inputID" class="labelForm">
+												Giá:
+											</p>
+										</div>
+										<div class="col-lg-8">
+											<input class="form-control" id="gia">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="col-lg-4">
+											<p for="inputID" class="labelForm">
+												Giới tính:
+											</p>
+										</div>
+										<div class="col-lg-8 " >
+											<select id="gioitinh2">
+												<option value="Nam">Nam</option>
+												<option value="Nữ">Nữ</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								</br>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="col-lg-4">
+											<p for="inputID" class="labelForm">
+												Màu sắc:
+											</p>
+										</div>
+										<div class="col-lg-8">
+											<input class="form-control" id="mausac">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div>
+											<div class="col-lg-4">
+												<p  for="inputID" class="labelForm">
+													Số lượng:
+												</p>
+											</div>
+											<div class="col-lg-8 " >
+												<input type="number" class="form-control" id="soluong">
+
+											</div>
+										</div>
+									</div>
+								</div>
+								</br>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="col-lg-2">
+											<p for="inputID" class="labelForm">
+												Mô Tả:
+											</p>
+										</div>
+										<div class="col-lg-9">
+											<textarea class="form-control" id="mota" rows="3"></textarea>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						</br>
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Size:
-									</p>
-								</div>
-								<div class="col-lg-8">
-									<input class="form-control" id="size">
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div>
-									<div class="col-lg-4">
-										<p  for="inputID" class="labelForm">
-											Số lượng:
-										</p>
-									</div>
-									<div class="col-lg-8 " >
-										<input type="number" class="form-control" id="soluong">
-
-									</div>
-								</div>
-							</div>
-						</div>
-						</br>
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Giới Tính:
-									</p>
-								</div>
-								<div class="col-lg-8">
-									<select id="gioitinh">
-										<option value="1">Nam</option>
-										<option value="2">Nữ</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Giá:
-									</p>
-								</div>
-								<div class="col-lg-8">
-									<input type="number" class="form-control" id="gia">
-								</div>
-							</div>
-						</div>
-						</br>
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Loại SP:
-									</p>
-								</div>
-								<div class="col-lg-8 " >
-									<select id="loaisp">
-
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Url Hình ảnh:
-									</p>
-								</div>
-								<div class="col-lg-8 " >
-									<form name="myForm" ng-controller="MyCtrl">
-										<input type="button" id="browse-image0" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
-										<button ng-click="uploadFiles(picFile)">Submit</button>
-										<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
-										<input id="urlha" class="form-control" ng-model="url1" placeholder="Đây là url hình ảnh" disabled="true">
-										<span class="progress" ng-show="picFile.progress >= 0">
-											<div style="width:5%;color: #0000cc" ng-bind="picFile.progress + '%'"></div>
-										</span>
-										<br/>
-									</form>
-								</div>
-
-							</div>
-						</div>
-						</br>
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Url Hình ảnh:
-									</p>
-								</div>
-
-								<div class="col-lg-8">
-									<form name="myForm" ng-controller="MyCtrl">
-										<input type="button" id="browse-image" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
-										<button ng-click="uploadFiles(picFile)">Submit</button>
-										<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
-										<input class="form-control" ng-model="url1" placeholder="Đây là url hình ảnh" disabled="true" id="urlha1">
-										<span class="progress" ng-show="picFile.progress >= 0">
-												  <div style="width:5%; color: #0000cc" ng-bind="picFile.progress + '%'"></div>
-										</span>
-										<br/>
-									</form>
-								</div>
-
-							</div>
-							<div class="col-lg-6">
-
-									<div class="col-lg-4">
-										<p for="inputID" class="labelForm" >
-											Url Hình ảnh:
-										</p>
-									</div>
-
-									<div class="col-lg-8 " >
-										<form name="myForm" ng-controller="MyCtrl">
-											<input type="button" id="browse-image2" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
-											<button ng-click="uploadFiles(picFile)">Submit</button>
-											<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
-											<input class="form-control" ng-model="url1" placeholder="Đây là url hình ảnh" id="urlha2" disabled="true">
-											<span class="progress" ng-show="picFile.progress >= 0">
-												  <div style="width:5%;color: #0000cc" ng-bind="picFile.progress + '%'"></div>
-										</span>
-											<br/>
-										</form>
-									</div>
-							</div>
-						</div>
-						</br>
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="col-lg-2">
-									<p for="inputID" class="labelForm">
-										Mô Tả:
-									</p>
-								</div>
-								<div class="col-lg-9">
-									<textarea class="form-control" id="mota" rows="2"></textarea>
-								</div>
-							</div>
-						</div>
-
 					</fieldset>
 					<div class="modal-footer" style="margin-top: 20px">
 						<div class="submitButton">
@@ -419,59 +224,6 @@
 
 </div>
 
-<!---Script thêm sản phầm--->
-<script>
-	$.ajax({
-		type: 'GET',
-		url:'http://apishoponline.apphb.com/api/Server/getsub',
-		datatype: 'JSON',
-		success: function (success) {
-			var LoaiSP = '<select id="loaisp">';
-			for (var i = 0; i < success.length; i++)
-			{
-				LoaiSP = LoaiSP + '<option value="'+ success[i].ID + '">' + success[i].TenLoai + '</option>';
-			}
-			LoaiSP = LoaiSP + '</select>';
-
-			$('#loaisp').html(LoaiSP);
-            $('#loaispe').html(LoaiSP);
-		}
-	})
-
-	$('#OK').click(function () {
-		var t = $('#gioitinh').val();
-		if(t == 'Nam')
-		{
-		    t = 'Nam';
-		}else {
-		    t = 'Nữ';
-		}
-		$.ajax({
-		    type : 'POST',
-			url : 'http://apishoponline.apphb.com/api/Server/themMH',
-			datatype: 'JSON',
-			data: {
-				TenMH: $('#TenMH').val(),
-				IDSubLoaiHang : $('#loaisp').val(),
-				URLHinhAnh1: $('#urlha').val(),
-				URLHianhAnh2: $('#urlha1').val(),
-                URLHinhAnh3: $('#urlha2').val(),
-//                MoTa : $('#mota').val(),
-//                MauSac: $('#mausac').val(),
-//                Size: $('#size').val(),
-//                Loai : t,
-//                SoLuong : $('#soluong').val(),
-			},
-			success: function (data) {
-				if (data == true){
-				}
-				else {
-                    alert("Lưu thất bại!");
-				}
-            }
-		});
-    });
-</script>
 
 
 <!--POPUP chỉnh sửa sản phầm--->
@@ -488,102 +240,25 @@
 							<div class="col-lg-6">
 								<div class="col-lg-4">
 									<p for="inputID" class="labelForm" >
-										ID:
+										ID mặt hàng:
 									</p>
 								</div>
 								<div class="col-lg-8">
-									<input id= "IDe" class="form-control" readonly="true">
+									<input id= "idmhe" class="form-control" readonly="true">
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div>
 									<div class="col-lg-4">
 										<p for="inputID" class="labelForm">
-											ID mặt hàng:
+											Tên mặt hàng:
 										</p>
 									</div>
 
 									<div class="col-lg-8 " >
-										<input class="form-control" id="IDMHe" readonly="true">
+										<input class="form-control" id="tenmhe">
 
 									</div>
-								</div>
-							</div>
-						</div>
-						</br>
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Tên mặt hàng:
-									</p>
-								</div>
-
-								<div class="col-lg-8">
-									<input class="form-control" id="TenMHe">
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div>
-									<div class="col-lg-4">
-										<p for="inputID" class="labelForm">
-											Màu sắc
-										</p>
-									</div>
-
-									<div class="col-lg-8 " >
-										<input class="form-control" id="mausace">
-
-									</div>
-								</div>
-							</div>
-						</div>
-						</br>
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Size:
-									</p>
-								</div>
-								<div class="col-lg-8">
-									<input class="form-control" id="sizee">
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div>
-									<div class="col-lg-4">
-										<p  for="inputID" class="labelForm">
-											Số lượng:
-										</p>
-									</div>
-									<div class="col-lg-8 " >
-										<input type="number" class="form-control" id="soluonge">
-
-									</div>
-								</div>
-							</div>
-						</div>
-						</br>
-						<div class="row">
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Giới Tính:
-									</p>
-								</div>
-								<div class="col-lg-8">
-									<input class="form-control" id="gioitinhe">
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="col-lg-4">
-									<p for="inputID" class="labelForm">
-										Giá:
-									</p>
-								</div>
-								<div class="col-lg-8">
-									<input type="number" class="form-control" id="giae">
 								</div>
 							</div>
 						</div>
@@ -608,10 +283,11 @@
 									</p>
 								</div>
 								<div class="col-lg-8 " >
-									<form name="myForm" ng-controller="MyCtrl">
+									<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
+									<form name="myForm">
 										<input type="button" id="browse-image0e" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
 										<button ng-click="uploadFiles(picFile)">Submit</button>
-										<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
+
 										<input class="form-control" ng-model="url1" id="urlhae" placeholder="Đây là url hình ảnh" disabled="true">
 										<span class="progress" ng-show="picFile.progress >= 0">
 											<div style="width:5%;color: #0000cc" ng-bind="picFile.progress + '%'"></div>
@@ -632,10 +308,10 @@
 								</div>
 
 								<div class="col-lg-8">
-									<form name="myForm" ng-controller="MyCtrl">
-										<input type="button" id="browse-imagee" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
-										<button ng-click="uploadFiles(picFile)">Submit</button>
-										<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
+									<img style="height: 25px;width: 25px" ngf-src="picFile2" class="thumb">
+									<form name="myForm">
+										<input type="button" id="browse-imagee" data-target="image_name" ngf-select ng-model="picFile2" name="file" ngf-accept="'image/*'" value="Choose" required>
+										<button ng-click="uploadFiles(picFile2)">Submit</button>
 										<input class="form-control" ng-model="url1" id="urlha1e" placeholder="Đây là url hình ảnh" disabled="true">
 										<span class="progress" ng-show="picFile.progress >= 0">
 												  <div style="width:5%; color: #0000cc" ng-bind="picFile.progress + '%'"></div>
@@ -652,31 +328,17 @@
 										Url Hình ảnh:
 									</p>
 								</div>
-
 								<div class="col-lg-8 " >
-									<form name="myForm" ng-controller="MyCtrl">
-										<input type="button" id="browse-image1" data-target="image_name" ngf-select ng-model="picFile" name="file" ngf-accept="'image/*'" value="Choose" required>
-										<button ng-click="uploadFiles(picFile)">Submit</button>
-										<img style="height: 25px;width: 25px" ngf-src="picFile" class="thumb">
+									<img style="height: 25px;width: 25px" ngf-src="picFile3" class="thumb">
+									<form name="myForm" >
+										<input type="button" id="browse-image1" data-target="image_name" ngf-select ng-model="picFile3" name="file" ngf-accept="'image/*'" value="Choose" required>
+										<button ng-click="uploadFiles(picFile3)">Submit</button>
 										<input class="form-control" ng-model="url1"id="urlha2e" placeholder="Đây là url hình ảnh" disabled="true">
 										<span class="progress" ng-show="picFile.progress >= 0">
 												  <div style="width:5%;color: #0000cc" ng-bind="picFile.progress + '%'"></div>
 										</span>
 										<br/>
 									</form>
-								</div>
-							</div>
-						</div>
-						</br>
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="col-lg-2">
-									<p for="inputID" class="labelForm">
-										Mô Tả:
-									</p>
-								</div>
-								<div class="col-lg-9">
-									<textarea class="form-control" id="motae" rows="2"></textarea>
 								</div>
 							</div>
 						</div>
@@ -694,3 +356,4 @@
 		</div>
 	</div>
 </div>
+
