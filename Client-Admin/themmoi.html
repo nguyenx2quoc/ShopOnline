@@ -130,7 +130,7 @@ $(document).ready(function () {
                 </br>
 
                 <div class="modal-footer" style="margin-top: 20px">
-                    <button id="OKthemmoi" class="btn btn-primary" >OK
+                    <button id="OKthemmoi" class="btn btn-primary" data-dismiss="modal" >OK
                     </button>
 
                 </div>
@@ -164,9 +164,9 @@ $(document).ready(function () {
                     data: {
                         TenMH: $('#TenMH').val(),
                         IDSubLoaiHang : $('#loaisp').val(),
-                        URLHinhAnh1: $('#urlha').val(),
-                        URLHinhAnh2: $('#urlha1').val(),
-                        URLHinhAnh3: $('#urlha2').val(),
+                        URLHinhAnh1: $('#urlha1').val(),
+                        URLHinhAnh2: $('#urlha12').val(),
+                        URLHinhAnh3: $('#urlha13').val(),
                         STATUS: true
                     },
                     success: function (response) {

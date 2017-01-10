@@ -25,7 +25,7 @@ $.ajax({
                     MauSac: $('#mausace').val(),
                     Gia: $('#giae').val(),
                     Size: $('#sizee').val(),
-                    Loai: $('#loaispe').val(),
+                    Loai: $('#gioitinhe').val(),
                     STATUS: true,
                     SoLuong: $('#soluonge').val()
                 },
