@@ -13,7 +13,13 @@ checkCtrl.controller('checkCtrl', ['$scope','$http','$stateParams', function($sc
       });
 	
 	$scope.mua = function(){
-		var parameter = JSON.stringify({
+		if ($scope.user.diachi == "" || $scope.user.dienthoai == "")
+		{
+			swal("Online Shop!", "Bạn phải nhập đủ trường!", "warning");
+		}
+		else
+		{
+			var parameter = JSON.stringify({
   			  	"H_Email": $scope.user.diachi,
     			"H_SDT": $scope.user.dienthoai,
     			"H_TongTien": $scope.total,
@@ -26,6 +32,9 @@ checkCtrl.controller('checkCtrl', ['$scope','$http','$stateParams', function($sc
      		 	error(function(data, status, headers, config) {
        				swal("Online Shop!", "Lỗi!", "success");
       			});
+   			
+		}
+		
 
 
 	};
