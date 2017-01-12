@@ -67,7 +67,7 @@ $.ajax({
             'STATUS: true,'+
             'Size: $("#size").val(),'+
             'Gia: $("#gia").val(),'+
-            'Loai: $("#gioitinh").val(),'+
+            'Loai: $("#gioitinh2").val(),'+
             'SoLuong: $("#soluong").val(),'+
             'MauSac: $("#mausac").val(),'+
             'MoTa: $("#mota").val() },'+
