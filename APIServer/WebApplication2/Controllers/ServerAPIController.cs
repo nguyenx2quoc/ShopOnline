@@ -714,6 +714,10 @@ namespace WebApplication2.Controllers
                 db.CHITIETHOADONs.Add(c);
                 db.SaveChanges();
 
+                var u = db.CHITIETMATHANGs.Where(t => t.ID.Equals(a.C_IDCTMH)).FirstOrDefault();
+                u.SoLuong = u.SoLuong - 1;
+                db.SaveChanges();
+
                 return true;
             }
             catch (Exception e)
